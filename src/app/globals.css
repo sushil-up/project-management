@@ -3,3 +3,12 @@
 @tailwind utilities;
 
 
+
+
+/* navbar background */
+.css-7mxpdy-MuiPaper-root-MuiAppBar-root {
+    background-color: #e7e7e7!important; 
+}
+.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.flex.css-1ygil4i-MuiToolbar-root {
+    color: black!important;
+}

@@ -26,6 +26,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import NavBar from "../Navbar/NavBar";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -169,41 +170,17 @@ export default function MiniDrawer({ children }) {
     const storedOpenItems = localStorage.getItem("openItems");
     if (storedOpenItems) {
       setOpenItems(JSON.parse(storedOpenItems));
-    }
+    } 
   }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <div className="flex ">
-            <IconButton
-              color="inherit"
-              aria-label="toggle drawer"
-              onClick={handleDrawerToggle}
-              edge="start"
-              sx={{
-                marginRight: 3,
-                color: "#757575",
-              }}
-            >
-              {open ? <ChevronLeftIcon /> : <MenuIcon />}
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              <img src="/logo.png" alt="Logo" width="230" />
-            </Typography>
-          </div>
-          <div className="flex justify-center items-center">
-            <Typography className="header-email">
-              Hello! {session?.user?.username}
-            </Typography>
-            <LogoutButton className="logout-button" />
-          </div>
-        </Toolbar>
+      <AppBar className="flex justify-between" position="fixed" open={open}>
+       <NavBar open={open} handleDrawerToggle={handleDrawerToggle} setOpen={setOpen}/>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader />
+        <DrawerHeader />  
         <Divider />
         <List>
           {menuItems.map((item, index) => (

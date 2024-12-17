@@ -15,6 +15,7 @@ export default function Home() {
         <Link className="text-center" href={routesUrl.signIn}>
           {session ? <LogoutButton /> : <Button>SignIn</Button>}
         </Link>
+
       </div>
     </>
   );
