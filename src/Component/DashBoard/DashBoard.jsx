@@ -132,7 +132,7 @@ export default function MiniDrawer({ children }) {
     <LogoutButton />
   ) : (
     <Link href={routesUrl.signIn}>
-      <Typography color="white">Sign In</Typography>
+      <Typography color="white" >Sign In</Typography>
     </Link>
   );
   return (
@@ -161,8 +161,8 @@ export default function MiniDrawer({ children }) {
                   Project Management
                 </Typography>
                 <Box sx={{ flexGrow: 1 }} />
-                <Typography className="mr-3">{session?.user?.email}</Typography>
-                <Tooltip title={session ? "Sign Out" : "Sign In"}>
+                <Typography className="mr-3 ">{session?.user?.email}</Typography>
+                <Tooltip  title={session ? "Sign Out" : "Sign In"}>
                   {signInOrOutButton}
                 </Tooltip>
               </Toolbar>

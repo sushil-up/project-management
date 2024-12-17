@@ -91,21 +91,21 @@ const menuItems = [
     icon: <DashboardIcon />,
     subItems: [
       {
-        title: "Dashboard 1",
+        title: "Task ",
         icon: <DashboardIcon />,
-        route: routesUrl.Dashboard,
+        route: routesUrl.task,
       },
       {
-        title: "Dashboard 2",
+        title: "Add Project",
         icon: <DashboardIcon />,
-        route: routesUrl.Dashboard2,
+        route: routesUrl.addProject,
       },
     ],
   },
   {
     title: "All Appointment",
     icon: <CalendarTodayIcon />,
-    route: routesUrl.AllAppointment,
+    route: routesUrl.allprojects,
   },
   {
     title: "Test",

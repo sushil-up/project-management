@@ -1,13 +1,14 @@
+import { routesUrl } from "@/utils/pagesurl";
 import Cookies from "js-cookie";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials) {
-
         const { email, password, localData } = credentials;
         const data = JSON.parse(localData);
         
@@ -22,7 +23,23 @@ const handler = NextAuth({
         }
       },
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        // It will force the Refresh Token to always be provided on sign in
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
   ],
+  pages: {
+    signIn: routesUrl.signIn,
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
