@@ -1,5 +1,6 @@
-'use client'
+"use client";
 import MiniDrawer from "@/Component/drawer/drawer";
+import UserContextProvider from "@/context/UserContextProvider";
 import React, { useState } from "react";
 
 const Layout = ({ children }) => {
@@ -18,7 +19,9 @@ const Layout = ({ children }) => {
     <div>
       <button onClick={handleToggle}>Toggle</button>
       <MiniDrawer>
-      <div className="mt-16">{children}</div>
+        <div className="mt-16">
+          <UserContextProvider>{children}</UserContextProvider>
+        </div>
       </MiniDrawer>
     </div>
   );

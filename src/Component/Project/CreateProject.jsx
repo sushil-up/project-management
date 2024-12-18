@@ -1,0 +1,50 @@
+"use client";
+import { Box, Button, Container, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import ProjectForm from "./ProjectForm";
+import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
+import UserContext from "@/context/UserContext";
+const CreateProject = ({ handleClose }) => {
+  const { project, setProject } = useContext(UserContext);
+  const { control, handleSubmit } = useForm();
+  const id = uuidv4();
+  const onSubmit = (data) => {
+    try {
+      const setid = { ...data, id };
+      const storedData = [...project, setid];
+      setProject(storedData);
+    } catch (error) {}
+  };
+  return (
+    <>
+      <Container className="p-4">
+        <CloseIcon
+          onClick={handleClose}
+          className="cursor-pointer text-gray-600 hover:text-gray-800"
+        />
+        <Box className="p-6 rounded-lg bg-slate-100 shadow-md">
+          <div className="flex justify-center items-start gap-4">
+            <div className="w-full max-w-lg">
+              <Box>
+                <Typography variant="h5" className="mb-4 text-center">Create Project </Typography>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <ProjectForm control={control} />
+                </form>
+              </Box>
+            </div>
+            <div className="hidden md:block">
+              <img
+                src="/project.jpg"
+                 className="rounded-lg shadow-md w-full max-w-sm"
+              />
+            </div>
+          </div>
+        </Box>
+      </Container>
+    </>
+  );
+};
+
+export default CreateProject;

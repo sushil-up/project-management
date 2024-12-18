@@ -33,7 +33,6 @@ const Login = () => {
         redirect: false,
         localData: JSON.stringify(localData),
       });
-      console.log("res", res); // Log response here to check for errors
 
       if (res.error) {
         return errorMsg("Invalid credentials" || res.error);

@@ -27,6 +27,7 @@
     "react-toastify": "^11.0.0",
     "styled-components": "^6.1.13",
     "use-local-storage": "^3.0.0",
+    "uuid": "^11.0.3",
     "yup": "^1.6.0"
   },
   "devDependencies": {

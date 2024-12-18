@@ -1,16 +1,17 @@
 import { FormControl } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Controller } from "react-hook-form";
-export default function FormInput({
+export default function SearchField({
   name,
-  InputProps,
-  defaultValue,
+InputProps,
+defaultValue,
   control,
   label,
   inputType,
   className,
   placeholder,
   errors,
+  onChange
 }) {
   return (
     <FormControl fullWidth  className={className}> 
@@ -29,6 +30,7 @@ export default function FormInput({
             type={inputType}
             variant="outlined"
             InputProps={InputProps}
+            onChange={onChange}
             error={!!errors?.[name]}
             helperText={errors?.[name]?.message}
           />

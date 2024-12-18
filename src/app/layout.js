@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import Provider from "@/Component/Provider";
+import UserContextProvider from "@/context/UserContextProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,8 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Provider>{children}</Provider>
+      <UserContextProvider >
+        <Provider>
+          {children}
+        </Provider>
         <ToastContainer />
+        </UserContextProvider>
       </body>
     </html>
   );
