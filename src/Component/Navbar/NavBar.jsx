@@ -1,8 +1,8 @@
-import { Avatar, Button, IconButton, InputAdornment, Toolbar, Typography } from "@mui/material";
+import { Avatar, Button, IconButton, InputAdornment, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import LogoutButton from "../shared/form/LogoutButton";
 import FormInput from "../shared/form/formData";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,6 +15,17 @@ import { deepOrange } from "@mui/material/colors";
 const NavBar = ({ open, handleDrawerToggle }) => {
   const {control}=useForm()
 const navItems=['Your work','Projects','Filters','Dashboard','Teams','Plans','Apps']
+const [anchorEl, setAnchorEl] = useState(null);
+
+// Open the menu when the avatar is clicked
+const handleAvatarClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+// Close the menu
+const handleClose = () => {
+  setAnchorEl(null);
+};
 
   return (
     <>
@@ -47,7 +58,7 @@ const navItems=['Your work','Projects','Filters','Dashboard','Teams','Plans','Ap
        <FormInput
             control={control}
             name="search"
-            placeholder="Search Movie Name"
+            placeholder="Search"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -59,7 +70,25 @@ const navItems=['Your work','Projects','Filters','Dashboard','Teams','Plans','Ap
           <NotificationsNoneIcon/>
           <HelpOutlinedIcon/>
           <SettingsIcon/>
+          <IconButton onClick={handleAvatarClick}>
           <Avatar>C</Avatar>
+        </IconButton>
+        {/* Menu for logout */}
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <MenuItem onClick={signOut}>Logout</MenuItem>
+        </Menu>
        </div>
       </Toolbar>
     </>
