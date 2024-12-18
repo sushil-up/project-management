@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -8,21 +9,19 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { signOut, useSession } from "next-auth/react";
-import LogoutButton from "../shared/form/LogoutButton";
 import FormInput from "../shared/form/formData";
 import SearchIcon from "@mui/icons-material/Search";
 import { useForm } from "react-hook-form";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { deepOrange } from "@mui/material/colors";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
-  const { data: session } = useSession();
+  const { data: session } = useSession(); // Access session data
   const { control } = useForm();
   const navItems = [
     "Your work",
@@ -34,6 +33,19 @@ const NavBar = ({ open, handleDrawerToggle }) => {
     "Apps",
   ];
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [activeNavItem, setActiveNavItem] = useState(null);
+
+  // Load the active navigation item from localStorage on component mount
+  useEffect(() => {
+    const storedNavItem = localStorage.getItem("activeNavItem");
+    if (storedNavItem) {
+      setActiveNavItem(storedNavItem);
+    }
+  }, []);
+
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
   // Open the menu when the avatar is clicked
   const handleAvatarClick = (event) => {
@@ -44,6 +56,20 @@ const NavBar = ({ open, handleDrawerToggle }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Set the clicked nav item as active and store it in localStorage
+  const handleNavItemClick = (item) => {
+    setActiveNavItem(item);
+    localStorage.setItem("activeNavItem", item); // Persist the active item
+  };
+
+  // Get user initials
+  const getInitials = (name) =>
+    name
+      ?.split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
 
   return (
     <>
@@ -63,10 +89,27 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           <Typography variant="h6" noWrap component="div">
             PMT
           </Typography>
-          <div className="ml-10 flex !gap-10 justify-center items-center">
-            {navItems.map((items, index) => (
-              <ul key={index} className=" ">
-                <li>{items}</li>
+          <div className="ml-10 flex !gap-7 justify-center items-center">
+            {navItems.map((item, index) => (
+              <ul key={index} className="">
+                <li
+                  onClick={() => handleNavItemClick(item)}
+                  style={{
+                    cursor: "pointer",
+                    fontWeight: activeNavItem === item ? "bold" : "normal",
+                    color: activeNavItem === item ? "#0C66E4" : "inherit",
+                    backgroundColor:
+                      activeNavItem === item ? "#63c6ff2b" : "inherit",
+                    padding: activeNavItem === item ? "10px" : "",
+                    textDecoration:
+                      activeNavItem === item ? "underline 2px" : "none",
+                    textUnderlineOffset: "2px",
+                  }}
+                  className={`${activeNavItem === item ? "active-class" : ""}`}
+                >
+                  {item}
+                  <ArrowDropDownIcon />
+                </li>
               </ul>
             ))}
           </div>
@@ -76,6 +119,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
             variant="outlined"
             label="Dark"
             color="dark"
+            onClick={handleOpenModal}
           >
             Create
           </Button>
@@ -97,7 +141,9 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           <HelpOutlinedIcon />
           <SettingsIcon />
           <IconButton onClick={handleAvatarClick}>
-            <Avatar>C</Avatar>
+            <Avatar >
+              {getInitials(session?.user?.name)}
+            </Avatar>
           </IconButton>
           {/* Menu for logout */}
           <Menu
@@ -113,7 +159,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
               horizontal: "right",
             }}
           >
-            <MenuItem>{session.user.email}</MenuItem>
+            <MenuItem>{session?.user?.email}</MenuItem>
             <MenuItem>Manage Account</MenuItem>
             <MenuItem>Setting</MenuItem>
             <MenuItem onClick={signOut}>Logout</MenuItem>
