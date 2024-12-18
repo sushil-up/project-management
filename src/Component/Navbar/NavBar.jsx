@@ -21,8 +21,12 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
-  const { data: session } = useSession(); // Access session data
-  const { control } = useForm();
+  const { data: session } = useSession();
+  const { control } = useForm({
+    defaultValues:{
+      search:""
+    }
+  });
   const navItems = [
     "Your work",
     "Projects",
@@ -63,7 +67,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
     localStorage.setItem("activeNavItem", item); // Persist the active item
   };
 
-  // Get user initials
+  // Get user initials(Avatar)
   const getInitials = (name) =>
     name
       ?.split(" ")
@@ -97,9 +101,9 @@ const NavBar = ({ open, handleDrawerToggle }) => {
                   style={{
                     cursor: "pointer",
                     fontWeight: activeNavItem === item ? "bold" : "normal",
-                    color: activeNavItem === item ? "#0C66E4" : "inherit",
+                    color: activeNavItem === item ? "#1976d2" : "inherit",
                     backgroundColor:
-                      activeNavItem === item ? "#63c6ff2b" : "inherit",
+                      activeNavItem === item ? "#1976d214" : "inherit",
                     padding: activeNavItem === item ? "10px" : "",
                     textDecoration:
                       activeNavItem === item ? "underline 2px" : "none",
@@ -141,9 +145,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           <HelpOutlinedIcon />
           <SettingsIcon />
           <IconButton onClick={handleAvatarClick}>
-            <Avatar >
-              {getInitials(session?.user?.name)}
-            </Avatar>
+            <Avatar>{getInitials(session?.user?.name)}</Avatar>
           </IconButton>
           {/* Menu for logout */}
           <Menu

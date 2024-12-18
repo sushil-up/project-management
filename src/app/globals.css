@@ -2,16 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 /* navbar background */
 .css-7mxpdy-MuiPaper-root-MuiAppBar-root {
-    background-color: #e7e7e7!important; 
-}
-.css-1ygil4i-MuiToolbar-root {
-    min-height: 75px!important;
+  background-color: #e7e7e7 !important;
 }
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.flex.css-1ygil4i-MuiToolbar-root {
-    color: black!important;
+  color: black !important;
+}
+.css-2u11ia-MuiInputBase-input-MuiOutlinedInput-input {
+  height: 0.6em !important;
+}
+.todo-task{
+  height: 10px !important;
+}
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root {
+height: 35px;
+}
+.MuiFormControl-root.MuiFormControl-fullWidth.todo-select.css-ytlejw-MuiFormControl-root {
+margin-top: 18px;
+}
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+    height: 35px;
+}
+.css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 6px!important;
 }

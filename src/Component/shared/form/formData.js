@@ -3,14 +3,14 @@ import TextField from "@mui/material/TextField";
 import { Controller } from "react-hook-form";
 export default function FormInput({
   name,
-InputProps,
-defaultValue,
+  InputProps,
+  defaultValue,
   control,
   label,
   inputType,
   className,
   placeholder,
-  errors
+  errors,
 }) {
   return (
     <FormControl fullWidth>

@@ -4,6 +4,7 @@ import { Controller } from "react-hook-form";
 
 const FormInputSelect = ({
   name,
+  placeholder,
   control,
   label,
   options,
@@ -23,6 +24,7 @@ const FormInputSelect = ({
             <Select
               label={label}
               id={name}
+              placeholder={placeholder}
               {...field}
             >
               {options?.map((option) => (
