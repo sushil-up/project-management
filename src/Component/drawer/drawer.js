@@ -111,7 +111,7 @@ const menuItems = [
     title: "Test",
     icon: <SettingsIcon />,
     subItems: [
-      { title: "Test Page 1", icon: <SettingsIcon />, route: routesUrl.test },
+      { title: "Kanban Board", icon: <SettingsIcon />, route: routesUrl.kanbanBoard },
       { title: "Test Page 2", icon: <SettingsIcon />, route: routesUrl.test2 },
     ],
   },

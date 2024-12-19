@@ -4,7 +4,7 @@ export const routesUrl = {
   signUp: "/auth/signupform",
   admin:'/admin-panel',
   allprojects:'/admin-panel/all-projects',
-  test:'/admin-panel/test1',
+  kanbanBoard:'/admin-panel/kanban-board',
   test2:'/admin-panel/testpage2',
   test0:'/admin-panel/test0',
   task:'/admin-panel/task',
