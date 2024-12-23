@@ -19,23 +19,16 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Grid } from "@mui/joy";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
   const { data: session } = useSession();
   const { control } = useForm({
-    defaultValues:{
-      search:""
-    }
+    defaultValues: {
+      search: "",
+    },
   });
-  const navItems = [
-    "Your work",
-    "Projects",
-    "Filters",
-    "Dashboard",
-    "Teams",
-    "Plans",
-    "Apps",
-  ];
+  const navItems = ['Your work','Projects','Filters','Dashboard','Teams','Plans','Apps'];
   const [anchorEl, setAnchorEl] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [activeNavItem, setActiveNavItem] = useState(null);
@@ -78,24 +71,36 @@ const NavBar = ({ open, handleDrawerToggle }) => {
   return (
     <>
       <Toolbar className="flex justify-between">
-        <div className="flex justify-between gap-36 items-center">
-         <div className="flex justify-center items-center">
-         <IconButton
-            color="inherit"
-            aria-label="toggle drawer"
-            onClick={handleDrawerToggle}
-            edge="start"
-            sx={{
-              color: "#757575",
-            }}
+        <Grid
+          container
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          // gap={}
+        >
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            className="place-items-center"
+            gap={2}
           >
-            {open ? <ChevronLeftIcon /> : <MenuIcon />}
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            PMT
-          </Typography>
-         </div>
-          <div className=" flex !gap-5 justify-center items-center">
+          
+              <IconButton
+                color="inherit"
+                aria-label="toggle drawer"
+                onClick={handleDrawerToggle}
+                edge="start"
+                sx={{
+                  color: "#757575",
+                }}
+              >
+                {open ? <ChevronLeftIcon /> : <MenuIcon />}
+              </IconButton>
+              <Typography variant="h6" noWrap component="div">
+                PMT
+              </Typography>
+          
+
             {navItems.map((item, index) => (
               <ul key={index} className="">
                 <li
@@ -113,61 +118,79 @@ const NavBar = ({ open, handleDrawerToggle }) => {
                   }}
                   className={`${activeNavItem === item ? "active-class" : ""}`}
                 >
-                  {item}
-                  <ArrowDropDownIcon />
+                  <Grid
+                    container
+                    rowSpacing={1}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                    className="place-items-center"
+                    gap={5}
+                  >
+                    <Grid> {item}  <ArrowDropDownIcon /></Grid>
+                  </Grid>
+                 
                 </li>
               </ul>
             ))}
-          <Button
-            name="create"
-            variant="outlined"
-            label="Dark"
-            color="dark"
-            onClick={handleOpenModal}
+
+            <Button
+              name="create"
+              variant="outlined"
+              label="Dark"
+              color="dark"
+              onClick={handleOpenModal}
+            >
+              Create
+            </Button>
+          </Grid>
+
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            className="place-items-center "
           >
-            Create
-          </Button>
-          </div>
-        </div>
-        <div className="flex gap-4 justify-center items-center">
-          <FormInput
-            control={control}
-            name="search"
-            placeholder="Search"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon style={{ color: "gray" }} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <NotificationsNoneIcon />
-          <HelpOutlinedIcon />
-          <SettingsIcon />
-          <IconButton onClick={handleAvatarClick}>
-            <Avatar>{getInitials(session?.user?.name)}</Avatar>
-          </IconButton>
-          {/* Menu for logout */}
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-          >
-            <MenuItem>{session?.user?.email}</MenuItem>
-            <MenuItem>Manage Account</MenuItem>
-            <MenuItem>Setting</MenuItem>
-            <MenuItem onClick={signOut}>Logout</MenuItem>
-          </Menu>
-        </div>
+            <Grid>
+              <FormInput
+                control={control}
+                name="search"
+                placeholder="Search"
+                className="w-48 "
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon style={{ color: "gray" }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <NotificationsNoneIcon />
+            <HelpOutlinedIcon />
+            <SettingsIcon />
+            <IconButton onClick={handleAvatarClick}>
+              <Avatar>{getInitials(session?.user?.name)}</Avatar>
+            </IconButton>
+            {/* Menu for logout */}
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+            >
+              <MenuItem>{session?.user?.email}</MenuItem>
+              <MenuItem>Manage Account</MenuItem>
+              <MenuItem>Setting</MenuItem>
+              <MenuItem onClick={signOut}>Logout</MenuItem>
+            </Menu>
+          </Grid>
+        </Grid>
       </Toolbar>
     </>
   );

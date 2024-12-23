@@ -37,13 +37,15 @@ const Login = () => {
       });
 
       if (res.error) {
-        return errorMsg("Invalid credentials" || res.error);
+         errorMsg("Invalid credentials" || res.error);
+         setLoader(false);
       } else {
         router.push(routesUrl.addProject);
         return successMsg("Login Successfully");
       }
     } catch (error) {
-      return errorMsg("Login Error");
+       errorMsg("Login Error");
+       setLoader(false);
     }
   };
 

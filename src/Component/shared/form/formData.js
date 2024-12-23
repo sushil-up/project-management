@@ -13,7 +13,7 @@ export default function FormInput({
   errors,
 }) {
   return (
-    <FormControl fullWidth  className={className}> 
+    <FormControl fullWidth > 
       <Controller
         name={name}
         control={control}
