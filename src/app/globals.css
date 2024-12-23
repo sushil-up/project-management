@@ -9,26 +9,12 @@
 .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.flex.css-1ygil4i-MuiToolbar-root {
   color: black !important;
 }
-.css-2u11ia-MuiInputBase-input-MuiOutlinedInput-input {
-  height: 0.6em !important;
-}
 
-.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root {
-  height: 35px;
-}
+
 .MuiFormControl-root.MuiFormControl-fullWidth.todo-select.css-ytlejw-MuiFormControl-root {
   margin-top: 18px;
 }
-.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
-  height: 35px;
-}
-.css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input {
-  height: 1em;
-  padding: 6px !important;
-}
-.MuiFormControl-root.MuiFormControl-fullWidth.css-ytlejw-MuiFormControl-root {
-  margin-top: 11px!important;
-}
+
 .MuiFormControl-root.MuiFormControl-fullWidth.css-17qa0m8 {
   margin-top: 11px!important;
 }

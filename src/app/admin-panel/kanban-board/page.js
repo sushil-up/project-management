@@ -18,7 +18,7 @@ const KanbanBoard = () => {
     <>
       <Typography variant="h6">Kanban Board</Typography>
       <hr />
-      <div className="!mt-5">
+      <div className="">
         <FormInput
           className="!w-72"
           control={control}
