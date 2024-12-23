@@ -146,7 +146,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
               control={control}
               name="search"
               placeholder="Search"
-              className="w-48 mb-2"
+              className="w-48 mb-2 mt-2"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

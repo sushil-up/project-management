@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import ProjectForm from "./ProjectForm";
@@ -32,7 +32,7 @@ const CreateProject = ({ handleClose, setOpen }) => {
             <div className="w-full max-w-lg">
               <Box>
                 <Typography variant="h5" className="mb-4 text-center">
-                  Create Project{" "}
+                  Create Project
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <ProjectForm control={control} />

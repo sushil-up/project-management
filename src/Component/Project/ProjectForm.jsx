@@ -16,7 +16,6 @@ const ProjectForm = ({ control }) => {
         control={control}
         name="projecttype"
         label="Project type"
-        className="mt-2"
       />
       <FormInput
         control={control}
