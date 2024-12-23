@@ -12,18 +12,27 @@
 .css-2u11ia-MuiInputBase-input-MuiOutlinedInput-input {
   height: 0.6em !important;
 }
-.todo-task{
-  height: 10px !important;
-}
+
 .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root {
-height: 35px;
+  height: 35px;
 }
 .MuiFormControl-root.MuiFormControl-fullWidth.todo-select.css-ytlejw-MuiFormControl-root {
-margin-top: 18px;
+  margin-top: 18px;
 }
 .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
-    height: 35px;
+  height: 35px;
 }
 .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input {
-    padding: 6px!important;
+  height: 1em;
+  padding: 6px !important;
+}
+.MuiFormControl-root.MuiFormControl-fullWidth.css-ytlejw-MuiFormControl-root {
+  margin-top: 11px!important;
+}
+.MuiFormControl-root.MuiFormControl-fullWidth.css-17qa0m8 {
+  margin-top: 11px!important;
+}
+.css-157ayuk {
+  background-color: #e7e7e7 !important;
+  color: #000000;
 }

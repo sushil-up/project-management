@@ -78,8 +78,9 @@ const NavBar = ({ open, handleDrawerToggle }) => {
   return (
     <>
       <Toolbar className="flex justify-between">
-        <div className="flex">
-          <IconButton
+        <div className="flex justify-between gap-36 items-center">
+         <div className="flex justify-center items-center">
+         <IconButton
             color="inherit"
             aria-label="toggle drawer"
             onClick={handleDrawerToggle}
@@ -93,7 +94,8 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           <Typography variant="h6" noWrap component="div">
             PMT
           </Typography>
-          <div className="ml-10 flex !gap-7 justify-center items-center">
+         </div>
+          <div className=" flex !gap-5 justify-center items-center">
             {navItems.map((item, index) => (
               <ul key={index} className="">
                 <li
@@ -116,10 +118,8 @@ const NavBar = ({ open, handleDrawerToggle }) => {
                 </li>
               </ul>
             ))}
-          </div>
           <Button
             name="create"
-            className="!ml-10"
             variant="outlined"
             label="Dark"
             color="dark"
@@ -127,6 +127,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           >
             Create
           </Button>
+          </div>
         </div>
         <div className="flex gap-4 justify-center items-center">
           <FormInput

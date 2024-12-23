@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { routesUrl } from "./utils/pagesurl";
 export const ProtectedRoutes = [
-  routesUrl.allprojects,
+
   routesUrl.test,
   routesUrl.test0,
   routesUrl.testpage2,

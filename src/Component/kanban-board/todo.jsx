@@ -14,6 +14,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import useLocalStorage from "use-local-storage";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Draggable from "react-draggable";
+import DraggableWrapper from "../DraggableWrapper";
 
 const TODO = () => {
   const { control, handleSubmit, reset, setValue } = useForm({
@@ -87,10 +89,10 @@ const TODO = () => {
       setValue("priority", currentRow?.priority);
     }
   };
-  console.log("todoTask", todoTask);
+
   return (
     <>
-      <div className="bg-stone-100 p-4 w-80 ">
+      <div className="bg-stone-100 p-4 w-80">
         <div className="flex justify-between items-center">
           <span>TODO</span>
           <IconButton onClick={addTodo}>
@@ -125,51 +127,35 @@ const TODO = () => {
                 </Card>
               </div>
             ) : (
-              <div
-                key={row.id}
-                className="bg-gray-100 p-3 rounded-md mt-3 border"
-              >
-                <Typography
-                  className="flex justify-between items-center"
-                  variant="body1"
-                >
-                  {row.todotask}
-                  <IconButton onClick={(e) => handleOpenSettings(e, row.id)}>
-                    <MoreHorizIcon />
-                  </IconButton>
+              <DraggableWrapper key={row.id}>
+                <div className="bg-gray-100 p-3 rounded-md mt-3 border">
+                  <Typography
+                    className="flex justify-between items-center"
+                    variant="body1"
+                  >
+                    {row.todotask}
+                    <IconButton onClick={(e) => handleOpenSettings(e, row.id)}>
+                      <MoreHorizIcon />
+                    </IconButton>
+                  </Typography>
                   <Menu
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl && selectedTaskId === row.id)}
                     onClose={handleClose}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    PaperProps={{
-                      style: {
-                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                        borderRadius: "8px",
-                        padding: "8px 0",
-                      },
-                    }}
                   >
                     <MenuItem onClick={() => handleEdit(row.id)}>Edit</MenuItem>
                     <MenuItem onClick={() => handleDelete(row.id)}>
                       Delete
                     </MenuItem>
                   </Menu>
-                </Typography>
-                <Typography
-                  variant="caption"
-                  style={{ color: "gray", fontSize: "0.8rem" }}
-                >
-                  Priority: {row.priority}
-                </Typography>
-              </div>
+                  <Typography
+                    variant="caption"
+                    style={{ color: "gray", fontSize: "0.8rem" }}
+                  >
+                    Priority: {row.priority}
+                  </Typography>
+                </div>
+              </DraggableWrapper>
             )
           )}
         </div>
@@ -179,3 +165,49 @@ const TODO = () => {
 };
 
 export default TODO;
+
+// <div
+//   key={row.id}
+//   className="bg-gray-100 p-3 rounded-md mt-3 border"
+// >
+//   <Typography
+//     className="flex justify-between items-center"
+//     variant="body1"
+//   >
+//     {row.todotask}
+//     <IconButton onClick={(e) => handleOpenSettings(e, row.id)}>
+//       <MoreHorizIcon />
+//     </IconButton>
+//     <Menu
+//       anchorEl={anchorEl}
+//       open={Boolean(anchorEl && selectedTaskId === row.id)}
+//       onClose={handleClose}
+//       anchorOrigin={{
+//         vertical: "bottom",
+//         horizontal: "right",
+//       }}
+//       transformOrigin={{
+//         vertical: "top",
+//         horizontal: "right",
+//       }}
+//       PaperProps={{
+//         style: {
+//           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+//           borderRadius: "8px",
+//           padding: "8px 0",
+//         },
+//       }}
+//     >
+//       <MenuItem onClick={() => handleEdit(row.id)}>Edit</MenuItem>
+//       <MenuItem onClick={() => handleDelete(row.id)}>
+//         Delete
+//       </MenuItem>
+//     </Menu>
+//   </Typography>
+//   <Typography
+//     variant="caption"
+//     style={{ color: "gray", fontSize: "0.8rem" }}
+//   >
+//     Priority: {row.priority}
+//   </Typography>
+// </div>

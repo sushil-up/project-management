@@ -102,11 +102,7 @@ const menuItems = [
       },
     ],
   },
-  {
-    title: "All Appointment",
-    icon: <CalendarTodayIcon />,
-    route: routesUrl.allprojects,
-  },
+
   {
     title: "Test",
     icon: <SettingsIcon />,
