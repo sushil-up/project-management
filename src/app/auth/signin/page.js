@@ -131,7 +131,7 @@ const Login = () => {
             </div>
           </form>
           <button
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: routesUrl.addProject })}
             className="flex items-center justify-center bg-white border border-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300 shadow-sm"
           >
             <GoogleIcon className="mr-2" /> Sign in with Google

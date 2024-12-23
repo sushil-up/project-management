@@ -55,14 +55,12 @@ const AllProject = ({ control, handleClick }) => {
                 }}
               />
             </div>
-            <div className="ml-5">
               <FormInputSelect
                 control={control}
                 label="Filter Project"
                 name="select"
                 className="!w-56 "
               />
-            </div>
           </div>
         </Box>
       </Container>
