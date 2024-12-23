@@ -45,7 +45,7 @@ const ProjectList = ({ data }) => {
                   {session?.user?.name}
                 </TableCell>
                 <TableCell>
-                  <MoreHorizIcon />
+                  <MoreHorizIcon onClick={handleOpen}/>
                 </TableCell>
               </TableRow>
             ))}

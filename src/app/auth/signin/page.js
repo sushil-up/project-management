@@ -2,7 +2,7 @@
 import { FormControl } from "@mui/joy";
 import { Sheet } from "@mui/joy";
 import { useForm } from "react-hook-form";
-import { Button, Typography } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import { SignInValidation } from "@/Component/validation/signInValidation";
 import { errorMsg, successMsg } from "@/Component/shared/form/Toastmsg/toaster";
 import InputField from "@/Component/shared/form/InputField";
 import GoogleIcon from "@mui/icons-material/Google";
+import { useState } from "react";
 
 const Login = () => {
   const {
@@ -20,12 +21,13 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignInValidation) });
+  const [loader, setLoader] = useState(false);
   const router = useRouter();
   const onSubmit = async (data) => {
     const { email, password } = data;
     const cookieData = Cookies.get("register"); // Retrieve cookies data
     const localData = cookieData ? JSON.parse(cookieData) : []; // Parse cookies data if exists
-
+    setLoader(true);
     try {
       const res = await signIn("credentials", {
         email,
@@ -97,13 +99,23 @@ const Login = () => {
             </div>
             <br />
             <div className="flex justify-center items-center mt-7  ">
-              <Button
-                type="submit"
-                className="!bg-gray-600 !hover:bg-gray-700 !text-white !font-bold cursor-pointer !px-6 !py-2 
+              {loader === false ? (
+                <>
+                  <Button
+                    type="submit"
+                    className="!bg-gray-600 !hover:bg-gray-700 !text-white !font-bold cursor-pointer !px-6 !py-2 
                 !rounded-md !transition duration-300"
-              >
-                Login
-              </Button>
+                  >
+                    Login
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <div className="flex justify-center">
+                    <CircularProgress size={24} />
+                  </div>
+                </>
+              )}
             </div>
             <div className="text-center mt-10">
               <Typography>

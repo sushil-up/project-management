@@ -21,7 +21,7 @@ const AddProject = () => {
         </>
       ) : (
         <>
-        <CreateProject handleClose={handleClose}/>
+        <CreateProject handleClose={handleClose} setOpen={setOpen}/>
         </>
       )}
     </>

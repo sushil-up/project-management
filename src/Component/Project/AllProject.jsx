@@ -60,7 +60,7 @@ const AllProject = ({ control, handleClick }) => {
                 control={control}
                 label="Filter Project"
                 name="select"
-                className="w-56 "
+                className="!w-56 "
               />
             </div>
           </div>

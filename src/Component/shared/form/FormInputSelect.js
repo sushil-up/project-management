@@ -21,7 +21,7 @@ const FormInputSelect = ({
   return (
     <>
       <FormControl fullWidth error={!!errors?.[name]}>
-        <InputLabel className={className}>{label}</InputLabel>
+        <InputLabel>{label}</InputLabel>
         <Controller
           name={name}
           control={control}
