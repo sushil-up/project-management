@@ -21,16 +21,21 @@ const FormInputSelect = ({
   return (
     <>
       <FormControl fullWidth error={!!errors?.[name]}>
-        <InputLabel>{label}</InputLabel>
+        <InputLabel  className={className}>{label}</InputLabel>
         <Controller
           name={name}
           control={control}
           defaultValue={defaultValue || ""}
           render={({ field }) => (
-            <Select label={label} id={name}placeholder={placeholder} {...field} className={className}>
+            <Select
+              id={name}
+              placeholder={placeholder}
+              {...field}
+              className={className}
+            >
               {options?.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+                <MenuItem key={option.value||option} value={option.value||option} >
+                  {option.label}{option}
                 </MenuItem>
               ))}
             </Select>

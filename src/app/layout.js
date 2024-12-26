@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Provider from "@/Component/Provider";
 import UserContextProvider from "@/context/UserContextProvider";
+// import ProtectedRouting from "@/Component/ProtectedRouting/ProtectedRouting";
 
 export const metadata = {
   title: "Create Next App",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       <body>
       <UserContextProvider >
         <Provider>
+        {/* <ProtectedRouting/> */}
           {children}
         </Provider>
         <ToastContainer />

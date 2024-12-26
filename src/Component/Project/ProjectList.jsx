@@ -15,11 +15,12 @@ import {
 } from "@mui/material";
 import { useSession } from "next-auth/react";
 import React, { useContext, useState } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ProjectForm from "./ProjectForm";
 import { useForm } from "react-hook-form";
 import UserContext from "@/context/UserContext";
-const ProjectList = ({ data, handleDelete }) => {
+const ProjectList = ({ tableData, handleDelete }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -35,12 +36,13 @@ const ProjectList = ({ data, handleDelete }) => {
   };
   const { data: session } = useSession();
   const { project, setProject } = useContext(UserContext);
-  const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [editId, setEditId] = useState(null);
   const { handleSubmit, control, reset } = useForm();
-  const onSubmit = (data) => {
-    const updateData = project.map((item) => (item.id == editId ? data : item));
+  const onSubmit = (formData) => {
+    const updateData = project?.map((item) =>
+      item.id === editId ? formData : item
+    );
     setProject(updateData);
     setOpen(false);
     setEditId(null);
@@ -50,16 +52,13 @@ const ProjectList = ({ data, handleDelete }) => {
     setEditId(null);
   };
   const handleEdit = (item) => {
+    console.log("itemedit", item);
+    console.log("itemeditid", item.id);
     setEditId(item.id);
     reset(item);
     setOpen(true);
   };
-  const handleAction = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+
   // Get user initials
   const getInitials = (name) => {
     name
@@ -83,7 +82,7 @@ const ProjectList = ({ data, handleDelete }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.map((item) => (
+            {tableData?.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.projectname}</TableCell>
                 <TableCell>{item.key}</TableCell>
@@ -93,27 +92,9 @@ const ProjectList = ({ data, handleDelete }) => {
                   {session?.user?.name}
                 </TableCell>
                 <TableCell>
-                  <MoreHorizIcon onClick={handleAction} />
-                  <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleCloseMenu}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                  >
-                    <MenuItem>
-                      <Button onClick={() => handleDelete(item)}>Delete</Button>
-                    </MenuItem>
-                    <MenuItem>
-                      <Button onClick={() => handleEdit(item)}>Edit</Button>
-                    </MenuItem>
-                  </Menu>
+                  <EditIcon className="text-green-500" onClick={() => handleDelete(item)}/>
+
+                  <DeleteIcon className="text-red-500" onClick={() => handleEdit(item)}/>
                 </TableCell>
               </TableRow>
             ))}
@@ -122,7 +103,7 @@ const ProjectList = ({ data, handleDelete }) => {
       </Container>
 
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style} classname="model-pop">
+        <Box sx={style} className="model-pop">
           <form onSubmit={handleSubmit(onSubmit)}>
             <ProjectForm control={control} />
           </form>

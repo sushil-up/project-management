@@ -10,22 +10,23 @@ import DeleteModal from "../Modal/DeleteModal";
 
 const AllProject = ({ control, handleClick }) => {
   const { project, setProject } = useContext(UserContext);
-  const [data, setData] = useState(project);
+  const [tableData, setTableData] = useState(project);
   const [deleteOpenModal, setDeleteOpenModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
   
   const handleChange = (event) => {
     const input = event?.target?.value;
-    const set = project.filter((item) =>
+    const set = project?.filter((item) =>
       item?.projectname.toLowerCase().includes(input)
     );
-    setData(set);
+    setTableData(set);
   };
   const onDelete = () => {
     const updatedData = project?.filter((item, i) => item.id !== deleteIndex);
-    setData(updatedData);
+    setTableData(updatedData);
     setProject(updatedData);
     setDeleteOpenModal(false);
+    setDeleteIndex(null)
     successMsg("Project Delete Successfully");
   };
   const handleDelete = (item) => {
@@ -35,6 +36,7 @@ const AllProject = ({ control, handleClick }) => {
 
   const deleteHandleModalClose = () => {
     setDeleteOpenModal(false);
+    setDeleteIndex(null)
   };
   return (
     <>
@@ -79,13 +81,14 @@ const AllProject = ({ control, handleClick }) => {
               label="Filter Project"
               name="select"
               className="!w-56 ml-2"
+              options={["IT", "HR", "Sales"]}
             />
           </div>
         </Box>
       </Container>
 
       <ProjectList
-        data={data}
+        tableData={tableData}
         handleDelete={handleDelete}
       />
       <DeleteModal
