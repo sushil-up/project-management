@@ -89,9 +89,9 @@ const ProjectList = ({ tableData, handleDelete }) => {
                   {session?.user?.name}
                 </TableCell>
                 <TableCell>
-                  <EditIcon className="text-green-500" onClick={() => handleDelete(item)}/>
+                  <EditIcon className="text-green-500" onClick={() =>handleEdit(item)}/>
 
-                  <DeleteIcon className="text-red-500" onClick={() => handleEdit(item)}/>
+                  <DeleteIcon className="text-red-500" onClick={() =>handleDelete(item)}/>
                 </TableCell>
               </TableRow>
             ))}

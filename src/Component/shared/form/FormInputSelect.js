@@ -21,7 +21,7 @@ const FormInputSelect = ({
   return (
     <>
       <FormControl fullWidth error={!!errors?.[name]}>
-        <InputLabel  className={className}>{label}</InputLabel>
+        <InputLabel className={className}>{label}</InputLabel>
         <Controller
           name={name}
           control={control}
@@ -34,8 +34,11 @@ const FormInputSelect = ({
               className={className}
             >
               {options?.map((option) => (
-                <MenuItem key={option.value||option} value={option.value||option} >
-                  {option.label}{option}
+                <MenuItem
+                  key={option.value || option}
+                  value={option.value || option}
+                >
+                  {option.label || option}
                 </MenuItem>
               ))}
             </Select>

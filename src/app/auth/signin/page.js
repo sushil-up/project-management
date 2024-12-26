@@ -40,7 +40,7 @@ const Login = () => {
          errorMsg("Invalid credentials" || res.error);
          setLoader(false);
       } else {
-        router.push(routesUrl.addProject);
+        router.replace(routesUrl.addProject);
         return successMsg("Login Successfully");
       }
     } catch (error) {

@@ -1,9 +1,9 @@
 import { routesUrl } from "./pagesurl";
 
 export const ProtectedRoutes = [
-  routesUrl.adminPanel,
+  routesUrl.addProject,
   routesUrl.admin,
   routesUrl.task,
 ];
 
-export const UnprotectedRoutes = [routesUrl.home, routesUrl.signIn];
+export const UnprotectedRoutes = [routesUrl.signIn];
