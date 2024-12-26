@@ -1,10 +1,8 @@
 import { routesUrl } from "./pagesurl";
 
 export const ProtectedRoutes = [
-  routesUrl.test0,
-  routesUrl.testpage2,
-  routesUrl.admin,
   routesUrl.adminPanel,
+  routesUrl.admin,
   routesUrl.task,
 ];
 

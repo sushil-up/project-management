@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@mui/joy";
 import { Box, Container, InputAdornment, Modal, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";

@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <div className="text-center m-auto">
         <Typography variant="h5">This is Home Page </Typography>
-        <Link className="text-center" href={routesUrl.signIn}>
+        <Link  href={routesUrl.signIn} className="text-center">
           {session ? <LogoutButton /> : <Button>SignIn</Button>}
         </Link>
 

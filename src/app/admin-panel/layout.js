@@ -4,7 +4,7 @@ import ProtectedRouting from "@/Component/ProtectedRouting/ProtectedRouting";
 import UserContextProvider from "@/context/UserContextProvider";
 import React, { useState } from "react";
 
-const Layout = ({ children }) => {
+const AdminLayout = ({ children }) => {
   // Initialize toggle state
   const [toggle, setToggle] = useState(false);
 
@@ -30,4 +30,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default AdminLayout;

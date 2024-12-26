@@ -4,7 +4,7 @@ import { Container } from "@mui/joy";
 import { useForm } from "react-hook-form";
 import AssignForm from "@/Component/TaskAssign/AssignForm";
 
-const Task = () => {
+const SetTask = () => {
   const { control,handleSubmit} = useForm();
   const onSubmit=(data)=>{
     console.log("data",data)
@@ -20,4 +20,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default SetTask;
