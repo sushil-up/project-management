@@ -14,7 +14,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import useLocalStorage from "use-local-storage";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Draggable from "react-draggable";
 import DraggableWrapper from "../DraggableWrapper";
 
 const TODO = () => {
@@ -114,7 +113,7 @@ const TODO = () => {
                       className="todo-task"
                     />
                     <FormInputSelect
-                      className="todo-select"
+                      className="mt-4"
                       control={control}
                       name="priority"
                       options={PriorityList}
@@ -127,7 +126,6 @@ const TODO = () => {
                 </Card>
               </div>
             ) : (
-              <DraggableWrapper key={row.id}>
                 <div className="bg-gray-100 p-3 rounded-md mt-3 border">
                   <Typography
                     className="flex justify-between items-center"
@@ -155,7 +153,6 @@ const TODO = () => {
                     Priority: {row.priority}
                   </Typography>
                 </div>
-              </DraggableWrapper>
             )
           )}
         </div>
@@ -165,3 +162,5 @@ const TODO = () => {
 };
 
 export default TODO;
+
+
