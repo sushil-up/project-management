@@ -5,10 +5,10 @@ import FormInput from "@/Component/shared/form/formData";
 import DateRangeSelect from "@/Component/shared/form/DateRangeSelect";
 import FormInputSelect from "@/Component/shared/form/FormInputSelect";
 import Cookies from "js-cookie";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import UserContext from "@/context/UserContext";
-import { Button } from "@mui/joy";
-const AssignForm = ({ control,errors }) => {
+import { Button, Grid } from "@mui/joy";
+const AssignForm = ({ control, errors }) => {
   const [user, setUser] = useState();
   const cookieUser = Cookies.get("register");
   useEffect(() => {
@@ -24,23 +24,28 @@ const AssignForm = ({ control,errors }) => {
   return (
     <>
       <Box>
-        <Typography>Assign Task</Typography>
-        <FormSelect
-          control={control}
-          errors={errors}
-          className="mt-4 w-64"
-          name="user"
-          label="User"
-          options={user}
-        />
-        <FormSelect
-          control={control}
-          errors={errors}
-          className="mt-4 w-64"
-          name="projectName"
-          label="Project Name"
-          options={projectList}
-        />
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={6}>
+            <FormSelect
+              control={control}
+              errors={errors}
+              className="mt-4 w-100"
+              name="user"
+              label="User"
+              options={user}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <FormSelect
+              control={control}
+              errors={errors}
+              className="mt-4 w-100"
+              name="projectName"
+              label="Project Name"
+              options={projectList}
+            />
+          </Grid>
+        </Grid>
         <FormInput
           control={control}
           errors={errors}
@@ -48,7 +53,7 @@ const AssignForm = ({ control,errors }) => {
           placeholder="Task Discription"
           className="!mt-4 "
         />
-        <DateRangeSelect control={control} name="taskdate" className="!mt-4" errors={errors}/>
+        <DateRangeSelect control={control} name="taskdate" className="!mt-4" />
         <FormInputSelect
           control={control}
           errors={errors}
@@ -58,7 +63,9 @@ const AssignForm = ({ control,errors }) => {
           className="!mt-4"
           options={["High", "Medium", "Low"]}
         />
-        <Button type="submit" className="!mt-4">Submit</Button>
+        <Button type="submit" className="!mt-4">
+          Submit
+        </Button>
       </Box>
     </>
   );

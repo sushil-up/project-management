@@ -20,26 +20,30 @@ export default function DateRangeSelect({
         <Controller
           name={name}
           control={control}
-          defaultValue={[dayjs(), dayjs()]}
+          defaultValue={[dayjs(), dayjs()]} // Ensure defaultValue is dayjs objects
           render={({ field }) => (
             <DateRangePicker
               {...field}
-              className={className}
-              label={label}
+              value={
+                field.value?.map((date) => (date ? dayjs(date) : null)) || [] // Ensure values are dayjs objects
+              }
               onChange={(date) => {
-                field.onChange(date);
+                field.onChange(date?.map((d) => (d ? dayjs(d) : null)));
               }}
-              error={!!errors?.[name]}
-              helpertext={errors?.[name]?.message}
+              className={className}
               renderInput={(startProps, endProps) => (
                 <>
                   <TextField
                     {...startProps}
                     placeholder={placeholder || "Start Date"}
+                    error={!!errors?.[name]}
+                    helperText={errors?.[name]?.message}
                   />
                   <TextField
                     {...endProps}
                     placeholder={placeholder || "End Date"}
+                    error={!!errors?.[name]}
+                    helperText={errors?.[name]?.message}
                   />
                 </>
               )}

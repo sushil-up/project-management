@@ -11,35 +11,40 @@ import { TaskValidation } from "@/Component/validation/TaskValidation";
 import { Button } from "@mui/material";
 import ViewTasks from "@/Component/TaskAssign/ViewTasks";
 
-const SetTask = () => {
+const AddTask = () => {
   const {
     control,
-    handleSubmit,reset,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(TaskValidation) });
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
   const [open, setOpen] = useState(false);
   const id = uuidv4();
-  const onSubmit = (data) => {
+  const onSubmit =  (data) => {
     try {
       const setid = { ...data, id };
       const storedData =
         editId === null
           ? [...task, setid]
           : task?.map((item, index) =>
-              item.studentid === editId ? data : item
+              item.id === editId ? data : item
             );
       setTask(storedData);
-      setEditId(null)
+      setEditId(null);
+      setOpen(false)
+      reset()
       successMsg("Task Assign Successfully");
-    } catch (error) {}
+    } catch (error) {
+    }
   };
   const handleClick = () => {
     setOpen(false);
+    setEditId(null);
   };
   const handleEdit = (item) => {
-    reset(item)
+    reset(item);
     setEditId(item.id);
     setOpen(true);
   };
@@ -63,4 +68,4 @@ const SetTask = () => {
   );
 };
 
-export default SetTask;
+export default AddTask;

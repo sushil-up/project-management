@@ -2,7 +2,7 @@
 import { FormControl } from "@mui/joy";
 import { Sheet } from "@mui/joy";
 import { useForm } from "react-hook-form";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress, Container, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -37,108 +37,124 @@ const Login = () => {
       });
 
       if (res.error) {
-         errorMsg("Invalid credentials" || res.error);
-         setLoader(false);
+        errorMsg("Invalid credentials" || res.error);
+        setLoader(false);
       } else {
         router.replace(routesUrl.addProject);
         return successMsg("Login Successfully");
       }
     } catch (error) {
-       errorMsg("Login Error");
-       setLoader(false);
+      errorMsg("Login Error");
+      setLoader(false);
     }
   };
 
   return (
-    <div className="login-section mt-4">
-      <div className="">
-        <Sheet
-          sx={{
-            width: 500,
-            mx: "auto",
-            py: 9,
-            py: 7,
-            px: 5,
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            borderRadius: "sm",
-            boxShadow: "md",
-          }}
-          variant="outlined"
-        >
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <Typography variant="h4" className="text-center">
-                <b>Welcome!</b>
-              </Typography>
-            </div>
-            <div>
-              <FormControl>
-                <InputField
-                  errors={errors}
-                  className="w-96 ml-5"
-                  label="Email"
-                  control={control}
-                  name="email"
-                  type="email"
-                  placeholder="example123@gmail.com"
-                />
-              </FormControl>
-            </div>
-            <br />
-            <div>
-              <FormControl>
-                <InputField
-                  errors={errors}
-                  className="w-96 ml-5"
-                  control={control}
-                  name="password"
-                  type="password"
-                  label="Password"
-                />
-              </FormControl>
-            </div>
-            <br />
-            <div className="flex justify-center items-center mt-7  ">
-              {loader === false ? (
-                <>
-                  <Button
-                    type="submit"
-                    className="!bg-gray-600 !hover:bg-gray-700 !text-white !font-bold cursor-pointer !px-6 !py-2 
-                !rounded-md !transition duration-300"
-                  >
-                    Login
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <div className="flex justify-center">
-                    <CircularProgress size={24} />
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="text-center mt-10">
-              <Typography>
-                Dont have an account?
-                <Link href={routesUrl.signUp}>
-                  <span className="hover:underline hover:text-red-800">
-                    Sign Up
-                  </span>
-                </Link>
-              </Typography>
-            </div>
-          </form>
-          <button
-            onClick={() => signIn("google", { callbackUrl: routesUrl.addProject })}
-            className="flex items-center justify-center bg-white border border-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300 shadow-sm"
+    <>
+      <Container>
+        <div className="mt-5 grid place-items-center h-screen">
+          <div
+            className="shadow-xl border border-slate-200 flex rounded-3xl bg-white overflow-hidden login-container"
+            style={{ width: "80%", maxWidth: "1200px" }}
           >
-            <GoogleIcon className="mr-2" /> Sign in with Google
-          </button>
-        </Sheet>
-      </div>
-    </div>
+            <div className="w-1/2">
+              <img
+                src="/signinback.jpg"
+                alt="Sign In"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="w-1/2">
+              <Sheet
+                sx={{
+                  mx: "auto",
+                  my: 5,
+                  py: 5,
+                  px: 5,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div>
+                    <Typography variant="h4" className="text-center">
+                      <b>Welcome!</b>
+                    </Typography>
+                    <br />
+                  </div>
+                  <br />
+                  <div>
+                    <FormControl>
+                      <InputField
+                        errors={errors}
+                        className="w-80 ml-5"
+                        label="Email"
+                        control={control}
+                        name="email"
+                        type="email"
+                        placeholder="example123@gmail.com"
+                      />
+                    </FormControl>
+                  </div>
+                  <br />
+                  <div>
+                    <FormControl>
+                      <InputField
+                        errors={errors}
+                        className="w-80 ml-5"
+                        control={control}
+                        name="password"
+                        type="password"
+                        label="Password"
+                      />
+                    </FormControl>
+                  </div>
+                  <br />
+                  <div className="flex justify-center items-center mt-7  "></div>
+                  {loader === false ? (
+                    <>
+                      <Button
+                        type="submit"
+                        className=" btn w-80 ml-2 bg-blue-600 hover:bg-blue-700 text-white font-bold 
+                    cursor-pointer px-6 py-2 rounded-md transition duration-300"
+                      >
+                        Login
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-center">
+                        <CircularProgress size={24} />
+                      </div>
+                    </>
+                  )}
+                  <div className="text-center mt-10">
+                    <Typography>
+                      Dont have an account?
+                      <Link href={routesUrl.signUp}>
+                        <span className="hover:underline hover:text-red-800">
+                          Sign Up
+                        </span>
+                      </Link>
+                    </Typography>
+                  </div>
+                </form>
+                <button
+                  onClick={() =>
+                    signIn("google", { callbackUrl: routesUrl.addProject })
+                  }
+                  className="flex items-center justify-center bg-white border border-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300 shadow-sm"
+                >
+                  <GoogleIcon className="mr-2" /> Sign in with Google
+                </button>
+              </Sheet>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 };
 

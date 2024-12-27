@@ -4,12 +4,12 @@ import UserContext from "./UserContext";
 
 const UserContextProvider = ({ children }) => {
     const [project,setProject]= useLocalStorage("project",[])
-    const [task,setTask]= useLocalStorage("taskAssign",[])
+    const [task, setTask]= useLocalStorage("taskAssign",[])
   return (
     <UserContext.Provider
       value={{
         project,setProject,
-        task,setTask
+        task, setTask
       }}
     >
       {children}

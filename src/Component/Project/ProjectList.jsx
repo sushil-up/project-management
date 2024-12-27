@@ -8,12 +8,13 @@ import {
   TableBody,
   TableCell,
   TableHead,
+  TablePagination,
   TableRow,
 } from "@mui/material";
 import { useSession } from "next-auth/react";
-import React, { useContext, useState } from "react";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useContext, useEffect, useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import ProjectForm from "./ProjectForm";
 import { useForm } from "react-hook-form";
 import UserContext from "@/context/UserContext";
@@ -36,6 +37,22 @@ const ProjectList = ({ tableData, handleDelete }) => {
   const [open, setOpen] = useState(false);
   const [editId, setEditId] = useState(null);
   const { handleSubmit, control, reset } = useForm();
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  useEffect(() => {
+    const requiredLength = page * 10;
+    if (tableData?.length === requiredLength) {
+      setPage(0);
+    }
+  }, [page, tableData?.length]);
+  const displayedData = tableData || [];
   const onSubmit = (formData) => {
     const updateData = project?.map((item) =>
       item.id === editId ? formData : item
@@ -49,8 +66,6 @@ const ProjectList = ({ tableData, handleDelete }) => {
     setEditId(null);
   };
   const handleEdit = (item) => {
-    console.log("itemedit", item);
-    console.log("itemeditid", item.id);
     setEditId(item.id);
     reset(item);
     setOpen(true);
@@ -79,24 +94,54 @@ const ProjectList = ({ tableData, handleDelete }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData?.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.projectname}</TableCell>
-                <TableCell>{item.key}</TableCell>
-                <TableCell>{item.projecttype}</TableCell>
-                <TableCell>
-                  <Avatar>{getInitials(session?.user?.name)}</Avatar>
-                  {session?.user?.name}
-                </TableCell>
-                <TableCell>
-                  <EditIcon className="text-green-500" onClick={() =>handleEdit(item)}/>
+            {displayedData?.length > 0 ? (
+              <>
+                {" "}
+                {displayedData
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.projectname}</TableCell>
+                      <TableCell>{item.key}</TableCell>
+                      <TableCell>{item.projecttype}</TableCell>
+                      <TableCell>
+                        <Avatar>{getInitials(session?.user?.name)}</Avatar>
+                        {session?.user?.name}
+                      </TableCell>
+                      <TableCell>
+                        <EditIcon
+                          className="text-green-500"
+                          onClick={() => handleEdit(item)}
+                        />
 
-                  <DeleteIcon className="text-red-500" onClick={() =>handleDelete(item)}/>
-                </TableCell>
-              </TableRow>
-            ))}
+                        <DeleteIcon
+                          className="text-red-500"
+                          onClick={() => handleDelete(item)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </>
+            ) : (
+              <>
+                <TableRow>
+                  <TableCell colSpan={9} className="text-center">
+                    {`  `}
+                  </TableCell>
+                </TableRow>
+              </>
+            )}
           </TableBody>
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={displayedData?.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Container>
 
       <Modal open={open} onClose={handleClose}>
