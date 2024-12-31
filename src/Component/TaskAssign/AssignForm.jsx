@@ -53,7 +53,7 @@ const AssignForm = ({ control, errors }) => {
           placeholder="Task Discription"
           className="!mt-4 "
         />
-        <DateRangeSelect control={control} name="taskdate" className="!mt-4" />
+        <DateRangeSelect control={control} name="taskDate" className="!mt-4" />
         <FormInputSelect
           control={control}
           errors={errors}
@@ -62,6 +62,15 @@ const AssignForm = ({ control, errors }) => {
           label="Priority"
           className="!mt-4"
           options={["High", "Medium", "Low"]}
+        />
+        <FormInputSelect
+          control={control}
+          errors={errors}
+          name="taskStatus"
+          placeholder="Task Status"
+          label="Task Status"
+          className="!mt-4"
+          options={["ToDo", "InProgress", "Done"]}
         />
         <Button type="submit" className="!mt-4">
           Submit

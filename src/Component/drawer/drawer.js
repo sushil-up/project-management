@@ -9,20 +9,19 @@ import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import LogoutButton from "../shared/form/LogoutButton";
+import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { routesUrl } from "@/utils/pagesurl";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import SettingsIcon from "@mui/icons-material/Settings";
+import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -92,23 +91,23 @@ const menuItems = [
     subItems: [
       {
         title: "Task ",
-        icon: <DashboardIcon />,
+        icon: <AddTaskIcon />,
         route: routesUrl.task,
       },
       {
         title: "Add Project",
-        icon: <DashboardIcon />,
+        icon: <NoteAddIcon />,
         route: routesUrl.addProject,
       },
     ],
   },
 
   {
-    title: "Test",
-    icon: <SettingsIcon />,
+    title: "Planing",
+
     subItems: [
-      { title: "Kanban Board", icon: <SettingsIcon />, route: routesUrl.kanbanBoard },
-      { title: "Timeline", icon: <SettingsIcon />, route: routesUrl.timeline },
+      { title: "Kanban Board", icon: <ViewKanbanIcon />, route: routesUrl.kanbanBoard },
+      { title: "Timeline", icon: <ViewTimelineIcon />, route: routesUrl.timeline },
     ],
   },
 ];

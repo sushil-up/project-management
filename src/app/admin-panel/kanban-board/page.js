@@ -1,13 +1,10 @@
 "use client";
 import FormInput from "@/Component/shared/form/formData";
-import {  InputAdornment, Typography } from "@mui/material";
-import React from "react";
+import { InputAdornment, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
-import TODO from "@/Component/kanban-board/todo";
-import InProgress from "@/Component/kanban-board/Inprogress";
-import Done from "@/Component/kanban-board/Done";
-
+import TaskStatus from "@/Component/kanban-board/TaskStatus";
 const KanbanBoard = () => {
   const { control } = useForm();
 
@@ -31,12 +28,7 @@ const KanbanBoard = () => {
         />
       </div>
       <div className="!mt-5 flex justify-start gap-10">
-        {/* TODO Section */}
-        <TODO />
-        {/* IN PROGRESS Section */}
-        <InProgress />
-        {/* DONE Section */}
-        <Done />
+       <TaskStatus/>
       </div>
     </>
   );

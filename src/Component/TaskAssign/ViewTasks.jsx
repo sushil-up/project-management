@@ -83,8 +83,8 @@ const ViewTasks = ({ setOpen, handleEdit }) => {
                       <TableCell>{item.discription}</TableCell>
                       <TableCell>{item.priority}</TableCell>
                       <TableCell>
-                        {dayjs(item?.taskdate[0]).format("YYYY-MM-DD")} to
-                        {dayjs(item?.taskdate[1]).format("YYYY-MM-DD")}
+                        {dayjs(item?.taskDate[0]).format("YYYY-MM-DD")} to
+                        {dayjs(item?.taskDate[1]).format("YYYY-MM-DD")}
                       </TableCell>
                       <TableCell>
                         <EditIcon

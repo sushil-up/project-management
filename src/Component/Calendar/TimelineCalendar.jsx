@@ -102,8 +102,8 @@ const TimelineCalendar = () => {
       const formatedData = task.map((item) => ({
         id: item.id,
         text: item.projectName,
-        start: item?.taskdate?.[0],
-        end: item?.taskdate?.[1],
+        start: item?.taskDate?.[0],
+        end: item?.taskDate?.[1],
       }));
       setEvents(formatedData);
     }

@@ -5,6 +5,7 @@ export const ProtectedRoutes = [
   routesUrl.admin,
   routesUrl.task,
   routesUrl.timeline,
+  routesUrl.kanbanBoard,
 ];
 
 export const UnprotectedRoutes = [routesUrl.signIn];
