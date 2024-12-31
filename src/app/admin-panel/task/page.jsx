@@ -21,9 +21,9 @@ const AddTask = () => {
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
   const [open, setOpen] = useState(false);
-  const randomId = () => Math.floor(Math.random() * 1000000);
+  // const randomId = () => Math.floor(Math.random() * 1000000);
 
-  const id = randomId();
+  const id = uuidv4();
 
   const onSubmit = (data) => {
     try {
