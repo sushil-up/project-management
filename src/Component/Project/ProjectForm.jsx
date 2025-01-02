@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import FormInput from "../shared/form/formData";
 import FormInputSelect from "../shared/form/FormInputSelect";
@@ -15,7 +15,10 @@ const ProjectForm = ({ control }) => {
       <FormInputSelect
         control={control}
         name="projecttype"
+        placeholder="Project type"
         label="Project type"
+        className="!mt-4"
+        options={["IT", "HR", "Marketing"]}
       />
       <FormInput
         control={control}
@@ -23,7 +26,9 @@ const ProjectForm = ({ control }) => {
         placeholder="Key"
         className="!mt-2"
       />
-      <Button type="submit" className="!mt-3" >Create Project</Button>
+      <Button type="submit" className="!mt-3">
+        Create Project
+      </Button>
     </>
   );
 };
