@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import { TextField } from "@mui/material";
+
 
 export default function ListTable() {
   const [localData, setLocalData] = useState([]);
@@ -26,9 +26,9 @@ export default function ListTable() {
     const updatedData = localData.map((row) =>
       row.id === newRow.id ? { ...row, ...newRow } : row
     );
-    setLocalData(updatedData);
-    localStorage.setItem("taskAssign", JSON.stringify(updatedData));
-    return newRow;
+    setLocalData(updatedData); 
+    localStorage.setItem("taskAssign", JSON.stringify(updatedData)); 
+    return newRow; 
   };
 
   const columns = [
@@ -63,22 +63,6 @@ export default function ListTable() {
       field: "taskDate",
       headerName: "Due Date",
       width: 150,
-      editable: true,
-      renderEditCell: (params) => (
-        <TextField
-          type="date"
-          value={params.value || ""}
-          onChange={(event) => {
-            const newValue = event.target.value;
-            params.api.setEditCellValue({
-              id: params.id,
-              field: params.field,
-              value: newValue,
-            });
-          }}
-          fullWidth
-        />
-      ),
     },
   ];
 

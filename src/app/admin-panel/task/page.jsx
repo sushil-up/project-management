@@ -9,7 +9,6 @@ import { successMsg } from "@/Component/shared/form/Toastmsg/toaster";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TaskValidation } from "@/Component/validation/TaskValidation";
 import { Button } from "@mui/material";
-import ViewTasks from "@/Component/TaskAssign/ViewTasks";
 import ListTable from "@/Component/listTable/listTable";
 
 const AddTask = () => {

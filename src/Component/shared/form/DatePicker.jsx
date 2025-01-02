@@ -22,25 +22,25 @@ export default function DateSelect({
           
           render={({ field }) => (
             <DatePicker
-  {...field}
-  className={className}
-  label={label}
-  value={dayjs(field.value)} // Convert value to Day.js instance
-  placeholder={placeholder}
-  onChange={(date) => {
-    const isoDate = date ? date.toISOString() : null; // Convert to ISO format
-    field.onChange(isoDate); // Trigger react-hook-form's change handler
-  }}
-  renderInput={(params) => (
-    <TextField
-      {...params}
-      error={!!errors?.[name]}
-      helperText={errors?.[name]?.message}
-    />
-  )}
-  defaultValue={dayjs(new Date())}
-/>
-
+              {...field}
+              className={className}
+              label={label}
+              value={value}
+              placeholder={placeholder}
+              onChange={(date) => {
+                field.onChange(date);
+              }}
+              
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={!!errors?.[name]}
+                  helpertext={errors?.[name]?.message}
+                
+                /> 
+              )}
+              defaultValue={dayjs(new Date())}
+            />
           )}
         />
       </LocalizationProvider>

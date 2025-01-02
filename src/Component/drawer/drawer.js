@@ -106,7 +106,6 @@ const menuItems = [
     subItems: [
       { title: "Kanban Board", icon: <ViewKanbanIcon />, route: routesUrl.kanbanBoard },
       { title: "Timeline", icon: <ViewTimelineIcon />, route: routesUrl.timeline },
-      { title: "Lists", icon: <ViewTimelineIcon />, route: routesUrl.list },
 
     ],
   },
