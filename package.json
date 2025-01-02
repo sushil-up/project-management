@@ -20,6 +20,7 @@
     "@mui/icons-material": "^6.1.5",
     "@mui/joy": "^5.0.0-beta.48",
     "@mui/material": "^6.1.5",
+    "@mui/x-data-grid": "^7.23.5",
     "@mui/x-date-pickers": "^7.21.0",
     "@mui/x-date-pickers-pro": "^7.22.0",
     "@toolpad/core": "^0.8.1",

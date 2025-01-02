@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { TaskValidation } from "@/Component/validation/TaskValidation";
 import { Button } from "@mui/material";
 import ViewTasks from "@/Component/TaskAssign/ViewTasks";
+import ListTable from "@/Component/listTable/listTable";
 
 const AddTask = () => {
   const {
@@ -50,22 +51,26 @@ const AddTask = () => {
     setEditId(item.id);
     setOpen(true);
   };
+  const handleClose = () => {
+    setOpen(true);
+  };
   return (
     <>
+        <Container>
       {open === false ? (
         <>
-          <ViewTasks setOpen={setOpen} handleEdit={handleEdit} />
+        <Button onClick={handleClose}>Add Task</Button>
+        <ListTable/>
         </>
       ) : (
         <>
-          <Container>
             <Button onClick={handleClick}>View Tasks</Button>
             <form onSubmit={handleSubmit(onSubmit)}>
               <AssignForm control={control} errors={errors} />
             </form>
-          </Container>
         </>
       )}
+      </Container>
     </>
   );
 };

@@ -58,7 +58,7 @@ const ViewTasks = ({ setOpen, handleEdit }) => {
   };
   return (
     <>
-      <Button onClick={handleClose}>Add Task</Button>
+      {/* <Button onClick={handleClose}>Add Task</Button> */}
       <Container>
         <Table>
           <TableHead>
