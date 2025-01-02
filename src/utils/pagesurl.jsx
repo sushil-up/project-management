@@ -7,6 +7,5 @@ export const routesUrl = {
   task:'/admin-panel/task',
   addProject:'/admin-panel/addproject',
   timeline:'/admin-panel/timeline',
-  // list:'/admin-panel/lists',
   home:'/'
 };

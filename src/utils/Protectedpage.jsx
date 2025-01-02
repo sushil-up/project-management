@@ -6,7 +6,6 @@ export const ProtectedRoutes = [
   routesUrl.task,
   routesUrl.timeline,
   routesUrl.kanbanBoard,
-  routesUrl.list,
 
 ];
 
