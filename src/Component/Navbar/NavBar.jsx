@@ -6,7 +6,6 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,6 +19,8 @@ import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Grid } from "@mui/joy";
+import { useRouter } from "next/navigation";
+import { routesUrl } from "@/utils/pagesurl";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
   const { data: session } = useSession();
@@ -28,11 +29,11 @@ const NavBar = ({ open, handleDrawerToggle }) => {
       search: "",
     },
   });
-  const navItems = ['Your work','Projects','Filters'];
+  const navItems = ["Your work", "Projects", "Filters"];
   const [anchorEl, setAnchorEl] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [activeNavItem, setActiveNavItem] = useState(null);
-
+  const router = useRouter();
   // Load the active navigation item from localStorage on component mount
   useEffect(() => {
     const storedNavItem = localStorage.getItem("activeNavItem");
@@ -41,7 +42,10 @@ const NavBar = ({ open, handleDrawerToggle }) => {
     }
   }, []);
 
-  const handleOpenModal = () => setOpenModal(true);
+  const handleOpenModal = () => {
+    router.replace(routesUrl.addProject);
+    setOpenModal(true);
+  };
   const handleCloseModal = () => setOpenModal(false);
 
   // Open the menu when the avatar is clicked
@@ -85,22 +89,22 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           gap={0}
         >
           <Grid>
-          <IconButton
-            color="inherit"
-            aria-label="toggle drawer"
-            onClick={handleDrawerToggle}
-            edge="start"
-            sx={{
-              color: "#757575",
-            }}
-          >
-            {open ? <ChevronLeftIcon /> : <MenuIcon />}
-          </IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="toggle drawer"
+              onClick={handleDrawerToggle}
+              edge="start"
+              sx={{
+                color: "#757575",
+              }}
+            >
+              {open ? <ChevronLeftIcon /> : <MenuIcon />}
+            </IconButton>
           </Grid>
-         <Grid>
-         <Typography variant="h6" noWrap component="div">
-            PMT
-          </Typography>
+          <Grid>
+            <Typography variant="h6" noWrap component="div">
+              PMT
+            </Typography>
           </Grid>
           {navItems.map((item, index) => (
             <ul key={index} className="">
@@ -157,8 +161,8 @@ const NavBar = ({ open, handleDrawerToggle }) => {
             />
           </Grid>
           <NotificationsNoneIcon className="ml-2" />
-          <HelpOutlinedIcon className="ml-2"/>
-          <SettingsIcon className="ml-2"/>
+          <HelpOutlinedIcon className="ml-2" />
+          <SettingsIcon className="ml-2" />
           <IconButton onClick={handleAvatarClick} className="!mr-2">
             <Avatar>{getInitials(session?.user?.name)}</Avatar>
           </IconButton>
