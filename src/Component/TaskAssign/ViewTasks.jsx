@@ -67,8 +67,9 @@ const ViewTasks = ({ setOpen, handleEdit }) => {
               <TableCell>Project Name</TableCell>
               <TableCell>Discription</TableCell>
               <TableCell>Priority</TableCell>
+              <TableCell>Task Status</TableCell>
               <TableCell>Date</TableCell>
-              <TableBody>Action</TableBody>
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,6 +83,7 @@ const ViewTasks = ({ setOpen, handleEdit }) => {
                       <TableCell>{item.projectName}</TableCell>
                       <TableCell>{item.discription}</TableCell>
                       <TableCell>{item.priority}</TableCell>
+                      <TableCell>{item.taskStatus}</TableCell>
                       <TableCell>
                         {dayjs(item?.taskDate[0]).format("YYYY-MM-DD")} to
                         {dayjs(item?.taskDate[1]).format("YYYY-MM-DD")}

@@ -12,7 +12,10 @@ import { routesUrl } from "@/utils/pagesurl";
 import InputField from "@/Component/shared/form/InputField";
 import { SignUpValidation } from "@/Component/validation/signUpValidation";
 import { errorMsg } from "@/Component/shared/form/Toastmsg/toaster";
-import { checkUserExists, saveNewUser } from "@/Component/shared/form/registered-already-exist";
+import {
+  checkUserExists,
+  saveNewUser,
+} from "@/Component/shared/form/registered-already-exist";
 
 const SignUpForm = () => {
   const {
@@ -36,10 +39,9 @@ const SignUpForm = () => {
     // Check if user already exists
     if (!checkUserExists(data, registeruser)) {
       // If user doesn't exist, save the new user
-      saveNewUser(data, registeruser, setData, setUser,reset);
+      saveNewUser(data, registeruser, setData, setUser, reset);
       reset();
     }
-   
   };
   useEffect(() => {
     if (!user) return;
@@ -69,91 +71,106 @@ const SignUpForm = () => {
 
   return (
     <>
-     <div className="login-section">
-       <div className="">
-       <Sheet
-          sx={{
-            width: 500,
-            mx: "auto",
-            py: 9,
-            py: 7,
-            px: 5,
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            borderRadius: "sm",
-            boxShadow: "md",
-          }}
-          variant="outlined"
-        >
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <Typography variant="h4" className="text-center">
-                <b>Welcome!</b>
-              </Typography>
-            </div>
-            <div>
-              <FormControl>
-                <InputField
-                errors={errors}
-                  className="w-96 ml-5"
-                  label="Email"
-                  control={control}
-                  name="email"
-                  type="text"
-                  placeholder="example123@gmail.com"
+      <div className="login-section">
+        <div className="">
+          <Sheet
+            sx={{
+              width: 500,
+              mx: "auto",
+              py: 9,
+              py: 7,
+              px: 5,
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              borderRadius: "sm",
+              boxShadow: "md",
+            }}
+            variant="outlined"
+          >
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                <Typography variant="h4" className="text-center">
+                  <b>Welcome!</b>
+                </Typography>
+              </div>
+              <div>
+                <FormControl>
+                  <InputField
+                    errors={errors}
+                    className="w-96 ml-5"
+                    label="Email"
+                    control={control}
+                    name="email"
+                    type="text"
+                    placeholder="example123@gmail.com"
                   />
-              </FormControl>
-            </div>
-            <br/>
-            <div>
-              <FormControl>
-                <InputField
-                  placeholder="example123"
-                errors={errors}
-                  className="w-96 ml-5"
-                  label="Username"
-                  control={control}
-                  name="username"
-                  type="text"
-                
-                />
-              </FormControl>
-            </div>
-            <br />
-            <div>
-              <FormControl>
-                <InputField
-                errors={errors}
-                  className="w-96 ml-5"
-                  control={control}
-                  name="password"
-                  type="password"
-                  label="Password"
-                />
-              </FormControl>
-            </div>
-            <br />
-            <div className="flex justify-center items-center mt-10  ">
-              <Button
-                type="submit"
-                className="!bg-gray-600 !hover:bg-gray-700 !text-white !font-bold cursor-pointer !px-6 !py-2 
+                </FormControl>
+              </div>
+              <br />
+              <div>
+                <FormControl>
+                  <InputField
+                    placeholder="example123"
+                    errors={errors}
+                    className="w-96 ml-5"
+                    label="Username"
+                    control={control}
+                    name="username"
+                    type="text"
+                  />
+                </FormControl>
+              </div>
+              <br />
+              <div>
+                <FormControl>
+                  <InputField
+                    errors={errors}
+                    className="w-96 ml-5"
+                    control={control}
+                    name="name"
+                    type="name"
+                    label="Name"
+                  />
+                </FormControl>
+              </div>
+              <br />
+              <div>
+                <FormControl>
+                  <InputField
+                    errors={errors}
+                    className="w-96 ml-5"
+                    control={control}
+                    name="password"
+                    type="password"
+                    label="Password"
+                  />
+                </FormControl>
+              </div>
+              <br />
+              <div className="flex justify-center items-center mt-10  ">
+                <Button
+                  type="submit"
+                  className="!bg-gray-600 !hover:bg-gray-700 !text-white !font-bold cursor-pointer !px-6 !py-2 
                 !rounded-md !transition duration-300"
-              >
-                Register
-              </Button>
-            </div>
+                >
+                  Register
+                </Button>
+              </div>
               <div className="text-center mt-10">
                 <Typography>
-                Already have an account? 
+                  Already have an account?
                   <Link href={routesUrl.signIn}>
-                    <span className="hover:underline hover:text-red-800"> Sign In</span>
+                    <span className="hover:underline hover:text-red-800">
+                      {" "}
+                      Sign In
+                    </span>
                   </Link>
                 </Typography>
               </div>
-          </form>
-        </Sheet>
-       </div>
+            </form>
+          </Sheet>
+        </div>
       </div>
     </>
   );

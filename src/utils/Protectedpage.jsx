@@ -8,4 +8,4 @@ export const ProtectedRoutes = [
   routesUrl.kanbanBoard,
 ];
 
-export const UnprotectedRoutes = [routesUrl.signIn];
+export const UnprotectedRoutes = [routesUrl.signIn,routesUrl.signUp];

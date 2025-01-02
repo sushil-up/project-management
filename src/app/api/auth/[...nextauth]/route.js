@@ -17,7 +17,7 @@ const handler = NextAuth({
         );
 
         if (user) {
-          return { email: user.email, username: user.username,}; 
+          return { email: user.email, username: user.username,name:user.name}; 
         } else {
           return null; 
         }
@@ -45,6 +45,7 @@ const handler = NextAuth({
       if (user) {
         token.email = user.email;
         token.username = user.username; 
+        token.name = user.name; 
         token.id = user.id;    
       }
       return token;
@@ -53,6 +54,7 @@ const handler = NextAuth({
       session.user.email = token.email;
       session.user.username = token.username; // Add name to the session
       session.user.id = token.id;     // Add ID to the session
+      session.user.name = token.name;
       return session;
     },
   },

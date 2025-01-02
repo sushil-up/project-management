@@ -33,9 +33,9 @@ const TaskStatus = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-screen bg-gray-100 p-4">
-        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+        {/* <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
           Project Kanban Board
-        </h1>
+        </h1> */}
         <div className="flex flex-col md:flex-row gap-10">
           {column.map((col) => (
             <Column

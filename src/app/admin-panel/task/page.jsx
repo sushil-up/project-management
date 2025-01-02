@@ -21,8 +21,6 @@ const AddTask = () => {
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
   const [open, setOpen] = useState(false);
-  // const randomId = () => Math.floor(Math.random() * 1000000);
-
   const id = uuidv4();
 
   const onSubmit = (data) => {
@@ -31,12 +29,16 @@ const AddTask = () => {
       const storedData =
         editId === null
           ? [...task, setid]
-          : task?.map((item, index) => (item.id === editId ? data : item));
+          : task?.map((item, index) => (item?.id === editId ? data : item));
       setTask(storedData);
       setEditId(null);
       setOpen(false);
       reset();
-      successMsg("Task Assign Successfully");
+      {
+        editId === null
+          ? successMsg("Task Assign Successfully")
+          : successMsg("Task Updated Successfully");
+      }
     } catch (error) {}
   };
   const handleClick = () => {
