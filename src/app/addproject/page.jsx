@@ -10,18 +10,22 @@ const AddProject = () => {
   const handleClick = () => {
     setOpen(true);
   };
-  const handleClose=()=>{
-    setOpen(false)
-  }
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <>
       {open === false ? (
         <>
-          <AllProject control={control} handleClick={handleClick}/>
+          <AllProject control={control} handleClick={handleClick} />
         </>
       ) : (
         <>
-        <CreateProject handleClose={handleClose} setOpen={setOpen}/>
+          <CreateProject
+            handleClose={handleClose}
+            setOpen={setOpen}
+            open={open}
+          />
         </>
       )}
     </>

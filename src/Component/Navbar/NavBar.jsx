@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import {
   Avatar,
@@ -20,10 +20,14 @@ import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Grid } from "@mui/joy";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { routesUrl } from "@/utils/pagesurl";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
+  const pathname = usePathname();
+  if (pathname === routesUrl.signIn || pathname === routesUrl.signUp) {
+    return null;
+  }
   const { data: session } = useSession();
   const { control } = useForm({
     defaultValues: {

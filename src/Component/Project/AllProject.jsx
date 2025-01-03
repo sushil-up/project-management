@@ -92,6 +92,7 @@ const AllProject = ({ control, handleClick }) => {
       <ProjectList
         tableData={tableData}
         handleDelete={handleDelete}
+        setTableData={setTableData}
       />
       <DeleteModal
         onDelete={onDelete}
