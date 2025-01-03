@@ -42,7 +42,7 @@ const AllProject = ({ control, handleClick }) => {
   };
   return (
     <>
-      <Container>
+      {/* <Container> */}
         <div className="flex justify-between items-center">
           <Typography className="font-bold">Add Projects</Typography>
           <div className="flex ">
@@ -86,9 +86,9 @@ const AllProject = ({ control, handleClick }) => {
               options={["IT", "HR", "Sales"]}
             />
           </div>
+          
         </Box>
-      </Container>
-
+      {/* </Container> */}
       <ProjectList
         tableData={tableData}
         handleDelete={handleDelete}

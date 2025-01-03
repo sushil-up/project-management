@@ -24,6 +24,7 @@ const AddTask = () => {
   const id = uuidv4();
 
   const onSubmit = (data) => {
+    console.log("data",data)
     try {
       const setid = { ...data, id };
       const storedData =

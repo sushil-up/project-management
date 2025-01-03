@@ -5,7 +5,7 @@ export const routesUrl = {
   admin:'/admin-panel',
   kanbanBoard:'/admin-panel/kanban-board',
   task:'/admin-panel/task',
-  addProject:'/admin-panel/addproject',
+  addProject:'/addproject',
   timeline:'/admin-panel/timeline',
   home:'/'
 };
