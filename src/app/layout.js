@@ -18,16 +18,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Container maxWidth="lg">
-          <UserContextProvider>
-            <Provider>
-              <NavBar />
-              <ProtectedRouting />
-              {children}
-            </Provider>
-            <ToastContainer />
-          </UserContextProvider>
-        </Container>
+        <Container maxWidth="">
+      <UserContextProvider >
+        <Provider>
+        <NavBar/>
+        <ProtectedRouting/>
+          {children}
+        </Provider>
+        <ToastContainer />
+        </UserContextProvider>
+        
+</Container>
       </body>
     </html>
   );

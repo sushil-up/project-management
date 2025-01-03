@@ -20,7 +20,7 @@ const AdminLayout = ({ children }) => {
     <div>
       <button onClick={handleToggle}>Toggle</button>
       <MiniDrawer>
-        <div className="mt-16">
+        <div className="">
           <UserContextProvider>
             <ProtectedRouting />
             {children}

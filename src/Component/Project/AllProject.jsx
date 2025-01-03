@@ -9,6 +9,7 @@ import UserContext from "@/context/UserContext";
 import SearchField from "../shared/form/SearchField";
 import DeleteModal from "../Modal/DeleteModal";
 import { successMsg } from "../shared/form/Toastmsg/toaster";
+import FormInput from "../shared/form/formData";
 
 const AllProject = ({ control, handleClick }) => {
   const { project, setProject } = useContext(UserContext);
@@ -43,8 +44,8 @@ const AllProject = ({ control, handleClick }) => {
   return (
     <>
       {/* <Container> */}
-        <div className="flex justify-between items-center">
-          <Typography className="font-bold">Add Projects</Typography>
+        <div className="flex justify-between items-center my-5">
+          <Typography variant="h5" className="font-bold">Projects</Typography>
           <div className="flex ">
             <div>
               <Button className="" onClick={handleClick}>
@@ -59,7 +60,7 @@ const AllProject = ({ control, handleClick }) => {
           </div>
         </div>
         <hr />
-        <Box className="mt-4">
+        <Box className="mt-10">
           <div className="flex justify-start">
             <div>
               <SearchField
@@ -78,18 +79,18 @@ const AllProject = ({ control, handleClick }) => {
                 }}
               />
             </div>
-            <FormInputSelect
+            <FormInput
               control={control}
               label="Filter Project"
               name="select"
-              className="!w-56 ml-2"
+              className="!w-56 !ml-2"
               options={["IT", "HR", "Sales"]}
             />
           </div>
           
         </Box>
       {/* </Container> */}
-      <ProjectList
+      <ProjectList 
         tableData={tableData}
         handleDelete={handleDelete}
         setTableData={setTableData}

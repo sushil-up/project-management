@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.css-5c1adp-MuiContainer-root {
-  max-width: 1700px!important;
-}
+
 /* navbar background */
 .css-7mxpdy-MuiPaper-root-MuiAppBar-root {
   background-color: #e7e7e7 !important;
