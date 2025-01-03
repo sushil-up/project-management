@@ -13,21 +13,12 @@ import {
 } from "@mui/material";
 import { useSession } from "next-auth/react";
 import React, { useContext, useEffect, useState } from "react";
-<<<<<<< Updated upstream
 import ProjectForm from "./ProjectForm";
 import { useForm } from "react-hook-form";
 import UserContext from "@/context/UserContext";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 const ProjectList = ({ tableData, handleDelete, setTableData }) => {
-=======
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ProjectForm from "./ProjectForm";
-import { useForm } from "react-hook-form";
-import UserContext from "@/context/UserContext";
-const ProjectList = ({ tableData, handleDelete }) => {
->>>>>>> Stashed changes
   const style = {
     position: "absolute",
     top: "50%",
@@ -67,10 +58,7 @@ const ProjectList = ({ tableData, handleDelete }) => {
       item.id === editId ? formData : item
     );
     setProject(updateData);
-<<<<<<< Updated upstream
     setTableData(updateData);
-=======
->>>>>>> Stashed changes
     setOpen(false);
     setEditId(null);
   };
@@ -83,11 +71,6 @@ const ProjectList = ({ tableData, handleDelete }) => {
     reset(item);
     setOpen(true);
   };
-<<<<<<< Updated upstream
-=======
-
-  // Get user initials
->>>>>>> Stashed changes
   const getInitials = (name) => {
     name
       ?.split(" ")
