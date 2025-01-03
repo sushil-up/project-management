@@ -3,7 +3,7 @@ export const routesUrl = {
   signIn: "/auth/signin",
   signUp: "/auth/signupform",
   admin:'/admin-panel',
-  kanbanBoard:'/admin-panel/kanban-board',
+  kanban: (id) => `/admin-panel/kanban-board/${id}`,
   task:'/admin-panel/task',
   addProject:'/addproject',
   timeline:'/admin-panel/timeline',

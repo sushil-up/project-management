@@ -56,7 +56,6 @@ const AddTask = () => {
   };
   return (
     <>
-        <Container>
       {open === false ? (
         <>
         <Button onClick={handleClose}>Add Task</Button>
@@ -70,7 +69,6 @@ const AddTask = () => {
             </form>
         </>
       )}
-      </Container>
     </>
   );
 };

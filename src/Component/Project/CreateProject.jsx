@@ -5,7 +5,7 @@ import ProjectForm from "./ProjectForm";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import UserContext from "@/context/UserContext";
-import { successMsg } from "../shared/form/Toastmsg/toaster";
+import { errorMsg, successMsg } from "../shared/form/Toastmsg/toaster";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProjectValidation } from "../validation/ProjectValidation";
 import { useRouter } from "next/navigation";
@@ -31,17 +31,22 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(ProjectValidation) });
   const id = uuidv4();
-const router=useRouter()
+  const router = useRouter();
 
   const onSubmit = (data) => {
-    try {
-      const setid = { ...data, id };
-      const storedData = [...project, setid];
-      setProject(storedData);
-      successMsg("Project Created Successfully");
-      setOpen(false);
-      router.push(routesUrl.kanbanBoard)
-    } catch (error) {}
+    const existingProject = project?.find((item) => item?.key === data?.key);
+    if (!existingProject) {
+      try {
+        const setid = { ...data, id };
+        const storedData = [...project, setid];
+        setProject(storedData);
+        successMsg("Project Created Successfully");
+        setOpen(false);
+        router.push(routesUrl.kanban);
+      } catch (error) {}
+    }else{
+      errorMsg("Project key already exist")
+    }
   };
 
   return (

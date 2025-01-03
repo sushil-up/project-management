@@ -8,6 +8,9 @@ export const SignUpValidation = Yup.object().shape({
     .required("Email is required"),
   username: Yup.string().required("Username is required"),
   password: Yup.string()
-    .required("Password is required")
+    .required("Password is required").matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    ),
   
 });

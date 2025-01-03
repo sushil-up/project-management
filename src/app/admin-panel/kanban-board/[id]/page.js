@@ -5,9 +5,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
-const KanbanBoard = () => {
+const KanbanBoard = ({params}) => {
+  console.log("params",params)
   const { control } = useForm();
-
   return (
     <>
       <Typography variant="h6">Kanban Board</Typography>

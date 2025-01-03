@@ -18,6 +18,8 @@ import { useForm } from "react-hook-form";
 import UserContext from "@/context/UserContext";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useRouter } from "next/navigation";
+import { routesUrl } from "@/utils/pagesurl";
 const ProjectList = ({ tableData, handleDelete, setTableData }) => {
   const style = {
     position: "absolute",
@@ -39,6 +41,7 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
   const { handleSubmit, control, reset } = useForm();
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
+  const router = useRouter();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -78,7 +81,10 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
       .join("")
       .toUpperCase();
   };
-
+  const handleClick = (item) => {
+    router.push(routesUrl.kanban(item.id));
+    console.log("routesUrl.kanban(item.id)",routesUrl.kanban(item.id))
+  };
   return (
     <>
       <Container>
@@ -95,12 +101,13 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
           <TableBody>
             {displayedData?.length > 0 ? (
               <>
-                {" "}
                 {displayedData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item) => (
                     <TableRow key={item.id}>
-                      <TableCell>{item.projectname}</TableCell>
+                      <TableCell onClick={() => handleClick(item)}>
+                        {item.projectname}
+                      </TableCell>
                       <TableCell>{item.key}</TableCell>
                       <TableCell>{item.projecttype}</TableCell>
                       <TableCell>

@@ -16,8 +16,8 @@ import Link from "next/link";
 import { routesUrl } from "@/utils/pagesurl";
 import { Tooltip } from "@mui/joy";
 import { ToastContainer } from "react-toastify";
-import ResponsiveAppBar from "./Navbar";
 import SideBarList from "./SideBarList";
+import NavBar from "../Navbar/NavBar";
 const drawerWidth = 273;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -139,7 +139,7 @@ export default function MiniDrawer({ children }) {
     <>
       {session === null || undefined ? (
         <>
-          <ResponsiveAppBar />
+          <NavBar />
           {children}
         </>
       ) : (
