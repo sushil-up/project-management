@@ -21,13 +21,15 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Grid } from "@mui/joy";
 import { usePathname, useRouter } from "next/navigation";
-import { routesUrl } from "@/utils/pagesurl";
+import { AllPages } from "@/utils/pagesurl";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
+  const routesUrl= AllPages()
   const pathname = usePathname();
   if (pathname === routesUrl.signIn || pathname === routesUrl.signUp) {
     return null;
   }
+
   const { data: session } = useSession();
   const { control } = useForm({
     defaultValues: {

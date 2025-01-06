@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { routesUrl } from "@/utils/pagesurl";
+import { AllPages, routesUrl } from "@/utils/pagesurl";
 import Cookies from "js-cookie"; // Import the js-cookie package
 import { SignInValidation } from "@/Component/validation/signInValidation";
 import { errorMsg, successMsg } from "@/Component/shared/form/Toastmsg/toaster";
@@ -23,6 +23,7 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(SignInValidation) });
   const [loader, setLoader] = useState(false);
   const router = useRouter();
+  const routesUrl= AllPages()
   const onSubmit = async (data) => {
     const { email, password } = data;
     const cookieData = Cookies.get("register"); // Retrieve cookies data

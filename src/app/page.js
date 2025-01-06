@@ -1,13 +1,13 @@
 "use client";
 import LogoutButton from "@/Component/shared/form/LogoutButton";
-import { routesUrl } from "@/utils/pagesurl";
+import { AllPages } from "@/utils/pagesurl";
 import { Button, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Home() {
   const { data: session } = useSession();
-
+  const routesUrl = AllPages();
   return (
     <>
       <div className="text-center m-auto">

@@ -42,10 +42,10 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
         setProject(storedData);
         successMsg("Project Created Successfully");
         setOpen(false);
-        router.push(routesUrl.kanban);
+        router.push(`/admin-panel/kanban-board/${id}`);
       } catch (error) {}
-    }else{
-      errorMsg("Project key already exist")
+    } else {
+      errorMsg("Project key already exist");
     }
   };
 

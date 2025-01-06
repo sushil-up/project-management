@@ -4,10 +4,8 @@ import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -19,11 +17,10 @@ import Collapse from "@mui/material/Collapse";
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { routesUrl } from "@/utils/pagesurl";
+import { AllPages } from "@/utils/pagesurl";
 import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import NavBar from "../Navbar/NavBar";
 const drawerWidth = 240;
@@ -83,7 +80,7 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-
+const routesUrl= AllPages()
 const menuItems = [
   {
     title: "Dashboard",

@@ -1,9 +1,9 @@
-import { routesUrl } from "@/utils/pagesurl";
-import Cookies from "js-cookie";
+import { AllPages } from "@/utils/pagesurl";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
+const routesUrl = AllPages();
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -11,19 +11,22 @@ const handler = NextAuth({
       async authorize(credentials) {
         const { email, password, localData } = credentials;
         const data = JSON.parse(localData);
-        
+
         const user = data.find(
           (item) => item.email === email && item.password === password
         );
 
         if (user) {
-          return { email: user.email, username: user.username,name:user.name}; 
+          return {
+            email: user.email,
+            username: user.username,
+            name: user.name,
+          };
         } else {
-          return null; 
+          return null;
         }
       },
     }),
-
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -44,16 +47,16 @@ const handler = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.email = user.email;
-        token.username = user.username; 
-        token.name = user.name; 
-        token.id = user.id;    
+        token.username = user.username;
+        token.name = user.name;
+        token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.email = token.email;
       session.user.username = token.username; // Add name to the session
-      session.user.id = token.id;     // Add ID to the session
+      session.user.id = token.id; // Add ID to the session
       session.user.name = token.name;
       return session;
     },

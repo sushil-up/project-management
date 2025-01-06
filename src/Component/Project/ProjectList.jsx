@@ -19,7 +19,7 @@ import UserContext from "@/context/UserContext";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/navigation";
-import { routesUrl } from "@/utils/pagesurl";
+import { AllPages } from "@/utils/pagesurl";
 const ProjectList = ({ tableData, handleDelete, setTableData }) => {
   const style = {
     position: "absolute",
@@ -82,8 +82,9 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
       .toUpperCase();
   };
   const handleClick = (item) => {
-    router.push(routesUrl.kanban(item.id));
-    console.log("routesUrl.kanban(item.id)",routesUrl.kanban(item.id))
+    const id = item?.id;
+    AllPages(id)
+    router.push(`/admin-panel/kanban-board/${id}`);
   };
   return (
     <>
@@ -131,9 +132,7 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
             ) : (
               <>
                 <TableRow>
-                  <TableCell colSpan={9} className="text-center">
-                    {`  `}
-                  </TableCell>
+                  <TableCell colSpan={9} className="text-center"></TableCell>
                 </TableRow>
               </>
             )}
