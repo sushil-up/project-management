@@ -132,7 +132,7 @@ export default function MiniDrawer({ children }) {
     <LogoutButton />
   ) : (
     <Link href={routesUrl.signIn}>
-      <Typography color="white" >Sign In</Typography>
+      <Typography color="white">Sign In</Typography>
     </Link>
   );
   return (

@@ -86,9 +86,10 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
     AllPages(id)
     router.push(`/admin-panel/kanban-board/${id}`);
   };
+ 
   return (
     <>
-      <Container>
+      {/* <Container> */}
         <Table>
           <TableHead>
             <TableRow>
@@ -120,7 +121,6 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
                           className="text-green-500"
                           onClick={() => handleEdit(item)}
                         />
-
                         <DeleteIcon
                           className="text-red-500"
                           onClick={() => handleDelete(item)}
@@ -147,7 +147,7 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Container>
+      {/* </Container> */}
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} className="model-pop">

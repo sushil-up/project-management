@@ -3,6 +3,7 @@ import React from "react";
 import FormInput from "../shared/form/formData";
 import FormInputSelect from "../shared/form/FormInputSelect";
 import { Button } from "@mui/joy";
+import FormSelect from "../shared/form/FormSelect";
 
 const ProjectForm = ({ control ,errors}) => {
   return (
@@ -10,10 +11,10 @@ const ProjectForm = ({ control ,errors}) => {
       <FormInput
         control={control}
         name="projectname"
-        placeholder="Project Name"
+        label="Project Name"
         errors={errors}
       />
-      <FormInputSelect
+      <FormSelect
         control={control}
         name="projecttype"
         placeholder="Project type"
@@ -25,7 +26,7 @@ const ProjectForm = ({ control ,errors}) => {
       <FormInput
         control={control}
         name="key"
-        placeholder="Project Key"
+        label="Project Key"
         className="!mt-2"
         errors={errors}
       />

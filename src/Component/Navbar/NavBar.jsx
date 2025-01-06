@@ -121,9 +121,9 @@ const NavBar = ({ open, handleDrawerToggle }) => {
                   cursor: "pointer",
                   fontWeight: activeNavItem === item ? "bold" : "normal",
                   color: activeNavItem === item ? "#1976d2" : "inherit",
-                  backgroundColor:
-                    activeNavItem === item ? "#1976d214" : "inherit",
-                  padding: activeNavItem === item ? "10px" : "",
+                  // backgroundColor:
+                  //   activeNavItem === item ? "#1976d214" : "inherit",
+                  // padding: activeNavItem === item ? "10px" : "",
                   textDecoration:
                     activeNavItem === item ? "underline 2px" : "none",
                   textUnderlineOffset: "2px",
@@ -157,7 +157,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
               control={control}
               name="search"
               placeholder="Search"
-              className="w-48 mb-2 mt-2"
+              className="w-48 mb-2 "
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

@@ -10,13 +10,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ProjectValidation } from "../validation/ProjectValidation";
 import { useRouter } from "next/navigation";
 import { routesUrl } from "@/utils/pagesurl";
+
 const CreateProject = ({ handleClose, setOpen, open }) => {
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 1000,
+    width: 700,
     bgcolor: "snow",
     border: "0px solid #000",
     boxShadow: 24,
@@ -29,7 +30,16 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(ProjectValidation) });
+  } = useForm(
+    {
+      defaultValues: {
+        projectname: "",
+        projecttype: "",
+        key: "",
+      },
+    },
+    { resolver: yupResolver(ProjectValidation) }
+  );
   const id = uuidv4();
   const router = useRouter();
 
@@ -48,7 +58,7 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
       errorMsg("Project key already exist");
     }
   };
-
+  console.log("project", project);
   return (
     <>
       <Modal open={open} onClose={handleClose}>
@@ -66,5 +76,4 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
     </>
   );
 };
-
 export default CreateProject;

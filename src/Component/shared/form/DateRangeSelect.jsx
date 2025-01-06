@@ -35,13 +35,13 @@ export default function DateRangeSelect({
                 <>
                   <TextField
                     {...startProps}
-                    placeholder={placeholder || "Start Date"}
+                    placeholder={placeholder || ""}
                     error={!!errors?.[name]}
                     helperText={errors?.[name]?.message}
                   />
                   <TextField
                     {...endProps}
-                    placeholder={placeholder || "End Date"}
+                    placeholder={placeholder || ""}
                     error={!!errors?.[name]}
                     helperText={errors?.[name]?.message}
                   />
