@@ -42,6 +42,7 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const router = useRouter();
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -49,6 +50,7 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
   useEffect(() => {
     const requiredLength = page * 10;
     if (tableData?.length === requiredLength) {
@@ -56,6 +58,7 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
     }
   }, [page, tableData?.length]);
   const displayedData = tableData || [];
+
   const onSubmit = (formData) => {
     const updateData = project?.map((item) =>
       item.id === editId ? formData : item
@@ -81,72 +84,79 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
       .join("")
       .toUpperCase();
   };
+
   const handleClick = (item) => {
     const id = item?.id;
-    AllPages(id)
-    router.push(`/admin-panel/kanban-board/${id}`);
+    if (id) {
+      const routesUrl = AllPages(id);
+      router.push(routesUrl.kanban); // Navigate dynamically
+    } else {
+      console.error("Invalid project ID");
+    }
   };
- 
+  
+
   return (
     <>
       {/* <Container> */}
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Key</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Lead</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {displayedData?.length > 0 ? (
-              <>
-                {displayedData
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell onClick={() => handleClick(item)}>
-                        {item.projectname}
-                      </TableCell>
-                      <TableCell>{item.key}</TableCell>
-                      <TableCell>{item.projecttype}</TableCell>
-                      <TableCell>
-                        <Avatar>{getInitials(session?.user?.name)}</Avatar>
-                        {session?.user?.name}
-                      </TableCell>
-                      <TableCell>
-                        <EditIcon
-                          className="text-green-500"
-                          onClick={() => handleEdit(item)}
-                        />
-                        <DeleteIcon
-                          className="text-red-500"
-                          onClick={() => handleDelete(item)}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </>
-            ) : (
-              <>
-                <TableRow>
-                  <TableCell colSpan={9} className="text-center"></TableCell>
-                </TableRow>
-              </>
-            )}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={displayedData?.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Key</TableCell>
+            <TableCell>Type</TableCell>
+            <TableCell>Lead</TableCell>
+            <TableCell>Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {displayedData?.length > 0 ? (
+            <>
+              {displayedData
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell onClick={() => handleClick(item)} role="button">
+                      {item.projectname}
+                    </TableCell>
+
+                    <TableCell>{item.key}</TableCell>
+                    <TableCell>{item.projecttype}</TableCell>
+                    <TableCell>
+                      <Avatar>{getInitials(session?.user?.name)}</Avatar>
+                      {session?.user?.name}
+                    </TableCell>
+                    <TableCell>
+                      <EditIcon
+                        className="text-green-500"
+                        onClick={() => handleEdit(item)}
+                      />
+                      <DeleteIcon
+                        className="text-red-500"
+                        onClick={() => handleDelete(item)}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </>
+          ) : (
+            <>
+              <TableRow>
+                <TableCell colSpan={9} className="text-center"></TableCell>
+              </TableRow>
+            </>
+          )}
+        </TableBody>
+      </Table>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={displayedData?.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
       {/* </Container> */}
 
       <Modal open={open} onClose={handleClose}>

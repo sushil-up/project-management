@@ -44,20 +44,27 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
   const router = useRouter();
 
   const onSubmit = (data) => {
+    const id = uuidv4(); // Generate unique ID
     const existingProject = project?.find((item) => item?.key === data?.key);
+  
     if (!existingProject) {
       try {
-        const setid = { ...data, id };
+        const setid = { ...data, id }; // Add the generated ID
         const storedData = [...project, setid];
-        setProject(storedData);
+        setProject(storedData); // Update context
         successMsg("Project Created Successfully");
         setOpen(false);
-        router.push(`/admin-panel/kanban-board/${id}`);
-      } catch (error) {}
+        router.push(`/admin-panel/kanban-board/${id}`); // Navigate with the ID
+      } catch (error) {
+        console.error("Error creating project:", error);
+      }
     } else {
-      errorMsg("Project key already exist");
+      errorMsg("Project key already exists");
     }
   };
+  
+  
+
   console.log("project", project);
   return (
     <>

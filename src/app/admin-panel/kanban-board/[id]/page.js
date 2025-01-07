@@ -1,12 +1,18 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation"; // For `app` directory
 import FormInput from "@/Component/shared/form/formData";
 import { InputAdornment, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import SearchIcon from "@mui/icons-material/Search";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
-const KanbanBoard = ({params}) => {
-  console.log("params",params)
+import SearchIcon from "@mui/icons-material/Search";
+import { useForm } from "react-hook-form";
+
+const KanbanBoard = () => {
+
   const { control } = useForm();
+
+ 
+
   return (
     <>
       <Typography variant="h6">Kanban Board</Typography>
@@ -27,7 +33,7 @@ const KanbanBoard = ({params}) => {
         />
       </div>
       <div className="!mt-5 flex justify-start gap-10">
-       <TaskStatus/>
+        <TaskStatus />
       </div>
     </>
   );
