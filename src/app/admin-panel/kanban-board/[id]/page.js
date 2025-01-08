@@ -1,18 +1,21 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation"; // For `app` directory
+"use client"; // For `app` directory
 import FormInput from "@/Component/shared/form/formData";
 import { InputAdornment, Typography } from "@mui/material";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
 import SearchIcon from "@mui/icons-material/Search";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { AllPages } from "@/utils/pagesurl";
+import { getIdParams } from "@/utils/Protectedpage";
 
-const KanbanBoard = () => {
-
+const KanbanBoard = async ({ params }) => {
   const { control } = useForm();
 
- 
-
+  const id = params.id;
+  AllPages(id);
+  useEffect(() => {
+    getIdParams(id);
+  }, []);
   return (
     <>
       <Typography variant="h6">Kanban Board</Typography>

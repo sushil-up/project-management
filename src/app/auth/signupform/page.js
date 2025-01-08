@@ -8,7 +8,6 @@ import { signIn } from "next-auth/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { routesUrl } from "@/utils/pagesurl";
 import { SignUpValidation } from "@/Component/validation/signUpValidation";
 import { errorMsg, successMsg } from "@/Component/shared/form/Toastmsg/toaster";
 import {
@@ -16,6 +15,7 @@ import {
   saveNewUser,
 } from "@/Component/shared/form/registered-already-exist";
 import SignUpHelp from "@/Component/SignUp/SignUpHelp";
+import { AllPages } from "@/utils/pagesurl";
 
 const SignUpForm = () => {
   const {
@@ -34,7 +34,7 @@ const SignUpForm = () => {
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState(null);
   const router = useRouter();
-
+  const routesUrl = AllPages();
   const onSubmit = async (registeruser) => {
     // Check if user already exists
     setLoader(true);

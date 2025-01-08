@@ -22,9 +22,8 @@ export default function RootLayout({ children }) {
       <UserContextProvider >
         <Provider>
         <NavBar/>
-        {/* <ProtectedRouting> */}
+        <ProtectedRouting/>
           {children}
-          {/* </ProtectedRouting> */}
         </Provider>
         <ToastContainer />
         </UserContextProvider>

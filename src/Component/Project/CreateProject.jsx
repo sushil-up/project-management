@@ -54,7 +54,7 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
         setProject(storedData); // Update context
         successMsg("Project Created Successfully");
         setOpen(false);
-        router.push(`/admin-panel/kanban-board/${id}`); // Navigate with the ID
+        // router.push(`/admin-panel/kanban-board/${id}`); // Navigate with the ID
       } catch (error) {
         console.error("Error creating project:", error);
       }
