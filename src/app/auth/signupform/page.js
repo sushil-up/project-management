@@ -33,8 +33,8 @@ const SignUpForm = () => {
   });
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState(null);
+  const routesUrl= AllPages()
   const router = useRouter();
-  const routesUrl = AllPages();
   const onSubmit = async (registeruser) => {
     // Check if user already exists
     setLoader(true);

@@ -24,8 +24,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { AllPages } from "@/utils/pagesurl";
 
 const NavBar = ({ open, handleDrawerToggle }) => {
-  const routesUrl= AllPages()
   const pathname = usePathname();
+  const routesUrl= AllPages()
   if (pathname === routesUrl.signIn || pathname === routesUrl.signUp) {
     return null;
   }

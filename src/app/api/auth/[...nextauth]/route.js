@@ -1,9 +1,9 @@
+
 import { AllPages } from "@/utils/pagesurl";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-
-const routesUrl = AllPages();
+const routesUrl= AllPages()
 const handler = NextAuth({
   providers: [
     CredentialsProvider({

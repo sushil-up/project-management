@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AllPages, routesUrl } from "@/utils/pagesurl";
 import Cookies from "js-cookie"; // Import the js-cookie package
 import { SignInValidation } from "@/Component/validation/signInValidation";
 import { errorMsg, successMsg } from "@/Component/shared/form/Toastmsg/toaster";
 import InputField from "@/Component/shared/form/InputField";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useState } from "react";
+import { AllPages } from "@/utils/pagesurl";
 
 const Login = () => {
   const {
@@ -22,8 +22,8 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignInValidation) });
   const [loader, setLoader] = useState(false);
-  const router = useRouter();
   const routesUrl= AllPages()
+  const router = useRouter();
   const onSubmit = async (data) => {
     const { email, password } = data;
     const cookieData = Cookies.get("register"); // Retrieve cookies data

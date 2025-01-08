@@ -17,12 +17,12 @@ import Collapse from "@mui/material/Collapse";
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { AllPages } from "@/utils/pagesurl";
 import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import NavBar from "../Navbar/NavBar";
+import { AllPages } from "@/utils/pagesurl";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({

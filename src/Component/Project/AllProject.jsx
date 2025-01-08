@@ -11,7 +11,7 @@ import DeleteModal from "../Modal/DeleteModal";
 import { successMsg } from "../shared/form/Toastmsg/toaster";
 import FormInput from "../shared/form/formData";
 
-const AllProject = ({ control, handleClick }) => {
+const AllProject = ({ control, handleOpenProject,handleOpenBoard }) => {
   const { project, setProject } = useContext(UserContext);
   const [tableData, setTableData] = useState(project);
   const [deleteOpenModal, setDeleteOpenModal] = useState(false);
@@ -48,7 +48,7 @@ const AllProject = ({ control, handleClick }) => {
           <Typography variant="h5" className="font-bold">Projects</Typography>
           <div className="flex ">
             <div>
-              <Button className="" onClick={handleClick}>
+              <Button className="" onClick={handleOpenProject}>
                 Create Project
               </Button>
             </div>
@@ -94,6 +94,7 @@ const AllProject = ({ control, handleClick }) => {
         tableData={tableData}
         handleDelete={handleDelete}
         setTableData={setTableData}
+        handleOpenBoard={handleOpenBoard}
       />
       <DeleteModal
         onDelete={onDelete}

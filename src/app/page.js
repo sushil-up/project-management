@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   const { data: session } = useSession();
-  const routesUrl = AllPages();
+  const routesUrl= AllPages()
   return (
     <>
       <div className="text-center m-auto">

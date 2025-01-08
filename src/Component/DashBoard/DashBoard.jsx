@@ -13,11 +13,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LogoutButton from "../shared/form/LogoutButton";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { routesUrl } from "@/utils/pagesurl";
 import { Tooltip } from "@mui/joy";
 import { ToastContainer } from "react-toastify";
 import SideBarList from "./SideBarList";
 import NavBar from "../Navbar/NavBar";
+import { AllPages } from "@/utils/pagesurl";
 const drawerWidth = 273;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -77,6 +77,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer({ children }) {
   const { data: session } = useSession();
+  const routesUrl= AllPages()
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);

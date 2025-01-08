@@ -19,8 +19,12 @@ import UserContext from "@/context/UserContext";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/navigation";
-import { AllPages } from "@/utils/pagesurl";
-const ProjectList = ({ tableData, handleDelete, setTableData }) => {
+const ProjectList = ({
+  tableData,
+  handleDelete,
+  setTableData,
+  handleOpenBoard,
+}) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -85,17 +89,6 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
       .toUpperCase();
   };
 
-  const handleClick = (item) => {
-    const id = item?.id;
-    if (id) {
-      const routesUrl = AllPages(id);
-      router.push(routesUrl.kanban); // Navigate dynamically
-    } else {
-      console.error("Invalid project ID");
-    }
-  };
-  
-
   return (
     <>
       {/* <Container> */}
@@ -116,7 +109,10 @@ const ProjectList = ({ tableData, handleDelete, setTableData }) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell onClick={() => handleClick(item)} role="button">
+                    <TableCell
+                      onClick={() => handleOpenBoard(item)}
+                      role="button"
+                    >
                       {item.projectname}
                     </TableCell>
 

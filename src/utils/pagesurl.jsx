@@ -1,4 +1,5 @@
 export const AllPages = (id) => {
+  console.log("id",id)
   const routesUrl = {
     signIn: "/auth/signin",
     signUp: "/auth/signupform",

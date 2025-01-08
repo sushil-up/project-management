@@ -9,9 +9,9 @@ import { errorMsg, successMsg } from "../shared/form/Toastmsg/toaster";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProjectValidation } from "../validation/ProjectValidation";
 import { useRouter } from "next/navigation";
-import { routesUrl } from "@/utils/pagesurl";
+import { AllPages } from "@/utils/pagesurl";
 
-const CreateProject = ({ handleClose, setOpen, open }) => {
+const CreateProject = ({ handleCloseForm, setOpen, open }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -42,7 +42,7 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
   );
   const id = uuidv4();
   const router = useRouter();
-
+  const routesUrl= AllPages()
   const onSubmit = (data) => {
     const id = uuidv4(); // Generate unique ID
     const existingProject = project?.find((item) => item?.key === data?.key);
@@ -68,7 +68,7 @@ const CreateProject = ({ handleClose, setOpen, open }) => {
   console.log("project", project);
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleCloseForm}>
         <Box sx={style} className="model-pop">
           <Container className="p-4">
             <Typography variant="h5" className="mb-4 text-center">
