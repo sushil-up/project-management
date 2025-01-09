@@ -1,12 +1,16 @@
-import { Typography } from '@mui/material'
-import React from 'react'
+"use client"
+import React from "react";
+import { Typography } from "@mui/material";
 
-const AllProjects = () => {
+export const AllProjects = () => {
   return (
-    <div>
-   <Typography className='text-center' variant='h4'>This is All Appointment</Typography>
-    </div>
-  )
-}
+    <>
+      <div>
+        <Typography className="text-center" variant="h4">
+          This is All Appointment
+        </Typography>
+      </div>
+    </>
+  );
+};
 
-export default AllProjects

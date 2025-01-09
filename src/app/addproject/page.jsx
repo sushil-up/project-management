@@ -1,16 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import AllProject from "@/Component/Project/AllProject";
 import CreateProject from "@/Component/Project/CreateProject";
 import { AllPages } from "@/utils/pagesurl";
 import { useRouter } from "next/navigation";
 
- const AddProject = () => {
+const AddProject = () => {
   const { control } = useForm();
   const [open, setOpen] = useState(false);
-  const router= useRouter()
-  localStorage.removeItem("id")
+  const router = useRouter();
+  useEffect(()=>{
+    localStorage.removeItem("id");
+  })
   const handleOpenProject = () => {
     setOpen(true);
   };
@@ -22,8 +24,8 @@ import { useRouter } from "next/navigation";
     const id = item?.id;
     if (id) {
       localStorage.setItem("id", id);
-    const routesUrl=  AllPages(id);
-      router.push(routesUrl.kanban); 
+      const routesUrl = AllPages(id);
+      router.push(routesUrl.kanban);
     } else {
       console.error("Invalid project ID");
     }
@@ -51,4 +53,4 @@ import { useRouter } from "next/navigation";
   );
 };
 
-export default AddProject
+export default AddProject;

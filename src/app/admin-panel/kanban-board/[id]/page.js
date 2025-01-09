@@ -5,16 +5,11 @@ import TaskStatus from "@/Component/kanban-board/TaskStatus";
 import SearchIcon from "@mui/icons-material/Search";
 import { useForm } from "react-hook-form";
 import { AllPages } from "@/utils/pagesurl";
-import { useEffect, useState } from "react";
 
 const KanbanBoard = async () => {
   const { control } = useForm();
-  // console.log("params", params);
-  // const resolvedParams = await params;
-  // const id = resolvedParams.id;
-  // localStorage.setItem("id", id);
+  // const id = localStorage.getItem("id");
   // AllPages(id);
-
   return (
     <>
       <Typography variant="h6">Kanban Board</Typography>

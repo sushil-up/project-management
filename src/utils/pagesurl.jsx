@@ -1,5 +1,4 @@
 export const AllPages = (id) => {
-console.log("id",id)
   return {
     signIn: "/auth/signin",
     signUp: "/auth/signupform",
