@@ -21,7 +21,6 @@ const AssignForm = ({ control, errors }) => {
   const { project } = useContext(UserContext);
   const projectName = project?.map((item) => item.projectname);
   const projectList = Array?.from(new Set(projectName));
- console.log("projectList",projectList)
   return (
     <>
       <Box>

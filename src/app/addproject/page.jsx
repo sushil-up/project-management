@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
   const { control } = useForm();
   const [open, setOpen] = useState(false);
   const router= useRouter()
+  localStorage.removeItem("id")
   const handleOpenProject = () => {
     setOpen(true);
   };
@@ -20,8 +21,8 @@ import { useRouter } from "next/navigation";
   const handleOpenBoard = (item) => {
     const id = item?.id;
     if (id) {
-    const routesUrl=  AllPages(id);
       localStorage.setItem("id", id);
+    const routesUrl=  AllPages(id);
       router.push(routesUrl.kanban); 
     } else {
       console.error("Invalid project ID");

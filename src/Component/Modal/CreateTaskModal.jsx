@@ -37,7 +37,6 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
 
-console.log("task",task)
   const onSubmit = (data) => {
     try {
       const setid = { ...data, id };

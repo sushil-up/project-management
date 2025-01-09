@@ -7,7 +7,6 @@ import UserContextProvider from "@/context/UserContextProvider";
 import ProtectedRouting from "@/Component/ProtectedRouting/ProtectedRouting";
 import NavBar from "@/Component/Navbar/NavBar";
 import { Container } from "@mui/material";
-// import ProtectedRouting from "@/Component/ProtectedRouting/ProtectedRouting";
 
 export const metadata = {
   title: "Create Next App",

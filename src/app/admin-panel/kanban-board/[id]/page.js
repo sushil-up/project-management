@@ -7,20 +7,13 @@ import { useForm } from "react-hook-form";
 import { AllPages } from "@/utils/pagesurl";
 import { useEffect, useState } from "react";
 
-const KanbanBoard = ({ params }) => {
+const KanbanBoard = async () => {
   const { control } = useForm();
-  const [id, setId] = useState();
-  console.log("params", params);
+  // console.log("params", params);
   // const resolvedParams = await params;
-  // const { id } = params;
-  // console.log("kanbanBoardID",resolvedParams)
   // const id = resolvedParams.id;
-  useEffect(() => {
-    const dynamicId = localStorage.getItem("id");
-    setId(dynamicId);
-  }, []);
-
-  AllPages(id);
+  // localStorage.setItem("id", id);
+  // AllPages(id);
 
   return (
     <>

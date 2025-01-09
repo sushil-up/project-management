@@ -9,13 +9,17 @@ const ProtectedRouting = ({ children }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
-
   useEffect(() => {
     if (status === "loading") return;
 
     if (session) {
-      if (ProtectedRoutes && !ProtectedRoutes?.includes(pathname)) {
-        router?.replace(ProtectedRoutes[0]);
+      const id = localStorage.getItem("id");
+      const ProtectedPages = ProtectedRoutes(id);
+      if (
+        ProtectedPages &&
+        !Object.values(ProtectedPages)?.includes(pathname)
+      ) {
+        router?.replace(ProtectedPages[0]);
       }
     } else {
       if (UnprotectedRoutes && !UnprotectedRoutes?.includes(pathname)) {

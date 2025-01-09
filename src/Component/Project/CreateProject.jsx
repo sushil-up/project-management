@@ -63,9 +63,7 @@ const CreateProject = ({ handleCloseForm, setOpen, open }) => {
     }
   };
   
-  
 
-  console.log("project", project);
   return (
     <>
       <Modal open={open} onClose={handleCloseForm}>

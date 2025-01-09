@@ -79,7 +79,9 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+const id = localStorage.getItem("id")
 const routesUrl= AllPages()
+console.log("routesUrl",routesUrl)
 const menuItems = [
   {
     title: "Dashboard",
@@ -100,7 +102,7 @@ const menuItems = [
   {
     title: "Planing",
     subItems: [
-      { title: "Kanban Board", icon: <ViewKanbanIcon />, route: routesUrl.kanban },
+      { title: "Kanban Board", icon: <ViewKanbanIcon />, route: `/admin-panel/kanban-board/${id}` },
       { title: "Timeline", icon: <ViewTimelineIcon />, route: routesUrl.timeline },
 
     ],
