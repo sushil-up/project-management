@@ -4,11 +4,8 @@ import React, { useContext, useState } from "react";
 import { FaClock, FaCheckCircle } from "react-icons/fa";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import dayjs from "dayjs";
-import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
+import {  IconButton, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useRouter } from "next/navigation";
-import { AllPages } from "@/utils/pagesurl";
 import CreateTaskModal from "../Modal/CreateTaskModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
