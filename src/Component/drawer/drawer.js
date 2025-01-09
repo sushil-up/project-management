@@ -15,7 +15,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 import AddTaskIcon from '@mui/icons-material/AddTask';
@@ -109,7 +108,6 @@ const menuItems = [
 ];
 
 export default function MiniDrawer({ children }) {
-  const { data: session } = useSession();
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);

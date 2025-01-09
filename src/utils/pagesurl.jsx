@@ -1,6 +1,6 @@
 export const AllPages = (id) => {
-  console.log("id",id)
-  const routesUrl = {
+console.log("id",id)
+  return {
     signIn: "/auth/signin",
     signUp: "/auth/signupform",
     admin: "/admin-panel",
@@ -10,6 +10,4 @@ export const AllPages = (id) => {
     timeline: "/admin-panel/timeline",
     home: "/",
   };
-
-  return routesUrl;
 };

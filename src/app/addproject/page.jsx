@@ -6,7 +6,7 @@ import CreateProject from "@/Component/Project/CreateProject";
 import { AllPages } from "@/utils/pagesurl";
 import { useRouter } from "next/navigation";
 
-const AddProject = () => {
+ const AddProject = () => {
   const { control } = useForm();
   const [open, setOpen] = useState(false);
   const router= useRouter()
@@ -16,11 +16,13 @@ const AddProject = () => {
   const handleCloseForm = () => {
     setOpen(false);
   };
+
   const handleOpenBoard = (item) => {
     const id = item?.id;
     if (id) {
-      const routesUrl = AllPages(id);
-      router.push(routesUrl.kanban); // Navigate dynamically
+    const routesUrl=  AllPages(id);
+      localStorage.setItem("id", id);
+      router.push(routesUrl.kanban); 
     } else {
       console.error("Invalid project ID");
     }
@@ -48,4 +50,4 @@ const AddProject = () => {
   );
 };
 
-export default AddProject;
+export default AddProject

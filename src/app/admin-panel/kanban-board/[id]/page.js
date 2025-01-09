@@ -4,11 +4,24 @@ import { InputAdornment, Typography } from "@mui/material";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
 import SearchIcon from "@mui/icons-material/Search";
 import { useForm } from "react-hook-form";
+import { AllPages } from "@/utils/pagesurl";
+import { useEffect, useState } from "react";
 
-const KanbanBoard = async ({ params }) => {
+const KanbanBoard = ({ params }) => {
   const { control } = useForm();
-console.log("params",params)
-  // const id = params.id;
+  const [id, setId] = useState();
+  console.log("params", params);
+  // const resolvedParams = await params;
+  // const { id } = params;
+  // console.log("kanbanBoardID",resolvedParams)
+  // const id = resolvedParams.id;
+  useEffect(() => {
+    const dynamicId = localStorage.getItem("id");
+    setId(dynamicId);
+  }, []);
+
+  AllPages(id);
+
   return (
     <>
       <Typography variant="h6">Kanban Board</Typography>
