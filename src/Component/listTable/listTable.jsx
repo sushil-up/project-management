@@ -78,6 +78,12 @@ export default function ListTable() {
   const columns = [
     { field: "id", headerName: "ID", width: 110},
     {
+      field: "task",
+      headerName: "Task",
+      width: 150,
+      editable: true,
+    },
+    {
       field: "user",
       headerName: "User",
       width: 210,
@@ -120,7 +126,7 @@ export default function ListTable() {
   
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ height: 400, width: "95%" }}>
       <DataGrid
         rows={localData}
         columns={columns}

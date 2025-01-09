@@ -4,12 +4,13 @@ import { Container } from "@mui/joy";
 import { useForm } from "react-hook-form";
 import AssignForm from "@/Component/TaskAssign/AssignForm";
 import UserContext from "@/context/UserContext";
-import { v4 as uuidv4 } from "uuid";
+
 import { successMsg } from "@/Component/shared/form/Toastmsg/toaster";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TaskValidation } from "@/Component/validation/TaskValidation";
 import { Button } from "@mui/material";
 import ListTable from "@/Component/listTable/listTable";
+import CreateTaskModal from "@/Component/Modal/CreateTaskModal";
 
 const AddTask = () => {
   const {
@@ -17,58 +18,48 @@ const AddTask = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(TaskValidation) });
+  } = useForm({
+    defaultValues: {
+      task: "",
+      discription: "",
+    },
+    resolver: yupResolver(TaskValidation),
+  });
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
   const [open, setOpen] = useState(false);
-  const id = uuidv4();
 
-  const onSubmit = (data) => {
-    console.log("data",data)
-    try {
-      const setid = { ...data, id };
-      const storedData =
-        editId === null
-          ? [...task, setid]
-          : task?.map((item, index) => (item?.id === editId ? data : item));
-      setTask(storedData);
-      setEditId(null);
-      setOpen(false);
-      reset();
-      {
-        editId === null
-          ? successMsg("Task Assign Successfully")
-          : successMsg("Task Updated Successfully");
-      }
-    } catch (error) {}
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 700,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
   };
-  const handleClick = () => {
-    setOpen(false);
-    setEditId(null);
-  };
-  const handleEdit = (item) => {
-    reset(item);
-    setEditId(item.id);
-    setOpen(true);
-  };
+
+
+ 
+
+  const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setOpen(true);
+    setOpen(false);
   };
   return (
     <>
-      {open === false ? (
-        <>
-        <Button onClick={handleClose}>Add Task</Button>
-        <ListTable/>
-        </>
-      ) : (
-        <>
-            <Button onClick={handleClick}>View Tasks</Button>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <AssignForm control={control} errors={errors} />
-            </form>
-        </>
-      )}
+      {/* <> */}
+        <Button onClick={handleOpen}>Add Task</Button>
+        <ListTable />
+      {/* </> */}
+      <CreateTaskModal
+        open={open}
+        handleClose={handleClose}
+        style={style}
+        setOpen={setOpen}
+      />
     </>
   );
 };

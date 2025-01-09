@@ -21,7 +21,7 @@ const AssignForm = ({ control, errors }) => {
   const { project } = useContext(UserContext);
   const projectName = project?.map((item) => item.projectname);
   const projectList = Array?.from(new Set(projectName));
-
+ console.log("projectList",projectList)
   return (
     <>
       <Box>
@@ -47,11 +47,33 @@ const AssignForm = ({ control, errors }) => {
             />
           </Grid>
         </Grid>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={6}>
+          <FormInput
+          control={control}
+          errors={errors}
+          name="task"
+          label="Task"
+          className="!mt-4 "
+        />
+          </Grid>
+          <Grid item xs={6}>
+          <FormSelect
+          control={control}
+          errors={errors}
+          name="taskStatus"
+          // placeholder="Task Status"
+          label="Task Status"
+          className="!mt-4"
+          options={["ToDo", "InProgress", "Done"]}
+        />
+          </Grid>
+        </Grid>
         <FormInput
           control={control}
           errors={errors}
           name="discription"
-          label="Task Discription"
+          label="Task Description"
           className="!mt-4 "
         />
         <DateRangeSelect control={control} name="taskDate" className="!mt-4" />
@@ -64,15 +86,7 @@ const AssignForm = ({ control, errors }) => {
           className="!mt-4"
           options={["High", "Medium", "Low"]}
         />
-        <FormSelect
-          control={control}
-          errors={errors}
-          name="taskStatus"
-          // placeholder="Task Status"
-          label="Task Status"
-          className="!mt-4"
-          options={["ToDo", "InProgress", "Done"]}
-        />
+        
         <Button type="submit" className="!mt-4">
           Submit
         </Button>

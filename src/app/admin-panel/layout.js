@@ -11,7 +11,7 @@ const AdminLayout = ({ children }) => {
       <MiniDrawer>
         <div className="">
           <UserContextProvider>
-            <ProtectedRouting/>
+            {/* <ProtectedRouting/> */}
             {children}
           </UserContextProvider>
         </div>
