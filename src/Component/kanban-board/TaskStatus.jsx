@@ -38,7 +38,7 @@ const TaskStatus = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="min-h-screen bg-gray-100 p-4">
+      <div className="min-h-screen w-full bg-gray-100 p-4">
         <div className="flex flex-col md:flex-row gap-10">
           {column.map((col) => (
             <Column
@@ -72,18 +72,16 @@ const Column = ({ column, tasks, moveTask }) => {
   };
   return (
     <>
-      <div className="flex-1 min-w-[250px]" ref={drop}>
+      <div className="min-w-[250px]" ref={drop}>
         <div className="bg-white rounded-lg shadow-lg p-4">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 ml-1 mb-4">
             {column.icon}
             <h2 className="text-lg font-semibold text-gray-700">
               {column.title}
             </h2>
           </div>
           {tasks.map((task) => (
-            <>
               <Task key={task.id} task={task} />
-            </>
           ))}
           <IconButton onClick={handleModalOpen}>
             <AddIcon />
@@ -104,8 +102,8 @@ const Task = ({ task }) => {
   const { setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [isEditing, setIsEditing] = useState(false); // State for editing mode
-  const [editText, setEditText] = useState(task.task); // State for the updated task text
+  const [isEditing, setIsEditing] = useState(false); 
+  const [editText, setEditText] = useState(task.task); 
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { id: task.id },

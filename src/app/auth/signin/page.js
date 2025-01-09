@@ -24,6 +24,8 @@ const Login = () => {
   const [loader, setLoader] = useState(false);
   const routesUrl= AllPages()
   const router = useRouter();
+
+  
   const onSubmit = async (data) => {
     const { email, password } = data;
     const cookieData = Cookies.get("register"); // Retrieve cookies data

@@ -12,12 +12,12 @@ export default function Home() {
   return (
     <>
     <AddProject/>
-      <div className="text-center m-auto">
+      {/* <div className="text-center m-auto">
         <Typography variant="h5">This is Home Page </Typography>
         <Link href={routesUrl.signIn} className="text-center">
           {session ? <LogoutButton /> : <Button>SignIn</Button>}
         </Link>
-      </div>
+      </div> */}
     </>
   );
 }
