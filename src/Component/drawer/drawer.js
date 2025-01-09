@@ -82,7 +82,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer({ children }) {
-  const {id,setId} = useContext(UserContext);
+  const {id} = useContext(UserContext);
   const routesUrl = AllPages(id);
   const menuItems = [
     {

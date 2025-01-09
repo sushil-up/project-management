@@ -1,4 +1,5 @@
 "use client";
+
 import UserContext from "@/context/UserContext";
 import { ProtectedRoutes, UnprotectedRoutes } from "@/utils/Protectedpage";
 import { useSession } from "next-auth/react";
@@ -7,26 +8,28 @@ import { useContext, useEffect } from "react";
 
 const ProtectedRouting = ({ children }) => {
   const { data: session, status } = useSession();
-  const {id,setId}= useContext(UserContext)
+  const { id } = useContext(UserContext); // Ensure `id` is properly initialized in UserContext
   const router = useRouter();
   const pathname = usePathname();
+
   useEffect(() => {
-    if (status === "loading") return;
+    if (status === "loading") return; // Wait for session to load
 
     if (session) {
-      const ProtectedPages = ProtectedRoutes(id);
-      if (
-        ProtectedPages &&
-        !Object.values(ProtectedPages)?.includes(pathname)
-      ) {
-        router?.replace(ProtectedPages[0]);
+      const protectedRoutes = ProtectedRoutes(id);
+      const protectedPaths = Object.values(protectedRoutes); // Extract route paths
+      if (protectedPaths && !protectedPaths.includes(pathname)) {
+        // Redirect to the first protected route
+        router.replace(protectedPaths[0]);
       }
     } else {
-      if (UnprotectedRoutes && !UnprotectedRoutes?.includes(pathname)) {
-        router?.replace(UnprotectedRoutes[0]);
+      if (UnprotectedRoutes && !UnprotectedRoutes.includes(pathname)) {
+        // Redirect to the first unprotected route
+        router.replace(UnprotectedRoutes[0]);
       }
     }
-  }, [pathname, router, session, status, ProtectedRoutes, UnprotectedRoutes]);
+  }, [pathname, router, session, status, id]);
+
   return <>{children}</>;
 };
 
