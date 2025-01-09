@@ -136,7 +136,6 @@ export default function ListTable() {
         columns={columns}
         processRowUpdate={handleRowUpdate}
         onProcessRowUpdateError={(error) => {
-          console.error("Row update failed:", error);
         }}
         initialState={{
           pagination: {

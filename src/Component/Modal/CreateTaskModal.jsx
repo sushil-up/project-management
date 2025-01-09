@@ -36,10 +36,6 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
   const id = uuidv4();
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
-
-console.log("task",task)
-
-
   const onTaskSubmit = (data) => {
       try {
         const newTask = { ...data, id: uuidv4() };
