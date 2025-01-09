@@ -8,6 +8,7 @@ import {  IconButton, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CreateTaskModal from "../Modal/CreateTaskModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import BoardModal from "../Modal/BoardModal";
 
 const TaskStatus = () => {
   const { task, setTask } = useContext(UserContext);
@@ -35,7 +36,7 @@ const TaskStatus = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="min-h-screen w-full bg-gray-100 p-4">
+      <div className="min-h-96 w-full bg-gray-100 p-4">
         <div className="flex flex-col md:flex-row gap-10">
           {column.map((col) => (
             <Column
@@ -78,7 +79,7 @@ const Column = ({ column, tasks, moveTask }) => {
             </h2>
           </div>
           {tasks.map((task) => (
-              <Task key={task.id} task={task} />
+            <Task key={task.id} task={task} />
           ))}
           <IconButton onClick={handleModalOpen}>
             <AddIcon />
@@ -99,8 +100,9 @@ const Task = ({ task }) => {
   const { setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [isEditing, setIsEditing] = useState(false); 
-  const [editText, setEditText] = useState(task.task); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(task.task);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { id: task.id },
@@ -123,81 +125,98 @@ const Task = ({ task }) => {
   };
 
   const handleTaskEdit = () => {
-    setIsEditing(true); // Enable editing mode
+    setIsEditing(true);
     setAnchorEl(null);
   };
 
   const handleEditSave = () => {
     setTask((prevTasks) =>
-      prevTasks.map((t) =>
-        t.id === task.id ? { ...t, task: editText } : t
-      )
+      prevTasks.map((t) => (t.id === task.id ? { ...t, task: editText } : t))
     );
-    setIsEditing(false); // Exit editing mode
+    setIsEditing(false);
   };
 
   const handleEditCancel = () => {
-    setEditText(task.task); // Reset text to the original value
-    setIsEditing(false); // Exit editing mode
+    setEditText(task.task);
+    setIsEditing(false);
+  };
+
+  const handleTaskModalOpen = () => {
+
+    setOpenTaskModal(true);
   };
 
   return (
-    <div
-      ref={drag}
-      className={`bg-gray-50 rounded-lg p-3 mb-4 shadow-sm ${
-        isDragging ? "opacity-50" : "opacity-100"
-      }`}
-    >
-      <div className="flex justify-between items-center">
-        {isEditing ? (
-          <input
-            type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-            className="border w-60 border-gray-300 rounded px-2 py-1 flex-1"
-          />
-        ) : (
-          <h3 className="font-semibold text-gray-800 mb-2">{task.task}</h3>
-        )}
-        <IconButton onClick={handleSettingClick}>
-          <MoreHorizIcon />
-        </IconButton>
-      </div>
-      <p className="text-gray-600 text-sm font-medium">
-        Priority: {task.priority}
-      </p>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleSettingClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
+    <>
+      <div
+        ref={drag}
+        className={`cursor-pointer bg-gray-50 rounded-lg p-3 mb-4 shadow-sm ${
+          isDragging ? "opacity-50" : "opacity-100"
+        }`}
       >
-        <MenuItem onClick={handleTaskEdit}>Edit</MenuItem>
-        <MenuItem onClick={() => handleTaskDelete(task.id)}>Delete</MenuItem>
-      </Menu>
-
-      {isEditing && (
-        <div className="mt-2 flex gap-2">
-          <button
-            onClick={handleEditSave}
-            className="bg-blue-500 text-white px-3 py-1 rounded"
-          >
-            Save
-          </button>
-          <button
-            onClick={handleEditCancel}
-            className="bg-gray-300 px-3 py-1 rounded"
-          >
-            Cancel
-          </button>
+        <div className="flex justify-between items-center">
+          {isEditing ? (
+            <input
+              type="text"
+              value={editText}
+              onChange={(e) => setEditText(e.target.value)}
+              className="border w-60 border-gray-300 rounded px-2 py-1 flex-1"
+            />
+          ) : (
+            <h3
+              onClick={handleTaskModalOpen}
+              className="font-semibold text-gray-800 mb-2"
+            >
+              {task.task}
+            </h3>
+          )}
+          <IconButton onClick={handleSettingClick}>
+            <MoreHorizIcon />
+          </IconButton>
         </div>
-      )}
-    </div>
+        <p
+          onClick={handleTaskModalOpen}
+          className="text-gray-600 text-sm font-medium"
+        >
+          Priority: {task.priority}
+        </p>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleSettingClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleTaskEdit}>Edit</MenuItem>
+          <MenuItem onClick={() => handleTaskDelete(task.id)}>Delete</MenuItem>
+        </Menu>
+
+        {isEditing && (
+          <div className="mt-2 flex gap-2">
+            <button
+              onClick={handleEditSave}
+              className="bg-blue-500 text-white px-3 py-1 rounded"
+            >
+              Save
+            </button>
+            <button
+              onClick={handleEditCancel}
+              className="bg-gray-300 px-3 py-1 rounded"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
+      <BoardModal
+      task={task}
+        setOpenTaskModal={setOpenTaskModal}
+        openTaskModal={openTaskModal}
+      />
+    </>
   );
 };
-
 
 export default TaskStatus;
