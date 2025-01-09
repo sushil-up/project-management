@@ -2,7 +2,7 @@ import TimelineCalendar from '@/Component/Calendar/TimelineCalendar'
 import { Container } from '@mui/material'
 import React from 'react'
 
-export const Timeline = () => {
+ const Timeline = () => {
   return (
     <>
     <Container>
@@ -11,3 +11,4 @@ export const Timeline = () => {
     </>
   )
 }
+export default Timeline

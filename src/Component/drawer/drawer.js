@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -7,21 +7,22 @@ import MuiAppBar from "@mui/material/AppBar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
+import ViewTimelineIcon from "@mui/icons-material/ViewTimeline";
 import Link from "next/link";
-import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
-import AddTaskIcon from '@mui/icons-material/AddTask';
+import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import NavBar from "../Navbar/NavBar";
 import { AllPages } from "@/utils/pagesurl";
+import UserContext from "@/context/UserContext";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -79,36 +80,43 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-const id = localStorage.getItem("id")
-const routesUrl= AllPages(id)
-const menuItems = [
-  {
-    title: "Dashboard",
-    icon: <DashboardIcon />,
-    subItems: [
-      {
-        title: "Task ",
-        icon: <AddTaskIcon />,
-        route: routesUrl.task,
-      },
-      {
-        title: "Add Project",
-        icon: <NoteAddIcon />,
-        route: routesUrl.addProject,
-      },
-    ],
-  },
-  {
-    title: "Planing",
-    subItems: [
-      { title: "Board", icon: <ViewKanbanIcon />, route: `/admin-panel/kanban-board/${id}` },
-      { title: "Timeline", icon: <ViewTimelineIcon />, route: routesUrl.timeline },
-
-    ],
-  },
-];
 
 export default function MiniDrawer({ children }) {
+  const {id,setId} = useContext(UserContext);
+  const routesUrl = AllPages(id);
+  const menuItems = [
+    {
+      title: "Dashboard",
+      icon: <DashboardIcon />,
+      subItems: [
+        {
+          title: "Task ",
+          icon: <AddTaskIcon />,
+          route: routesUrl.task,
+        },
+        {
+          title: "Add Project",
+          icon: <NoteAddIcon />,
+          route: routesUrl.addProject,
+        },
+      ],
+    },
+    {
+      title: "Planing",
+      subItems: [
+        {
+          title: "Board",
+          icon: <ViewKanbanIcon />,
+          route: `/admin-panel/kanban-board/${id}`,
+        },
+        {
+          title: "Timeline",
+          icon: <ViewTimelineIcon />,
+          route: routesUrl.timeline,
+        },
+      ],
+    },
+  ];
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -160,17 +168,21 @@ export default function MiniDrawer({ children }) {
     const storedOpenItems = localStorage.getItem("openItems");
     if (storedOpenItems) {
       setOpenItems(JSON.parse(storedOpenItems));
-    } 
+    }
   }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar className="flex justify-between" position="fixed" open={open}>
-       <NavBar open={open} handleDrawerToggle={handleDrawerToggle} setOpen={setOpen}/>
+        <NavBar
+          open={open}
+          handleDrawerToggle={handleDrawerToggle}
+          setOpen={setOpen}
+        />
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader />  
+        <DrawerHeader />
         <Divider />
         <List>
           {menuItems.map((item, index) => (
@@ -380,9 +392,7 @@ export default function MiniDrawer({ children }) {
                                 >
                                   {subItem.icon}
                                 </ListItemIcon>
-                                <ListItemText
-                                  primary={subItem.title}
-                                />
+                                <ListItemText primary={subItem.title} />
                               </ListItemButton>
                             </Link>
                           ))}
