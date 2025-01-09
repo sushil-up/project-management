@@ -37,28 +37,25 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
   const { task, setTask } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
 
-  const onSubmit = (data) => {
-    try {
-      const setid = { ...data, id };
-      const updatedTasks =
-        editId === null
-          ? [...task, setid]
-          : task.map((item) => (item.id === editId ? { ...data, id: editId } : item));
-  
-      setTask(updatedTasks); // Update the context
-      localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
-  
-      setEditId(null);
-      setOpen(false);
-      reset();
-  
-      editId === null
-        ? successMsg("Task Assigned Successfully")
-        : successMsg("Task Updated Successfully");
-    } catch (error) {
-      console.error("Error adding/updating task:", error);
-    }
-  };
+console.log("task",task)
+
+
+  const onTaskSubmit = (data) => {
+      try {
+        const newTask = { ...data, id: uuidv4() };
+        const updatedTasks = editId === null
+          ? [...task, newTask]
+          : task.map((task) => task.id === editId ? { ...data, id: editId } : task);
+    
+        setTask(updatedTasks); // Update the context
+        localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
+        reset();
+        setOpen(false);
+        successMsg(editId === null ? "Task Added Successfully" : "Task Updated Successfully");
+      } catch (error) {
+        console.error("Error adding/updating task:", error);
+      }
+    };
   
 
   return (
@@ -70,11 +67,13 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography>Add Task</Typography>
+         <div className="flex justify-between items-center ">
+         <Typography variant="h6">Add Task</Typography>
           <IconButton onClick={handleClose}>
             <CloseIcon />
           </IconButton>
-          <form onSubmit={handleSubmit(onSubmit)}>
+         </div>
+          <form onSubmit={handleSubmit(onTaskSubmit)}>
             <AssignForm control={control} errors={errors} />
           </form>
         </Box>

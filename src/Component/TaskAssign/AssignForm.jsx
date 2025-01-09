@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import FormSelect from "@/Component/shared/form/FormSelect";
 import FormInput from "@/Component/shared/form/formData";
 import DateRangeSelect from "@/Component/shared/form/DateRangeSelect";
-import FormInputSelect from "@/Component/shared/form/FormInputSelect";
 import Cookies from "js-cookie";
 import { Box } from "@mui/material";
 import UserContext from "@/context/UserContext";
@@ -61,7 +60,6 @@ const AssignForm = ({ control, errors }) => {
           control={control}
           errors={errors}
           name="taskStatus"
-          // placeholder="Task Status"
           label="Task Status"
           className="!mt-4"
           options={["ToDo", "InProgress", "Done"]}

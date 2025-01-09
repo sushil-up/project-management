@@ -110,7 +110,7 @@ const TimelineCalendar = () => {
   }, [task, calendar]);
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DateSelect control={control} name="startDate" label="Select Date" />
         <Button type="submit">Search</Button>
@@ -121,7 +121,7 @@ const TimelineCalendar = () => {
         startDate={startDate}
         controlRef={setCalendar}
       />
-    </div>
+    </>
   );
 };
 export default TimelineCalendar;

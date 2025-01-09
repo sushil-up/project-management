@@ -5,11 +5,12 @@ import { FaClock, FaCheckCircle } from "react-icons/fa";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import dayjs from "dayjs";
-import { Avatar, IconButton } from "@mui/material";
+import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
 import { AllPages } from "@/utils/pagesurl";
 import CreateTaskModal from "../Modal/CreateTaskModal";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const TaskStatus = () => {
   const { task, setTask } = useContext(UserContext);
@@ -58,17 +59,14 @@ const Column = ({ column, tasks, moveTask }) => {
     accept: "TASK",
     drop: (item) => moveTask(item.id, column.id),
   });
-  const router = useRouter();
-  const routesUrl = AllPages();
-   const [open, setOpen] = useState(false);
 
-
-  
+  const [open, setOpen] = useState(false);
 
   // handle Create task
   const handleModalOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -83,7 +81,9 @@ const Column = ({ column, tasks, moveTask }) => {
             </h2>
           </div>
           {tasks.map((task) => (
-            <Task key={task.id} task={task} />
+            <>
+              <Task key={task.id} task={task} />
+            </>
           ))}
           <IconButton onClick={handleModalOpen}>
             <AddIcon />
@@ -101,6 +101,11 @@ const Column = ({ column, tasks, moveTask }) => {
 };
 
 const Task = ({ task }) => {
+  const { setTask } = useContext(UserContext);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const [isEditing, setIsEditing] = useState(false); // State for editing mode
+  const [editText, setEditText] = useState(task.task); // State for the updated task text
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { id: task.id },
@@ -109,6 +114,38 @@ const Task = ({ task }) => {
     }),
   });
 
+  const handleSettingClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleSettingClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleTaskDelete = (id) => {
+    setTask((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    setAnchorEl(null);
+  };
+
+  const handleTaskEdit = () => {
+    setIsEditing(true); // Enable editing mode
+    setAnchorEl(null);
+  };
+
+  const handleEditSave = () => {
+    setTask((prevTasks) =>
+      prevTasks.map((t) =>
+        t.id === task.id ? { ...t, task: editText } : t
+      )
+    );
+    setIsEditing(false); // Exit editing mode
+  };
+
+  const handleEditCancel = () => {
+    setEditText(task.task); // Reset text to the original value
+    setIsEditing(false); // Exit editing mode
+  };
+
   return (
     <div
       ref={drag}
@@ -116,17 +153,56 @@ const Task = ({ task }) => {
         isDragging ? "opacity-50" : "opacity-100"
       }`}
     >
-      <h3 className="font-semibold text-gray-800 mb-2">{task.task}</h3>
+      <div className="flex justify-between items-center">
+        {isEditing ? (
+          <input
+            type="text"
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+            className="border w-60 border-gray-300 rounded px-2 py-1 flex-1"
+          />
+        ) : (
+          <h3 className="font-semibold text-gray-800 mb-2">{task.task}</h3>
+        )}
+        <IconButton onClick={handleSettingClick}>
+          <MoreHorizIcon />
+        </IconButton>
+      </div>
       <p className="text-gray-600 text-sm font-medium">
         Priority: {task.priority}
       </p>
-      {/* <p className="text-gray-600 text-sm"><Avatar>{task.user}</Avatar></p> */}
-      {/* <div className="flex items-center text-sm text-gray-500">
-        <FaClock className="mr-1" />
-        <span> {dayjs(task?.taskDate[0]).format("YYYY-MM-DD")}</span>
-      </div> */}
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleSettingClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <MenuItem onClick={handleTaskEdit}>Edit</MenuItem>
+        <MenuItem onClick={() => handleTaskDelete(task.id)}>Delete</MenuItem>
+      </Menu>
+
+      {isEditing && (
+        <div className="mt-2 flex gap-2">
+          <button
+            onClick={handleEditSave}
+            className="bg-blue-500 text-white px-3 py-1 rounded"
+          >
+            Save
+          </button>
+          <button
+            onClick={handleEditCancel}
+            className="bg-gray-300 px-3 py-1 rounded"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default TaskStatus;

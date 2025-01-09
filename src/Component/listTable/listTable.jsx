@@ -21,7 +21,7 @@ function CustomToolbar() {
 export default function ListTable() {
   const [localData, setLocalData] = useState([]);
   const [user, setUser] = useState();
-
+  const { task } = useContext(UserContext);
   // get user data form cookies
   const cookieUser = Cookies.get("register");
   useEffect(() => {
@@ -37,6 +37,10 @@ export default function ListTable() {
   const projectList = Array?.from(new Set(projectName));
 
   const { control } = useForm();
+
+  useEffect(() => {
+    setLocalData(task); // Sync tasks with localData
+  }, [task]);
 
   // Load initial data from localStorage
   useEffect(() => {
