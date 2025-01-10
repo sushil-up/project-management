@@ -35,6 +35,7 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
   });
   const { task, setTask, id } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
+
   const onTaskSubmit = (data) => {
     try {
       const newTask = { ...data, id: uuidv4(), taskId: id };
@@ -49,7 +50,7 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
       setTableData(updatedTasks)
       localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
       reset();
-      setOpen(false);
+      handleClose()
       successMsg(
         editId === null
           ? "Task Added Successfully"

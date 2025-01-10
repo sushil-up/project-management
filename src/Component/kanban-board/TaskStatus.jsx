@@ -71,7 +71,7 @@ const Column = ({ column, tasks, moveTask }) => {
   };
   return (
     <>
-      <div className="min-w-[250px]" ref={drop}>
+      <div className="min-w-[280px]" ref={drop}>
         <div className="bg-white rounded-lg shadow-lg p-4">
           <div className="flex items-center gap-2 ml-1 mb-4">
             {column.icon}
@@ -84,7 +84,7 @@ const Column = ({ column, tasks, moveTask }) => {
           ))}
           <IconButton onClick={handleModalOpen}>
             <AddIcon />
-            <span className="text-base">Create</span>
+            <span className="text-sm font-semibold">Create</span>
           </IconButton>
         </div>
       </div>
@@ -212,6 +212,7 @@ const Task = ({ task }) => {
       </div>
       <BoardModal
         task={task}
+        setTask={setTask} // Pass setTask here
         setOpenTaskModal={setOpenTaskModal}
         openTaskModal={openTaskModal}
       />

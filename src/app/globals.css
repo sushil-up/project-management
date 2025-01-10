@@ -26,3 +26,6 @@
 .css-aixiz9-MuiButtonBase-root-MuiIconButton-root {
   padding: 0px!important;
 }
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.bg-gray-200.task-status.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  height: 35px;
+}
