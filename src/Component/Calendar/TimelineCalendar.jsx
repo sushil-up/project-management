@@ -8,13 +8,14 @@ import DateSelect from "../shared/form/DatePicker";
 import dayjs from "dayjs";
 
 const TimelineCalendar = () => {
+  const {id, task } = useContext(UserContext);
   const { handleSubmit, control } = useForm();
   const [calendar, setCalendar] = useState(null);
   const [events, setEvents] = useState([]);
   const [startDate, setStartDate] = useState(
     new Date().toISOString().split("T")[0]
   );
-  const { task } = useContext(UserContext);
+
   const onSubmit = (data) => {
     setStartDate(dayjs(data.startDate).format("YYYY-MM-DD"));
   };
@@ -98,8 +99,10 @@ const TimelineCalendar = () => {
   };
 
   useEffect(() => {
-    if (task) {
-      const formatedData = task.map((item) => ({
+    const filterTask = task?.filter((item) => item?.taskId === id);
+    console.log("filterTask",filterTask)
+    if (filterTask) {
+      const formatedData = filterTask?.map((item) => ({
         id: item.id,
         text: item.projectName,
         start: item?.taskDate?.[0],
@@ -107,7 +110,7 @@ const TimelineCalendar = () => {
       }));
       setEvents(formatedData);
     }
-  }, [task, calendar]);
+  }, [ calendar,id]);
 
   return (
     <div>

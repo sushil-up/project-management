@@ -23,6 +23,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import NavBar from "../Navbar/NavBar";
 import { AllPages } from "@/utils/pagesurl";
 import UserContext from "@/context/UserContext";
+import { Grid } from "@mui/joy";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -82,7 +83,11 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer({ children }) {
-  const {id} = useContext(UserContext);
+  const { id, project } = useContext(UserContext);
+  const filterProjectName = project?.filter((item) => item?.id === id);
+
+  const projectName = filterProjectName?.map((item) => item?.projectname);
+  const projectType = filterProjectName?.map((item) => item?.projecttype);
   const routesUrl = AllPages(id);
   const menuItems = [
     {
@@ -183,8 +188,25 @@ export default function MiniDrawer({ children }) {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader />
+
         <Divider />
         <List>
+          <Box>
+            <Box className="flex items-center">
+              <div className="ml-5 flex">
+                <img
+                  src="/icon.svg"
+                  style={{ width: "20%", height: "80%" }}
+                  alt="Icon"
+                />
+                <div>
+                  <div className="ml-3 text-sm font-bold">{projectName}</div>
+                  <span className="ml-3 font-light text-xs">{projectType}</span>
+                </div>
+              </div>
+            </Box>
+          </Box>
+
           {menuItems.map((item, index) => (
             <div key={index}>
               {item.route ? (

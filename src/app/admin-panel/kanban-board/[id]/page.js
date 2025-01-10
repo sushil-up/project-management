@@ -4,12 +4,9 @@ import { InputAdornment, Typography } from "@mui/material";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
 import SearchIcon from "@mui/icons-material/Search";
 import { useForm } from "react-hook-form";
-import { AllPages } from "@/utils/pagesurl";
 
 const KanbanBoard =  () => {
   const { control } = useForm();
-  // const id = localStorage.getItem("id");
-  // AllPages(id);
   return (
     <>
       <Typography variant="h6">Board</Typography>

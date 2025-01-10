@@ -9,6 +9,7 @@ import UserContext from "@/context/UserContext";
 import { Button, Grid } from "@mui/joy";
 
 const AssignForm = ({ control, errors }) => {
+  const { project, id } = useContext(UserContext);
   const [user, setUser] = useState();
   const cookieUser = Cookies.get("register");
   useEffect(() => {
@@ -17,8 +18,8 @@ const AssignForm = ({ control, errors }) => {
     const userList = Array?.from(new Set(User));
     setUser(userList);
   }, []);
-  const { project } = useContext(UserContext);
-  const projectName = project?.map((item) => item.projectname);
+  const filterProject = project?.filter((item) => item.id === id);
+  const projectName = filterProject?.map((item) => item.projectname);
   const projectList = Array?.from(new Set(projectName));
   return (
     <>
@@ -47,23 +48,23 @@ const AssignForm = ({ control, errors }) => {
         </Grid>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
-          <FormInput
-          control={control}
-          errors={errors}
-          name="task"
-          label="Task"
-          className="!mt-4 "
-        />
+            <FormInput
+              control={control}
+              errors={errors}
+              name="task"
+              label="Task"
+              className="!mt-4 "
+            />
           </Grid>
           <Grid item xs={6}>
-          <FormSelect
-          control={control}
-          errors={errors}
-          name="taskStatus"
-          label="Task Status"
-          className="!mt-4"
-          options={["ToDo", "InProgress", "Done"]}
-        />
+            <FormSelect
+              control={control}
+              errors={errors}
+              name="taskStatus"
+              label="Task Status"
+              className="!mt-4"
+              options={["ToDo", "InProgress", "Done"]}
+            />
           </Grid>
         </Grid>
         <FormInput
@@ -83,7 +84,7 @@ const AssignForm = ({ control, errors }) => {
           className="!mt-4"
           options={["High", "Medium", "Low"]}
         />
-        
+
         <Button type="submit" className="!mt-4">
           Submit
         </Button>

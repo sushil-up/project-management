@@ -6,7 +6,6 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { useForm } from "react-hook-form";
 import dayjs from "dayjs"; // Ensure Day.js is installed and imported
 import UserContext from "@/context/UserContext";
 import Cookies from "js-cookie";
@@ -19,9 +18,9 @@ function CustomToolbar() {
   );
 }
 export default function ListTable() {
-  const [localData, setLocalData] = useState([]);
   const [user, setUser] = useState();
-  const { task } = useContext(UserContext);
+  const { id, task, project, setTask } = useContext(UserContext);
+  const filterTask = task?.filter((item) => item?.taskId === id);
   // get user data form cookies
   const cookieUser = Cookies.get("register");
   useEffect(() => {
@@ -32,55 +31,49 @@ export default function ListTable() {
   }, []);
 
   // get project data form context
-  const { project } = useContext(UserContext);
-  const projectName = project?.map((item) => item.projectname);
+  const filterProject = project?.filter((item) => item?.id === id);
+  const projectName = filterProject?.map((item) => item.projectname);
   const projectList = Array?.from(new Set(projectName));
-
-  const { control } = useForm();
-
-  useEffect(() => {
-    setLocalData(task); // Sync tasks with localData
-  }, [task]);
 
   // Load initial data from localStorage
   useEffect(() => {
-    const getLocalData = localStorage.getItem("taskAssign");
-    if (getLocalData) {
+    if (filterTask) {
       try {
-        const parsedData = JSON.parse(getLocalData);
         // Format taskDate to 'YYYY-MM-DD'
-        const formattedData = parsedData.map(item => {
-          const formattedDates = item.taskDate.map(date => dayjs(date).format('DD-MM-YYYY'));
+        const formattedData = filterTask.map((item) => {
+          const formattedDates = item.taskDate.map((date) =>
+            dayjs(date).format("DD-MM-YYYY")
+          );
           return { ...item, taskDate: formattedDates };
         });
-        setLocalData(Array.isArray(formattedData) ? formattedData : []);
+        setTask(Array.isArray(formattedData) ? formattedData : []);
       } catch (error) {
         console.error("Failed to parse localStorage data:", error);
-        setLocalData([]);
+        setTask([]);
       }
     }
   }, []);
-  
 
   // Save changes to localStorage
   const handleRowUpdate = (newRow) => {
-    const updatedData = localData.map((row) =>
+    const updatedData = filterTask.map((row) =>
       row.id === newRow.id ? { ...row, ...newRow } : row
     );
     // Ensure that taskDate is formatted correctly on update
-    const formattedData = updatedData.map(item => {
-      const formattedDates = item.taskDate.map(date => dayjs(date).format('DD-MM-YYYY'));
+    const formattedData = updatedData.map((item) => {
+      const formattedDates = item.taskDate.map((date) =>
+        dayjs(date).format("DD-MM-YYYY")
+      );
       return { ...item, taskDate: formattedDates };
     });
-  
-    setLocalData(formattedData);
+
+    setTask(formattedData);
     localStorage.setItem("taskAssign", JSON.stringify(formattedData));
     return newRow;
   };
-  
 
   const columns = [
-    { field: "id", headerName: "ID", width: 110},
+    { field: "id", headerName: "ID", width: 110 },
     {
       field: "task",
       headerName: "Task",
@@ -123,20 +116,18 @@ export default function ListTable() {
       width: 190,
       renderCell: (params) => {
         // Format taskDate for display if it's an array
-        return params.value.join(', ');
+        return params.value.join(", ");
       },
     },
   ];
-  
 
   return (
     <Box sx={{ height: 400, width: "95%" }}>
       <DataGrid
-        rows={localData}
+        rows={filterTask}
         columns={columns}
         processRowUpdate={handleRowUpdate}
-        onProcessRowUpdateError={(error) => {
-        }}
+        onProcessRowUpdateError={(error) => {}}
         initialState={{
           pagination: {
             paginationModel: {

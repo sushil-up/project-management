@@ -4,9 +4,9 @@ export const AllPages = (id) => {
     signUp: "/auth/signupform",
     admin: "/admin-panel",
     kanban: `/admin-panel/kanban-board/${id}`,
-    task: "/admin-panel/task",
+    task: `/admin-panel/task/${id}`,
     addProject: "/addproject",
-    timeline: "/admin-panel/timeline",
+    timeline: `/admin-panel/timeline/${id}`,
     home: "/",
   };
 };

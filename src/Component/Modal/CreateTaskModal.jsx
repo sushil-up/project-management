@@ -33,26 +33,31 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
     },
     resolver: yupResolver(TaskValidation),
   });
-  const id = uuidv4();
-  const { task, setTask } = useContext(UserContext);
+  const { task, setTask, id } = useContext(UserContext);
   const [editId, setEditId] = useState(null);
   const onTaskSubmit = (data) => {
-      try {
-        const newTask = { ...data, id: uuidv4() };
-        const updatedTasks = editId === null
+    try {
+      const newTask = { ...data, id: uuidv4(), taskId: id };
+      const updatedTasks =
+        editId === null
           ? [...task, newTask]
-          : task.map((task) => task.id === editId ? { ...data, id: editId } : task);
-    
-        setTask(updatedTasks); // Update the context
-        localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
-        reset();
-        setOpen(false);
-        successMsg(editId === null ? "Task Added Successfully" : "Task Updated Successfully");
-      } catch (error) {
-        console.error("Error adding/updating task:", error);
-      }
-    };
-  
+          : task.map((task) =>
+              task.id === editId ? { ...data, id: editId } : task
+            );
+
+      setTask(updatedTasks); // Update the context
+      localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
+      reset();
+      setOpen(false);
+      successMsg(
+        editId === null
+          ? "Task Added Successfully"
+          : "Task Updated Successfully"
+      );
+    } catch (error) {
+      console.error("Error adding/updating task:", error);
+    }
+  };
 
   return (
     <div>
@@ -63,12 +68,12 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-         <div className="flex justify-between items-center ">
-         <Typography variant="h6">Add Task</Typography>
-          <IconButton onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-         </div>
+          <div className="flex justify-between items-center ">
+            <Typography variant="h6">Add Task</Typography>
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+          </div>
           <form onSubmit={handleSubmit(onTaskSubmit)}>
             <AssignForm control={control} errors={errors} />
           </form>
