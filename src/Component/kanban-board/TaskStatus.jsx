@@ -4,14 +4,15 @@ import React, { useContext, useState } from "react";
 import { FaClock, FaCheckCircle } from "react-icons/fa";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import {  IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CreateTaskModal from "../Modal/CreateTaskModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import BoardModal from "../Modal/BoardModal";
 
 const TaskStatus = () => {
-  const { task, setTask } = useContext(UserContext);
+  const { task, setTask, id } = useContext(UserContext);
+  const filtereTask = task?.filter((item) => item?.taskId === id);
   const column = [
     { id: "ToDo", title: "To Do", icon: <FaClock className="text-blue-500" /> },
     {
@@ -42,7 +43,7 @@ const TaskStatus = () => {
             <Column
               key={col.id}
               column={col}
-              tasks={task.filter((item) => item.taskStatus === col.id)}
+              tasks={filtereTask.filter((item) => item.taskStatus === col.id)}
               moveTask={moveTask}
             />
           ))}
@@ -142,7 +143,6 @@ const Task = ({ task }) => {
   };
 
   const handleTaskModalOpen = () => {
-
     setOpenTaskModal(true);
   };
 
@@ -211,7 +211,7 @@ const Task = ({ task }) => {
         )}
       </div>
       <BoardModal
-      task={task}
+        task={task}
         setOpenTaskModal={setOpenTaskModal}
         openTaskModal={openTaskModal}
       />
