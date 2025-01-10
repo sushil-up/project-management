@@ -46,6 +46,7 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
             );
 
       setTask(updatedTasks); // Update the context
+      setTableData(updatedTasks)
       localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
       reset();
       setOpen(false);

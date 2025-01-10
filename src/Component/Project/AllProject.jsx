@@ -1,8 +1,7 @@
 "use client"
 import { Button } from "@mui/joy";
-import { Box, Container, InputAdornment, Modal, Typography } from "@mui/material";
+import { Box, InputAdornment,  Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
-import FormInputSelect from "../shared/form/FormInputSelect";
 import SearchIcon from "@mui/icons-material/Search";
 import ProjectList from "./ProjectList";
 import UserContext from "@/context/UserContext";
@@ -17,7 +16,7 @@ const AllProject = ({ control, handleOpenProject,handleOpenBoard }) => {
   const [deleteOpenModal, setDeleteOpenModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
   
-  const handleChange = (event) => {
+  const handleFindProject = (event) => {
     const input = event?.target?.value;
     const set = project?.filter((item) =>
       item?.projectname.toLowerCase().includes(input)
@@ -43,7 +42,6 @@ const AllProject = ({ control, handleOpenProject,handleOpenBoard }) => {
   };
   return (
     <>
-      {/* <Container> */}
         <div className="flex justify-between items-center my-5">
           <Typography variant="h5" className="font-bold">Projects</Typography>
           <div className="flex ">
@@ -69,7 +67,7 @@ const AllProject = ({ control, handleOpenProject,handleOpenBoard }) => {
                 placeholder="Search Projects"
                 label="Search Projects"
                 className="w-56"
-                onChange={handleChange}
+                onChange={handleFindProject}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -89,7 +87,6 @@ const AllProject = ({ control, handleOpenProject,handleOpenBoard }) => {
           </div>
           
         </Box>
-      {/* </Container> */}
       <ProjectList 
         tableData={tableData}
         handleDelete={handleDelete}

@@ -10,9 +10,9 @@ import CreateTaskModal from "../Modal/CreateTaskModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import BoardModal from "../Modal/BoardModal";
 
-const TaskStatus = () => {
-  const { task, setTask, id } = useContext(UserContext);
-  const filtereTask = task?.filter((item) => item?.taskId === id);
+const TaskStatus = ({tableData}) => {
+  const {  setTask, id } = useContext(UserContext);
+  const filtereTask = tableData?.filter((item) => item?.taskId === id);
   const column = [
     { id: "ToDo", title: "To Do", icon: <FaClock className="text-blue-500" /> },
     {
@@ -98,7 +98,7 @@ const Column = ({ column, tasks, moveTask }) => {
 };
 
 const Task = ({ task }) => {
-  const { setTask } = useContext(UserContext);
+  const {  setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [isEditing, setIsEditing] = useState(false);
