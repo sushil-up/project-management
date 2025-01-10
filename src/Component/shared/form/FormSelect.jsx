@@ -8,7 +8,7 @@ const FormSelect = ({
   label,
   options,
   errors,
-  defaultValue,
+  defaultValues,
   className,
   multiple = false,
   onChange,
@@ -20,7 +20,7 @@ const FormSelect = ({
         <Controller
           name={name}
           control={control}
-          defaultValue={defaultValue || ""}
+          defaultValues={defaultValues || ""}
           render={({ field }) => (
             <Select
               id={name}
