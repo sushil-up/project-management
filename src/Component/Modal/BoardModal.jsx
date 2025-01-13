@@ -12,8 +12,8 @@ const BoardModal = ({ task, openTaskModal, setOpenTaskModal, setTask }) => {
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      discription: task.discription,
-      taskStatus: task.taskStatus,
+      discription: task.discription || "",
+      taskStatus: task.taskStatus || "",
     },
   });
 
@@ -80,12 +80,16 @@ const BoardModal = ({ task, openTaskModal, setOpenTaskModal, setTask }) => {
                   className="bg-gray-200 task-status"
                   control={control}
                   name="taskStatus"
-                  defaultValues={task.taskStatus}
-                  options={["ToDo", "InProgress", "Done"].filter((data) => {
-                    return data !== task.taskStatus;
-                  })}
+                  defaultValue={task.taskStatus }
+                  options={[
+                    task.taskStatus,
+                    ...["ToDo", "InProgress", "Done"].filter(
+                      (status) => status !== task.taskStatus
+                    ),
+                  ]}
                 />
               </div>
+
               <Typography variant="h6" className="!mt-5">
                 Details
               </Typography>

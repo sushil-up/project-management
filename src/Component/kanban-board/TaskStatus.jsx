@@ -1,6 +1,5 @@
-"use client";
 import UserContext from "@/context/UserContext";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaClock, FaCheckCircle } from "react-icons/fa";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -9,11 +8,16 @@ import AddIcon from "@mui/icons-material/Add";
 import CreateTaskModal from "../Modal/CreateTaskModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import BoardModal from "../Modal/BoardModal";
+import FormInput from "../shared/form/formData";
+import { useForm } from "react-hook-form";
+import CloseIcon from "@mui/icons-material/Close";
+import DoneIcon from "@mui/icons-material/Done";
 
-const TaskStatus = ({tableData}) => {
-  const {  setTask, id } = useContext(UserContext);
-  const filtereTask = tableData?.filter((item) => item?.taskId === id);
-  const column = [
+const TaskStatus = ({ tableData }) => {
+  const { control, handleSubmit } = useForm();
+  const { setTask, id } = useContext(UserContext);
+  const [isEdit, setIsEdit] = useState(false);
+  const [columns, setColumns] = useState([
     { id: "ToDo", title: "To Do", icon: <FaClock className="text-blue-500" /> },
     {
       id: "InProgress",
@@ -25,7 +29,33 @@ const TaskStatus = ({tableData}) => {
       title: "Done",
       icon: <FaCheckCircle className="text-green-500" />,
     },
-  ];
+  ]);
+
+
+  const filtereTask = tableData?.filter((item) => item?.taskId === id);
+
+  // Function to handle adding a new column
+  const handleAddColumn = () => {
+    const newColumnId = `Custom${columns.length + 1}`;
+    const newColumn = {
+      id: newColumnId,
+      title: `New Column ${columns.length + 1}`,
+      icon: <FaClock className="text-gray-500" />,
+    };
+    
+    const updatedColumns = [...columns, newColumn];
+    setColumns(updatedColumns);
+    
+    // Save updated columns to localStorage
+    saveColumnsToLocalStorage(updatedColumns);
+  };
+  
+
+  // columns data store in localstorage
+  const saveColumnsToLocalStorage = (columns) => {
+    localStorage.setItem('cardcolumns', JSON.stringify(columns));
+  };
+  
 
   const moveTask = (taskId, newStatus) => {
     setTask((prevTasks) =>
@@ -35,11 +65,27 @@ const TaskStatus = ({tableData}) => {
     );
   };
 
+  // handle create card in board
+  const handleCreateCardBoard = () => {
+    setIsEdit(true);
+  };
+
+  // create card data
+  const handleCardCreate = (data) => {
+    console.log("data", data);
+    setIsEdit(false);
+  };
+
+  // cancel card
+  const handleCardCancel = () => {
+    setIsEdit(false);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-96 w-full bg-gray-100 p-4">
-        <div className="flex flex-col md:flex-row gap-10">
-          {column.map((col) => (
+        <div className="flex flex-col md:flex-row gap-5">
+          {columns.map((col) => (
             <Column
               key={col.id}
               column={col}
@@ -47,7 +93,26 @@ const TaskStatus = ({tableData}) => {
               moveTask={moveTask}
             />
           ))}
+          <div className="h-7" onClick={handleCreateCardBoard}>
+            {/* {isEdit ? (
+              <form onSubmit={handleSubmit(handleCardCreate)}>
+                <FormInput control={control} name="createboard" />
+                <button type="submit">
+                  <DoneIcon />
+                </button>
+                <button onClick={handleCardCancel}>
+                  <CloseIcon />
+                </button>
+              </form>
+            ) : ( */}
+            <IconButton onClick={handleAddColumn}>
+              <AddIcon />
+              <span className="text-sm font-semibold">Add Column</span>
+            </IconButton>
+            {/* )} */}
+          </div>
         </div>
+        <div className="mt-5"></div>
       </div>
     </DndProvider>
   );
@@ -98,7 +163,7 @@ const Column = ({ column, tasks, moveTask }) => {
 };
 
 const Task = ({ task }) => {
-  const {  setTask } = useContext(UserContext);
+  const { setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [isEditing, setIsEditing] = useState(false);
