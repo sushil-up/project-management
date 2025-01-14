@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import UserContext from "@/context/UserContext";
 import { successMsg } from "../shared/form/Toastmsg/toaster";
 
-const CreateTaskModal = ({ handleClose, setOpen, open }) => {
+const CreateTaskModal = ({ handleClose, setOpen, open ,columns}) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -45,10 +45,10 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
           : task.map((task) =>
               task.id === editId ? { ...data, id: editId } : task
             );
-      setTask(updatedTasks); // Update the context
-      localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
-      reset(); // Clear form inputs
-      setOpen(false); // Close modal
+      setTask(updatedTasks); 
+      localStorage.setItem("taskAssign", JSON.stringify(updatedTasks));
+      reset();
+      setOpen(false); 
       successMsg(
         editId === null
           ? "Task Added Successfully"
@@ -76,7 +76,7 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
             </IconButton>
           </div>
           <form onSubmit={handleSubmit(onTaskSubmit)}>
-            <AssignForm control={control} errors={errors} />
+            <AssignForm control={control} errors={errors} columns={columns} />
           </form>
         </Box>
       </Modal>

@@ -13,6 +13,7 @@ const FormSelect = ({
   multiple = false,
   onChange,
 }) => {
+
   return (
     <>
       <FormControl fullWidth error={!!errors?.[name]}>
@@ -20,7 +21,7 @@ const FormSelect = ({
         <Controller
           name={name}
           control={control}
-          defaultValues={defaultValues || ""}
+          defaultValue={defaultValues }
           render={({ field }) => (
             <Select
               id={name}

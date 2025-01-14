@@ -1,6 +1,6 @@
 import UserContext from "@/context/UserContext";
 import { Avatar, Box, IconButton, Modal, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSession } from "next-auth/react";
 import FormInput from "../shared/form/formData";
@@ -17,10 +17,10 @@ const BoardModal = ({
   const { data: session } = useSession();
 
   const { control, handleSubmit } = useForm({
-    // defaultValues: {
-    //   discription: task.discription || "",
-    //   taskStatus: task.taskStatus || "",
-    // },
+    defaultValues: {
+      discription: task.discription || "",
+      taskStatus: task.taskStatus || "", // Ensure the taskStatus is prefilled with the current value
+    },
   });
 
   const style = {
@@ -37,13 +37,21 @@ const BoardModal = ({
 
   const handleModalClose = () => setOpenTaskModal(false);
 
-  // save/update task
+  // Save/Update task
   const handleTaskSave = (data) => {
+    // Update task status correctly based on selected option
+    const updatedTask = { ...task, ...data };
+  
     setTask((prevTasks) =>
-      prevTasks.map((t) => (t.id === task.id ? { ...t, ...data } : t))
+      prevTasks.map((t) => (t.id === task.id ? updatedTask : t))
     );
+  
+    // Save updated tasks to local storage
+    localStorage.setItem("taskAssign", JSON.stringify(updatedTask));
+    
     handleModalClose();
   };
+  
 
   const getInitials = (name) => {
     return name
@@ -86,13 +94,13 @@ const BoardModal = ({
                   className="bg-gray-200 task-status"
                   control={control}
                   name="taskStatus"
-                  defaultValues={task.taskStatus}
-                  options={task.taskStatus.filter(
-                    (status) => status !== task.taskStatus
-                  )}
+                  defaultValue={task.taskStatus}
+                  options={['todo','inprogress','done']}
+                  // options={columns
+                  //   ?.map((column) => column.title)
+                  //   .filter((data) => data !== task.taskStatus)}
                 />
               </div>
-
               <Typography variant="h6" className="!mt-5">
                 Details
               </Typography>

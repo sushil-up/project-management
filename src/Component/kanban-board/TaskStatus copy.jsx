@@ -9,6 +9,7 @@ import useLocalStorage from "use-local-storage";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CreateTaskModal from "../Modal/CreateTaskModal";
 import BoardModal from "../Modal/BoardModal";
+import FormInput from "../shared/form/formData";
 
 // Main TaskStatus Component
 const TaskStatus = ({ tableData }) => {
@@ -37,22 +38,27 @@ const TaskStatus = ({ tableData }) => {
         t.id === taskId ? { ...t, taskStatus: newStatus } : t
       )
     );
+    
+    // Update the local storage with the changed task list
+    localStorage.setItem("taskAssign", JSON.stringify(updatedTasks));
   };
+  
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-96 w-full bg-gray-100 p-4">
         <div className="flex flex-col md:flex-row gap-5">
-          {columns?.map((col) => (
-            <Column
-              key={col.id}
-              column={col}
-              tasks={filtereTask.filter((item) => item.taskStatus === col.id)}
-              moveTask={moveTask}
-              columns={columns}
-              setColumns={setColumns}
-            />
-          ))}
+        {columns?.map((col) => (
+  <Column
+    key={col.id}
+    column={col}
+    tasks={filtereTask?.filter((item) => item.taskStatus === col.id)}
+    moveTask={moveTask}
+    columns={columns}
+    setColumns={setColumns}
+  />
+))}
+
           <IconButton className="h-7" onClick={handleAddColumn}>
             <AddIcon />
             <span className="text-sm font-semibold">Add Column</span>
@@ -64,9 +70,7 @@ const TaskStatus = ({ tableData }) => {
 };
 
 // Column Component
-
 const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
-
   const { control, handleSubmit } = useForm();
   const [anchor, setAnchor] = useState(null);
   const openMenu = Boolean(anchor);
@@ -122,9 +126,9 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
             <h2 className="text-lg font-semibold text-gray-700">
               {isEdit ? (
                 <form onSubmit={handleSubmit(handleSaveCardName)}>
-                  <input
-                    type="text"
-                    {...control.register("cardname")}
+                  <FormInput
+                  control={control}
+                  name="cardname"
                     defaultValue={column.title}
                     className="border border-gray-300 rounded px-2 py-1 w-full"
                   />
@@ -165,8 +169,8 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
               )}
             </h2>
           </div>
-          {tasks.map((task) => (
-            <Task key={task.id} task={task} columns={columns} />
+          {tasks?.map((task) => (
+            <Task key={task.id} task={task} columns={columns}/>
           ))}
           <IconButton onClick={handleModalOpen}>
             <AddIcon />
@@ -175,6 +179,7 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
         </div>
       </div>
       <CreateTaskModal
+      columns={columns}
         open={open}
         handleClose={handleClose}
         setOpen={setOpen}
@@ -184,7 +189,7 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
 };
 
 // Task Component
-const Task = ({ task,columns}) => {
+const Task = ({ task, columns }) => {
   const { setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
