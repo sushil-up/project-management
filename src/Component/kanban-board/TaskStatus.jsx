@@ -47,7 +47,7 @@ const TaskStatus = ({ tableData }) => {
             <Column
               key={col.id}
               column={col}
-              tasks={filtereTask.filter((item) => item.taskStatus === col.id)}
+              tasks={filtereTask?.filter((item) => item.taskStatus === col.id)}
               moveTask={moveTask}
               columns={columns}
               setColumns={setColumns}
@@ -165,7 +165,7 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
               )}
             </h2>
           </div>
-          {tasks.map((task) => (
+          {tasks?.map((task) => (
             <Task key={task.id} task={task} columns={columns} />
           ))}
           <IconButton onClick={handleModalOpen}>

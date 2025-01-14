@@ -87,12 +87,11 @@ const BoardModal = ({
                   control={control}
                   name="taskStatus"
                   defaultValues={task.taskStatus}
-                  options={task.taskStatus.filter(
+                  options={["ToDo", "InProgress", "Done"].filter(
                     (status) => status !== task.taskStatus
                   )}
                 />
               </div>
-
               <Typography variant="h6" className="!mt-5">
                 Details
               </Typography>
