@@ -9,4 +9,4 @@ export const ProtectedRoutes = (id) => {
     timeline: `/admin-panel/timeline/${id}`,
   };
 };
-export const UnprotectedRoutes = [routesUrl.signIn, routesUrl.signUp];
+export const UnprotectedRoutes = [routesUrl.signIn, routesUrl.signUp,routesUrl.home];
