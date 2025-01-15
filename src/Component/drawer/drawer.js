@@ -194,11 +194,11 @@ export default function MiniDrawer({ children }) {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader />
 
-        <Divider />
+        {/* <Divider /> */}
         <List>
           <Box>
             <Box className="flex items-center">
-              <div className="ml-5 flex">
+              <div className="m-5 flex">
                 <img
                   src="/icon.svg"
                   style={{ width: "20%", height: "80%" }}
@@ -213,7 +213,7 @@ export default function MiniDrawer({ children }) {
           </Box>
 
           {menuItems.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="">
               {item.route ? (
                 <>
                   <Link href={item.route}>

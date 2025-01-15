@@ -3,7 +3,7 @@ import { FormControl } from "@mui/joy";
 import { Sheet } from "@mui/joy";
 import { useForm } from "react-hook-form";
 import { Button, CircularProgress, Container, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,14 +22,13 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(SignInValidation) });
   const [loader, setLoader] = useState(false);
-  const routesUrl= AllPages()
+  const routesUrl = AllPages();
   const router = useRouter();
 
-  
   const onSubmit = async (data) => {
     const { email, password } = data;
-    const cookieData = Cookies.get("register"); // Retrieve cookies data
-    const localData = cookieData ? JSON.parse(cookieData) : []; // Parse cookies data if exists
+    const cookieData = Cookies.get("register"); 
+    const localData = cookieData ? JSON.parse(cookieData) : []; 
     setLoader(true);
     try {
       const res = await signIn("credentials", {

@@ -1,5 +1,6 @@
 import { AllPages } from "./pagesurl";
 const routesUrl = AllPages();
+
 export const ProtectedRoutes = (id) => {
   return {
     admin: "/admin-panel",

@@ -17,10 +17,9 @@ const BoardModal = ({
   const { data: session } = useSession();
 
   const { control, handleSubmit } = useForm({
-    // defaultValues: {
-    //   discription: task.discription || "",
-    //   taskStatus: task.taskStatus || "",
-    // },
+    defaultValues: {
+      discription:  "",
+    },
   });
 
   const style = {

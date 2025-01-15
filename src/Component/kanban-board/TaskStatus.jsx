@@ -37,7 +37,7 @@ const TaskStatus = ({ tableData }) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-96 w-full bg-gray-100 p-4">
-        <div className="flex flex-col md:flex-row gap-1">
+        <div className="flex flex-col md:flex-row gap-5">
           {columns?.map((col) => (
             <Column
              className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300"
@@ -112,7 +112,7 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
   return (
     <>
       <div className="min-w-[280px]" ref={drop}>
-      <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
+        <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
           <div className="ml-1 mb-4">
             <h2 className="text-lg font-semibold text-gray-700">
               {isEdit ? (
@@ -305,6 +305,5 @@ const Task = ({ task, columns }) => {
     </>
   );
 };
-
 
 export default TaskStatus;
