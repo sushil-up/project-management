@@ -8,5 +8,6 @@ export const AllPages = (id) => {
     addProject: "/addproject",
     timeline: `/admin-panel/timeline/${id}`,
     home: "/",
+    summary:`/admin-panel/summary/${id}`
   };
 };

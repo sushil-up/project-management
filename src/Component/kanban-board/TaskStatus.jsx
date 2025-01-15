@@ -12,14 +12,9 @@ import BoardModal from "../Modal/BoardModal";
 
 // Main TaskStatus Component
 const TaskStatus = ({ tableData }) => {
-  const { setTask, id } = useContext(UserContext);
+  const { setTask, id, columns, setColumns } = useContext(UserContext);
 
   // Initialize columns state with local storage
-  const [columns, setColumns] = useLocalStorage("cardColumns", [
-    { id: "ToDo", title: "To Do" },
-    { id: "InProgress", title: "In Progress" },
-    { id: "Done", title: "Done" },
-  ]);
 
   const filtereTask = tableData?.filter((item) => item?.taskId === id);
 
@@ -42,7 +37,7 @@ const TaskStatus = ({ tableData }) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-96 w-full bg-gray-100 p-4">
-        <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex flex-col md:flex-row gap-1">
           {columns?.map((col) => (
             <Column
              className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300"
@@ -67,7 +62,6 @@ const TaskStatus = ({ tableData }) => {
 // Column Component
 
 const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
-
   const { control, handleSubmit } = useForm();
   const [anchor, setAnchor] = useState(null);
   const openMenu = Boolean(anchor);
@@ -107,11 +101,11 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
   };
 
   const handleCardDelete = (columnId) => {
-    const updatedColumns = columns.filter(col => col.id !== columnId);
+    const updatedColumns = columns.filter((col) => col.id !== columnId);
     setColumns(updatedColumns);
     handleCardClose();
   };
-  
+
   const handleCardClose = () => {
     setAnchor(null);
   };

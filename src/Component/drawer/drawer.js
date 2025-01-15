@@ -95,6 +95,11 @@ export default function MiniDrawer({ children }) {
       icon: <DashboardIcon />,
       subItems: [
         {
+          title: "Summary",
+          icon: <ViewKanbanIcon />,
+          route: routesUrl.summary,
+        },
+        {
           title: "Task ",
           icon: <AddTaskIcon />,
           route: routesUrl.task,
