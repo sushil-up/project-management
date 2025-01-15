@@ -1,61 +1,29 @@
-import UserContext from "@/context/UserContext";
-import React, { useContext, useEffect, useState } from "react";
-import { FaClock, FaCheckCircle } from "react-icons/fa";
+import React, { useContext, useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Button, MenuItem, Menu } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import CreateTaskModal from "../Modal/CreateTaskModal";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import BoardModal from "../Modal/BoardModal";
-import FormInput from "../shared/form/formData";
 import { useForm } from "react-hook-form";
-import CloseIcon from "@mui/icons-material/Close";
-import DoneIcon from "@mui/icons-material/Done";
+import UserContext from "@/context/UserContext";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import CreateTaskModal from "../Modal/CreateTaskModal";
+import BoardModal from "../Modal/BoardModal";
 
+// Main TaskStatus Component
 const TaskStatus = ({ tableData }) => {
-  const { control, handleSubmit } = useForm();
-  const { setTask, id } = useContext(UserContext);
-  const [isEdit, setIsEdit] = useState(false);
-  const [columns, setColumns] = useState([
-    { id: "ToDo", title: "To Do", icon: <FaClock className="text-blue-500" /> },
-    {
-      id: "InProgress",
-      title: "In Progress",
-      icon: <FaClock className="text-yellow-500" />,
-    },
-    {
-      id: "Done",
-      title: "Done",
-      icon: <FaCheckCircle className="text-green-500" />,
-    },
-  ]);
+  const { setTask, id, columns, setColumns } = useContext(UserContext);
 
+  // Initialize columns state with local storage
 
   const filtereTask = tableData?.filter((item) => item?.taskId === id);
 
-  // Function to handle adding a new column
+  // Function to add a new column
   const handleAddColumn = () => {
     const newColumnId = `Custom${columns.length + 1}`;
-    const newColumn = {
-      id: newColumnId,
-      title: `New Column ${columns.length + 1}`,
-      icon: <FaClock className="text-gray-500" />,
-    };
-    
+    const newColumn = { id: newColumnId, title: "" };
     const updatedColumns = [...columns, newColumn];
     setColumns(updatedColumns);
-    
-    // Save updated columns to localStorage
-    saveColumnsToLocalStorage(updatedColumns);
   };
-  
-
-  // columns data store in localstorage
-  const saveColumnsToLocalStorage = (columns) => {
-    localStorage.setItem('cardcolumns', JSON.stringify(columns));
-  };
-  
 
   const moveTask = (taskId, newStatus) => {
     setTask((prevTasks) =>
@@ -65,60 +33,39 @@ const TaskStatus = ({ tableData }) => {
     );
   };
 
-  // handle create card in board
-  const handleCreateCardBoard = () => {
-    setIsEdit(true);
-  };
-
-  // create card data
-  const handleCardCreate = (data) => {
-    console.log("data", data);
-    setIsEdit(false);
-  };
-
-  // cancel card
-  const handleCardCancel = () => {
-    setIsEdit(false);
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-96 w-full bg-gray-100 p-4">
         <div className="flex flex-col md:flex-row gap-5">
-          {columns.map((col) => (
+          {columns?.map((col) => (
             <Column
+             className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300"
               key={col.id}
               column={col}
-              tasks={filtereTask.filter((item) => item.taskStatus === col.id)}
+              tasks={filtereTask?.filter((item) => item.taskStatus === col.id)}
               moveTask={moveTask}
+              columns={columns}
+              setColumns={setColumns}
             />
           ))}
-          <div className="h-7" onClick={handleCreateCardBoard}>
-            {/* {isEdit ? (
-              <form onSubmit={handleSubmit(handleCardCreate)}>
-                <FormInput control={control} name="createboard" />
-                <button type="submit">
-                  <DoneIcon />
-                </button>
-                <button onClick={handleCardCancel}>
-                  <CloseIcon />
-                </button>
-              </form>
-            ) : ( */}
-            <IconButton onClick={handleAddColumn}>
-              <AddIcon />
-              <span className="text-sm font-semibold">Add Column</span>
-            </IconButton>
-            {/* )} */}
-          </div>
+          <IconButton className="h-7" onClick={handleAddColumn}>
+            <AddIcon />
+            <span className="text-sm font-semibold">Add Column</span>
+          </IconButton>
         </div>
-        <div className="mt-5"></div>
       </div>
     </DndProvider>
   );
 };
 
-const Column = ({ column, tasks, moveTask }) => {
+// Column Component
+
+const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
+  const { control, handleSubmit } = useForm();
+  const [anchor, setAnchor] = useState(null);
+  const openMenu = Boolean(anchor);
+  const [isEdit, setIsEdit] = useState(column.title === "");
+
   const [, drop] = useDrop({
     accept: "TASK",
     drop: (item) => moveTask(item.id, column.id),
@@ -126,7 +73,13 @@ const Column = ({ column, tasks, moveTask }) => {
 
   const [open, setOpen] = useState(false);
 
-  // handle Create task
+  const handleSaveCardName = (data) => {
+    const updatedColumns = columns.map((col) =>
+      col.id === column.id ? { ...col, title: data.cardname } : col
+    );
+    setColumns(updatedColumns);
+    setIsEdit(false);
+  };
   const handleModalOpen = () => {
     setOpen(true);
   };
@@ -134,18 +87,80 @@ const Column = ({ column, tasks, moveTask }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleEditCardName = () => {
+    setIsEdit(true);
+  };
+  const handleCancelCard = () => {
+    setIsEdit(false);
+  };
+
+  const handleOpenMenu = (event) => {
+    setAnchor(event.currentTarget);
+  };
+
+  const handleCardDelete = (columnId) => {
+    const updatedColumns = columns.filter((col) => col.id !== columnId);
+    setColumns(updatedColumns);
+    handleCardClose();
+  };
+
+  const handleCardClose = () => {
+    setAnchor(null);
+  };
   return (
     <>
       <div className="min-w-[280px]" ref={drop}>
-        <div className="bg-white rounded-lg shadow-lg p-4">
-          <div className="flex items-center gap-2 ml-1 mb-4">
-            {column.icon}
+        <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
+          <div className="ml-1 mb-4">
             <h2 className="text-lg font-semibold text-gray-700">
-              {column.title}
+              {isEdit ? (
+                <form onSubmit={handleSubmit(handleSaveCardName)}>
+                  <input
+                    type="text"
+                    {...control.register("cardname")}
+                    defaultValue={column.title}
+                    className="border border-gray-300 rounded px-2 py-1 w-full"
+                  />
+                  <Button type="submit" color="primary">
+                    Save
+                  </Button>
+                  <Button onClick={handleCancelCard} color="primary">
+                    Cancel
+                  </Button>
+                </form>
+              ) : (
+                <>
+                  <div className="flex !justify-between items-center">
+                    <div
+                      className="cursor-pointer"
+                      onClick={handleEditCardName}
+                    >
+                      {column.title || "New Column"}
+                    </div>
+                    <IconButton onClick={handleOpenMenu}>
+                      <MoreHorizIcon />
+                    </IconButton>
+                  </div>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchor}
+                    open={openMenu}
+                    onClose={handleCardClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem onClick={() => handleCardDelete(column.id)}>
+                      Delete
+                    </MenuItem>
+                  </Menu>
+                </>
+              )}
             </h2>
           </div>
-          {tasks.map((task) => (
-            <Task key={task.id} task={task} />
+          {tasks?.map((task) => (
+            <Task key={task.id} task={task} columns={columns} />
           ))}
           <IconButton onClick={handleModalOpen}>
             <AddIcon />
@@ -162,7 +177,8 @@ const Column = ({ column, tasks, moveTask }) => {
   );
 };
 
-const Task = ({ task }) => {
+// Task Component
+const Task = ({ task, columns }) => {
   const { setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -215,11 +231,11 @@ const Task = ({ task }) => {
     <>
       <div
         ref={drag}
-        className={`cursor-pointer bg-gray-50 rounded-lg p-3 mb-4 shadow-sm ${
-          isDragging ? "opacity-50" : "opacity-100"
+        className={`cursor-pointer bg-gray-50 rounded-lg p-3 mb-4 shadow-sm hover:shadow-lg transition-shadow duration-300 relative ${
+          isDragging ? "opacity-100" : "opacity-300"
         }`}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center group">
           {isEditing ? (
             <input
               type="text"
@@ -235,7 +251,10 @@ const Task = ({ task }) => {
               {task.task}
             </h3>
           )}
-          <IconButton onClick={handleSettingClick}>
+          <IconButton
+            onClick={handleSettingClick}
+            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
             <MoreHorizIcon />
           </IconButton>
         </div>
@@ -276,6 +295,7 @@ const Task = ({ task }) => {
         )}
       </div>
       <BoardModal
+        columns={columns}
         task={task}
         setTask={setTask} // Pass setTask here
         setOpenTaskModal={setOpenTaskModal}

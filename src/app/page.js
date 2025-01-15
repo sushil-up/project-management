@@ -1,52 +1,47 @@
+"use client";
+import LogoutButton from "@/Component/shared/form/LogoutButton";
+import { AllPages } from "@/utils/pagesurl";
+import { Button, Typography } from "@mui/material";
+import { useSession } from "next-auth/react";
+import AddProject from "./addproject/page";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Login from "./auth/signin/page";
 
-"use client"
-import { useState, useEffect } from 'react';
-
-export default function HomePage() {
-  const [data, setData] = useState([]);
-  const [newUser, setNewUser] = useState('');
-
-  useEffect(() => {
-    // Fetch data from the serverless function
-    async function fetchData() {
-      const response = await fetch('/api/data');
-      const data = await response.json();
-      setData(data.users);
-    }
-    fetchData();
-  }, []);
-
-  const handleAddUser = async () => {
-    const newUserData = { id: Date.now(), name: newUser };
-
-    const response = await fetch('/api/data', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ users: [...data, newUserData] }),
-    });
-
-    if (response.ok) {
-      setNewUser('');
-      const updatedData = await response.json();
-      setData(updatedData.users);
-    }
-  };
+export default function Home() {
+  const [userData, setUserData] = useState();
+  const routesUrl = AllPages();
 
   return (
-    <div>
-      <h1>Users List</h1>
-      <ul>
-        {data.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
-      <input
-        type="text"
-        value={newUser}
-        onChange={(e) => setNewUser(e.target.value)}
-        placeholder="Add a user"
-      />
-      <button onClick={handleAddUser}>Add User</button>
-    </div>
+    <>
+      <div className="w-full text-center">
+        <Typography className="text-center !text-7xl !mt-10">
+          The new Jira: <br /> from{" "}
+          <span style={{ fontWeight: "900" }}>teams</span> to dreams
+        </Typography>
+       <Link href={routesUrl.signIn}>
+       <Button
+          className="w-52 h-12 !text-xl !font-bold !rounded-xl !mt-10 hover:bg-blue-500 hover:text-white"
+          variant="outlined"
+          color="primary"
+        >
+          Get started
+        </Button>
+        </Link>
+      </div>
+      {/* Add Video Section */}
+      <div className="video-container mt-10">
+          <video
+            className="w-full max-w-4xl mx-auto"
+            src="/CSD-10721_WAC_Hero_FULL_LowBR.mp4" 
+            // controls
+            autoPlay
+            loop
+            muted
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+    </>
   );
 }

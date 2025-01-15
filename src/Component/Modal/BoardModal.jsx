@@ -1,19 +1,24 @@
 import UserContext from "@/context/UserContext";
 import { Avatar, Box, IconButton, Modal, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSession } from "next-auth/react";
 import FormInput from "../shared/form/formData";
 import { useForm } from "react-hook-form";
 import FormSelect from "../shared/form/FormSelect";
 
-const BoardModal = ({ task, openTaskModal, setOpenTaskModal, setTask }) => {
+const BoardModal = ({
+  task,
+  openTaskModal,
+  setOpenTaskModal,
+  setTask,
+  columns,
+}) => {
   const { data: session } = useSession();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      discription: task.discription || "",
-      taskStatus: task.taskStatus || "",
+      discription:  "",
     },
   });
 
@@ -31,12 +36,22 @@ const BoardModal = ({ task, openTaskModal, setOpenTaskModal, setTask }) => {
 
   const handleModalClose = () => setOpenTaskModal(false);
 
-  // save/update task
+  // Task status change handler (does not close the modal)
+  const handleTaskStatusChange = (event) => {
+    const updatedTask = { ...task, taskStatus: event.target.value };
+    
+    // Update task status in state
+    setTask((prevTasks) =>
+      prevTasks.map((t) => (t.id === task.id ? { ...t, ...updatedTask } : t))
+    );
+  };
+
+  // Save task and close the modal
   const handleTaskSave = (data) => {
     setTask((prevTasks) =>
       prevTasks.map((t) => (t.id === task.id ? { ...t, ...data } : t))
     );
-    handleModalClose();
+    handleModalClose(); // Close modal only after form submission
   };
 
   const getInitials = (name) => {
@@ -77,19 +92,16 @@ const BoardModal = ({ task, openTaskModal, setOpenTaskModal, setTask }) => {
             <div className="flex-[1]">
               <div className="flex justify-between items-center my-2">
                 <FormSelect
+                  onChange={handleTaskStatusChange} // Handle status change
                   className="bg-gray-200 task-status"
                   control={control}
                   name="taskStatus"
-                  defaultValue={task.taskStatus }
-                  options={[
-                    task.taskStatus,
-                    ...["ToDo", "InProgress", "Done"].filter(
-                      (status) => status !== task.taskStatus
-                    ),
-                  ]}
+                  defaultValues={task.taskStatus}
+                  options={["ToDo", "InProgress", "Done"].filter(
+                    (status) => status !== task.taskStatus
+                  )}
                 />
               </div>
-
               <Typography variant="h6" className="!mt-5">
                 Details
               </Typography>

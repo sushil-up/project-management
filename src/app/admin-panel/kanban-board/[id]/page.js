@@ -1,5 +1,4 @@
 "use client";
-import FormInput from "@/Component/shared/form/formData";
 import { InputAdornment, Typography } from "@mui/material";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
 import SearchIcon from "@mui/icons-material/Search";
@@ -26,7 +25,7 @@ const KanbanBoard = () => {
     <>
       <Typography variant="h6">Board</Typography>
       <hr />
-      <div className="">
+      <div className="mt-5">
         <SearchField
           control={control}
           name="search"

@@ -6,6 +6,11 @@ const UserContextProvider = ({ children }) => {
   const [project, setProject] = useLocalStorage("project", []);
   const [task, setTask] = useLocalStorage("taskAssign", []);
   const [id, setId] = useLocalStorage("id", []);
+  const [columns, setColumns] = useLocalStorage("cardColumns", [
+    { id: "ToDo", title: "To Do" },
+    { id: "InProgress", title: "In Progress" },
+    { id: "Done", title: "Done" },
+  ]);
   return (
     <UserContext.Provider
       value={{
@@ -15,6 +20,7 @@ const UserContextProvider = ({ children }) => {
         setTask,
         id,
         setId,
+        columns, setColumns,
       }}
     >
       {children}

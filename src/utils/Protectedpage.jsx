@@ -1,5 +1,6 @@
 import { AllPages } from "./pagesurl";
 const routesUrl = AllPages();
+
 export const ProtectedRoutes = (id) => {
   return {
     admin: "/admin-panel",
@@ -7,6 +8,7 @@ export const ProtectedRoutes = (id) => {
     task: `/admin-panel/task/${id}`,
     addProject: "/addproject",
     timeline: `/admin-panel/timeline/${id}`,
+     summary:`/admin-panel/summary/${id}`
   };
 };
 export const UnprotectedRoutes = [routesUrl.signIn, routesUrl.signUp,routesUrl.home];
