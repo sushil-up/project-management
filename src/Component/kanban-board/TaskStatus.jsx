@@ -5,7 +5,6 @@ import { IconButton, Button, MenuItem, Menu } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import UserContext from "@/context/UserContext";
-import useLocalStorage from "use-local-storage";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CreateTaskModal from "../Modal/CreateTaskModal";
 import BoardModal from "../Modal/BoardModal";

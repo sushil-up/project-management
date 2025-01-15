@@ -1,6 +1,6 @@
 "use client";
 import UserContext from "@/context/UserContext";
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { PieChart } from "@mui/x-charts/PieChart";
 import React, { useContext } from "react";
 
@@ -15,16 +15,15 @@ const TaskSummary = () => {
 
   return (
     <>
-      <Container>
-        <Typography>Status overview</Typography>
-        <PieChart
+        <Typography className="text-center text-xl font-semibold">Status overview</Typography>
+        <PieChart 
           series={[
             {
               data: data,
-              cx: 500,
-              cy: 200,
-              innerRadius: 40,
-              outerRadius: 80,
+              // cx: 500,
+              // cy: 200,
+              innerRadius: 100,
+              outerRadius: 70,
             },
           ]}
           height={300}
@@ -32,7 +31,6 @@ const TaskSummary = () => {
             legend: { hidden: false },
           }}
         />
-      </Container>
     </>
   );
 };

@@ -10,7 +10,6 @@ export default function ProjectChart() {
   const filteredData = task?.filter(
     (item) => item.taskId === id && item?.priority
   );
-
   // Group data by priority
   const priorityCounts = {
     High: filteredData?.filter((item) => item.priority === "High").length,
