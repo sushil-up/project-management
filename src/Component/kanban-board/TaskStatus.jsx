@@ -45,6 +45,7 @@ const TaskStatus = ({ tableData }) => {
         <div className="flex flex-col md:flex-row gap-5">
           {columns?.map((col) => (
             <Column
+             className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300"
               key={col.id}
               column={col}
               tasks={filtereTask?.filter((item) => item.taskStatus === col.id)}
@@ -117,7 +118,7 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
   return (
     <>
       <div className="min-w-[280px]" ref={drop}>
-        <div className="bg-white rounded-lg shadow-lg p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
           <div className="ml-1 mb-4">
             <h2 className="text-lg font-semibold text-gray-700">
               {isEdit ? (
@@ -184,7 +185,7 @@ const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
 };
 
 // Task Component
-const Task = ({ task,columns}) => {
+const Task = ({ task, columns }) => {
   const { setTask } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -237,11 +238,11 @@ const Task = ({ task,columns}) => {
     <>
       <div
         ref={drag}
-        className={`cursor-pointer bg-gray-50 rounded-lg p-3 mb-4 shadow-sm ${
-          isDragging ? "opacity-50" : "opacity-100"
+        className={`cursor-pointer bg-gray-50 rounded-lg p-3 mb-4 shadow-sm hover:shadow-lg transition-shadow duration-300 relative ${
+          isDragging ? "opacity-100" : "opacity-300"
         }`}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center group">
           {isEditing ? (
             <input
               type="text"
@@ -257,7 +258,10 @@ const Task = ({ task,columns}) => {
               {task.task}
             </h3>
           )}
-          <IconButton onClick={handleSettingClick}>
+          <IconButton
+            onClick={handleSettingClick}
+            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
             <MoreHorizIcon />
           </IconButton>
         </div>
@@ -298,7 +302,7 @@ const Task = ({ task,columns}) => {
         )}
       </div>
       <BoardModal
-      columns={columns}
+        columns={columns}
         task={task}
         setTask={setTask} // Pass setTask here
         setOpenTaskModal={setOpenTaskModal}
@@ -307,5 +311,6 @@ const Task = ({ task,columns}) => {
     </>
   );
 };
+
 
 export default TaskStatus;

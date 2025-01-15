@@ -39,7 +39,7 @@ const FormSelect = ({
                 field.onChange(e);
                 onChange?.(e);
               }}
-              displayEmpty
+              // displayEmpty
             >
               <MenuItem
                 value={defaultValues}

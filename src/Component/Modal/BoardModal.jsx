@@ -37,12 +37,22 @@ const BoardModal = ({
 
   const handleModalClose = () => setOpenTaskModal(false);
 
-  // save/update task
+  // Task status change handler (does not close the modal)
+  const handleTaskStatusChange = (event) => {
+    const updatedTask = { ...task, taskStatus: event.target.value };
+    
+    // Update task status in state
+    setTask((prevTasks) =>
+      prevTasks.map((t) => (t.id === task.id ? { ...t, ...updatedTask } : t))
+    );
+  };
+
+  // Save task and close the modal
   const handleTaskSave = (data) => {
     setTask((prevTasks) =>
       prevTasks.map((t) => (t.id === task.id ? { ...t, ...data } : t))
     );
-    handleModalClose();
+    handleModalClose(); // Close modal only after form submission
   };
 
   const getInitials = (name) => {
@@ -83,6 +93,7 @@ const BoardModal = ({
             <div className="flex-[1]">
               <div className="flex justify-between items-center my-2">
                 <FormSelect
+                  onChange={handleTaskStatusChange} // Handle status change
                   className="bg-gray-200 task-status"
                   control={control}
                   name="taskStatus"

@@ -1,4 +1,64 @@
 "use client";
+// import React from "react";
+
+// const SelectOptions = () => {
+//   const myData = [
+//     { id: "ToDo", title: "To Do" },
+//     { id: "InProgress", title: "In Progress" },
+//     { id: "Done", title: "Done" },
+//   ];
+
+//   return (
+//     <>
+//       <select defaultValue="InProgress">
+//         {myData.map((item) => (
+//           <option key={item.id} value={item.id}>
+//             {item.title}
+//           </option>
+//         ))}
+//       </select>
+//     </>
+//   );
+// };
+
+// export default SelectOptions;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import FormInput from "@/Component/shared/form/formData";
 import { InputAdornment, Typography } from "@mui/material";
 import TaskStatus from "@/Component/kanban-board/TaskStatus";
@@ -26,7 +86,7 @@ const KanbanBoard = () => {
     <>
       <Typography variant="h6">Board</Typography>
       <hr />
-      <div className="">
+      <div className="mt-5">
         <SearchField
           control={control}
           name="search"
