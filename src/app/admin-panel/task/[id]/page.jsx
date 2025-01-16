@@ -27,10 +27,8 @@ const AddTask = () => {
   };
   return (
     <>
-      {/* <> */}
-        <Button onClick={handleOpen}>Add Task</Button>
+        <Button variant="outlined" className="hover:bg-blue-500 hover:text-white" onClick={handleOpen}>Add Task</Button>
         <ListTable />
-      {/* </> */}
       <CreateTaskModal
         open={open}
         handleClose={handleClose}

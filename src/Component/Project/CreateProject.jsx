@@ -44,17 +44,16 @@ const CreateProject = ({ handleCloseForm, setOpen, open }) => {
   const router = useRouter();
   const routesUrl= AllPages()
   const onSubmit = (data) => {
-    const id = uuidv4(); // Generate unique ID
+    const id = uuidv4();
     const existingProject = project?.find((item) => item?.key === data?.key);
   
     if (!existingProject) {
       try {
-        const setid = { ...data, id }; // Add the generated ID
+        const setid = { ...data, id }; 
         const storedData = [...project, setid];
-        setProject(storedData); // Update context
+        setProject(storedData); 
         successMsg("Project Created Successfully");
         setOpen(false);
-        // router.push(`/admin-panel/kanban-board/${id}`); // Navigate with the ID
       } catch (error) {
         console.error("Error creating project:", error);
       }

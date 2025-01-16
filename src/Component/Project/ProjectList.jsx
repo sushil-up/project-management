@@ -2,7 +2,6 @@
 import {
   Avatar,
   Box,
-  Container,
   Modal,
   Table,
   TableBody,
@@ -91,7 +90,6 @@ const ProjectList = ({
 
   return (
     <>
-      {/* <Container> */}
       <Table>
         <TableHead>
           <TableRow>
@@ -153,7 +151,6 @@ const ProjectList = ({
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      {/* </Container> */}
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} className="model-pop">

@@ -23,7 +23,6 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import NavBar from "../Navbar/NavBar";
 import { AllPages } from "@/utils/pagesurl";
 import UserContext from "@/context/UserContext";
-import { Grid } from "@mui/joy";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -92,7 +91,7 @@ export default function MiniDrawer({ children }) {
   const menuItems = [
     {
       title: "Dashboard",
-      icon: <DashboardIcon />,
+      // icon: <DashboardIcon />,
       subItems: [
         {
           title: "Summary",
@@ -193,8 +192,6 @@ export default function MiniDrawer({ children }) {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader />
-
-        {/* <Divider /> */}
         <List>
           <Box>
             <Box className="flex items-center">
@@ -205,8 +202,8 @@ export default function MiniDrawer({ children }) {
                   alt="Icon"
                 />
                 <div>
-                  <div className="ml-3 text-sm font-bold">{projectName}</div>
-                  <span className="ml-3 font-light text-xs">{projectType}</span>
+                  <div className="ml-4 text-sm font-bold">{projectName}</div>
+                  <span className="ml-4 font-light text-xs">{projectType}</span>
                 </div>
               </div>
             </Box>
@@ -408,7 +405,7 @@ export default function MiniDrawer({ children }) {
                                 <ListItemIcon
                                   sx={{
                                     minWidth: 0,
-                                    mr: open ? 3 : "auto",
+                                    mr: open ? 3 : 4,
                                     justifyContent: "center",
                                     color:
                                       selectedIndex === index &&

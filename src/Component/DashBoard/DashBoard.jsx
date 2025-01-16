@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -78,7 +78,6 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer({ children }) {
   const { data: session } = useSession();
   const routesUrl= AllPages()
-  const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedSubIndex, setSelectedSubIndex] = useState(null);

@@ -19,7 +19,7 @@ export default function FormInput({
         control={control}
         defaultValue={defaultValue}
         className={className}
-        render={({ field, fieldState }) => (
+        render={({ field }) => (
           <TextField
             InputLabelProps={{ shrink: true }}
             {...field}

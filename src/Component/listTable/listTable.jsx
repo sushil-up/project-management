@@ -6,7 +6,7 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import dayjs from "dayjs"; // Ensure Day.js is installed and imported
+import dayjs from "dayjs"; 
 import UserContext from "@/context/UserContext";
 import Cookies from "js-cookie";
 
@@ -71,7 +71,6 @@ export default function ListTable() {
     localStorage.setItem("taskAssign", JSON.stringify(formattedData));
     return newRow;
   };
-
   const columns = [
     { field: "id", headerName: "ID", width: 110 },
     {
@@ -95,6 +94,15 @@ export default function ListTable() {
       editable: true,
     },
     {
+      field: "priority",
+      headerName: "Priority",
+      width: 200,
+      editable: true,
+      type: "singleSelect",
+      valueOptions: ["High", "Medium", "Low"],
+    },
+    {
+
       field: "projectName",
       headerName: "Project Name",
       width: 150,
@@ -115,14 +123,13 @@ export default function ListTable() {
       headerName: "Time Period",
       width: 190,
       renderCell: (params) => {
-        // Format taskDate for display if it's an array
         return params.value.join(", ");
       },
     },
   ];
 
   return (
-    <Box sx={{ height: 400, width: "95%" }}>
+    <Box sx={{ height: 400, width: "95%", marginTop:"10px" }}>
       <DataGrid
         rows={filterTask}
         columns={columns}

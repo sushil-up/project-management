@@ -68,7 +68,7 @@ const NavBar = ({ open, handleDrawerToggle }) => {
   // Set the clicked nav item as active and store it in localStorage
   const handleNavItemClick = (item) => {
     setActiveNavItem(item);
-    localStorage.setItem("activeNavItem", item); // Persist the active item
+    localStorage.setItem("activeNavItem", item); 
   };
 
   // Get user initials(Avatar)
@@ -121,9 +121,6 @@ const NavBar = ({ open, handleDrawerToggle }) => {
                   cursor: "pointer",
                   fontWeight: activeNavItem === item ? "bold" : "normal",
                   color: activeNavItem === item ? "#1976d2" : "inherit",
-                  // backgroundColor:
-                  //   activeNavItem === item ? "#1976d214" : "inherit",
-                  // padding: activeNavItem === item ? "10px" : "",
                   textDecoration:
                     activeNavItem === item ? "underline 2px" : "none",
                   textUnderlineOffset: "2px",
@@ -189,8 +186,11 @@ const NavBar = ({ open, handleDrawerToggle }) => {
           >
             <MenuItem>{session?.user?.email}</MenuItem>
             <MenuItem>Manage Account</MenuItem>
-            <MenuItem>Setting</MenuItem>
+            <MenuItem>Settings</MenuItem>
+            {session?.user.email?
             <MenuItem onClick={signOut}>Logout</MenuItem>
+            :
+            ""}
           </Menu>
         </Grid>
       </Grid>

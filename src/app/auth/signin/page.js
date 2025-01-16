@@ -3,11 +3,11 @@ import { FormControl } from "@mui/joy";
 import { Sheet } from "@mui/joy";
 import { useForm } from "react-hook-form";
 import { Button, CircularProgress, Container, Typography } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Cookies from "js-cookie"; // Import the js-cookie package
+import Cookies from "js-cookie"; 
 import { SignInValidation } from "@/Component/validation/signInValidation";
 import { errorMsg, successMsg } from "@/Component/shared/form/Toastmsg/toaster";
 import InputField from "@/Component/shared/form/InputField";

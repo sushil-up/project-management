@@ -59,7 +59,6 @@ const TaskStatus = ({ tableData }) => {
 };
 
 // Column Component
-
 const Column = ({ column, tasks, moveTask, columns, setColumns }) => {
   const { control, handleSubmit } = useForm();
   const [anchor, setAnchor] = useState(null);
@@ -297,7 +296,7 @@ const Task = ({ task, columns }) => {
       <BoardModal
         columns={columns}
         task={task}
-        setTask={setTask} // Pass setTask here
+        setTask={setTask}
         setOpenTaskModal={setOpenTaskModal}
         openTaskModal={openTaskModal}
       />

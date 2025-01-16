@@ -1,4 +1,3 @@
-
 import { AllPages } from "@/utils/pagesurl";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -31,7 +30,6 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
-        // It will force the Refresh Token to always be provided on sign in
         params: {
           prompt: "consent",
           access_type: "offline",

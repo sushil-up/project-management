@@ -29,8 +29,8 @@ const KanbanBoard = () => {
         <SearchField
           control={control}
           name="search"
-          placeholder="Search Projects"
-          label="Search Projects"
+          placeholder="Search Task"
+          label="Search Task"
           className="w-56"
           onChange={handleFindProject}
           InputProps={{

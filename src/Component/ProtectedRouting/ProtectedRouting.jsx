@@ -1,5 +1,4 @@
 "use client";
-
 import UserContext from "@/context/UserContext";
 import { ProtectedRoutes, UnprotectedRoutes } from "@/utils/Protectedpage";
 import { useSession } from "next-auth/react";

@@ -45,10 +45,10 @@ const CreateTaskModal = ({ handleClose, setOpen, open }) => {
           : task.map((task) =>
               task.id === editId ? { ...data, id: editId } : task
             );
-      setTask(updatedTasks); // Update the context
-      localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); // Update localStorage
-      reset(); // Clear form inputs
-      setOpen(false); // Close modal
+      setTask(updatedTasks); 
+      localStorage.setItem("taskAssign", JSON.stringify(updatedTasks)); 
+      reset(); 
+      setOpen(false); 
       successMsg(
         editId === null
           ? "Task Added Successfully"

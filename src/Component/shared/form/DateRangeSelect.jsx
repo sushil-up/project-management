@@ -9,7 +9,6 @@ import dayjs from "dayjs";
 export default function DateRangeSelect({
   name,
   control,
-  label,
   className,
   placeholder,
   errors,

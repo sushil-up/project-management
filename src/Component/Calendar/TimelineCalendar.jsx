@@ -100,7 +100,6 @@ const TimelineCalendar = () => {
 
   useEffect(() => {
     const filterTask = task?.filter((item) => item?.taskId === id);
-    console.log("filterTask",filterTask)
     if (filterTask) {
       const formatedData = filterTask?.map((item) => ({
         id: item.id,
