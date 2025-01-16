@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <div className="w-full text-center">
         <Typography className="text-center !text-7xl !mt-10">
-          The new Jira: <br /> from{" "}
+          The new Project Management: <br /> from{" "}
           <span style={{ fontWeight: "900" }}>teams</span> to dreams
         </Typography>
         <Link href={routesUrl.signIn}>
@@ -25,16 +25,17 @@ export default function Home() {
       </div>
       {/* Add Video Section */}
       <div className="video-container mt-10">
-        <video
-          className="w-full max-w-4xl mx-auto"
-          src="/CSD-10721_WAC_Hero_FULL_LowBR.mp4"
-          autoPlay
-          loop
-          muted
-        >
-          Your browser does not support the video tag.
-        </video>
-      </div>
+          <video
+            className="w-full max-w-4xl mx-auto"
+            src="/CSD-10721_WAC_Hero_FULL_LowBR.mp4" 
+            // controls
+            autoPlay
+            loop
+            muted
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
     </>
   );
 }
